@@ -100,10 +100,12 @@ dwg_decode_entity(Bit_Chain* dat, Bit_Chain* hdl_dat, Bit_Chain* str_dat,
 
 /*----------------------------------------------------------------------------*/
 
-static int s_absolute_ref_hash(void* key){
+static int s_absolute_ref_hash(void* key) {
+  return (int)key;
 }
 
-static bool s_absolute_ref_equals(void* A, void* B){
+static bool s_absolute_ref_equals(void* A, void* B) {
+  return A == B;
 }
 
 
