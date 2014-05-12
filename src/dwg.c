@@ -45,7 +45,8 @@ static bool env_var_checked_p;
 #define DWG_LOGLEVEL loglevel
 #include "logging.h"
 
-// used by free.c:
+// used by decode.c:
+int dwg_resolve_handleref(Dwg_Object_Ref *ref, const Dwg_Object * obj);
 int dwg_obj_is_control(const Dwg_Object *obj);
 
 /*------------------------------------------------------------------------------
@@ -632,28 +633,6 @@ dwg_ref_get_object_relative(const Dwg_Data *restrict dwg,
     }
   else
     return NULL;
-}
-
-/**
- * Find a pointer to an object given it's absolute id (handle).
- * TODO: Check and update each handleref obj cache.
- */
-Dwg_Object *
-dwg_resolve_handle(const Dwg_Data * dwg, const long unsigned int absref)
-{
-  // TODO hash table or sorted
-  // This is linear search, absref's are currently unsorted. encode sorts them.
-  long unsigned int i;
-  for (i = 0; i < dwg->num_objects; i++)
-    {
-      if (dwg->object[i].handle.value == absref)
-        return &dwg->object[i];
-    }
-  if (absref)
-    {
-      LOG_WARN("Object not found: %lu in %ld objects", absref, dwg->num_objects);
-    }
-  return NULL;
 }
 
 /* set ref->absolute_ref from obj, for a subsequent dwg_resolve_handle() */

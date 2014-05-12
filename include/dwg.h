@@ -4951,6 +4951,9 @@ typedef struct _dwg_struct
   long unsigned int measurement;
   unsigned int layout_number;
   unsigned int opts; /* 0xf: loglevel, ... */
+  unsigned int capacity;
+  void* hash_map;
+
 } Dwg_Data;
 
 /*--------------------------------------------------

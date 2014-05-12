@@ -34,6 +34,7 @@
 #include "dwg.h"
 #include "decode.h"
 #include "print.h"
+#include "hashmap.h"
 
 /* The logging level for the read (decode) path.  */
 static unsigned int loglevel;
@@ -97,7 +98,17 @@ static int
 dwg_decode_entity(Bit_Chain* dat, Bit_Chain* hdl_dat, Bit_Chain* str_dat,
                   Dwg_Object_Entity * ent);
 
-/*----------------------------------------------------------------------------
+/*----------------------------------------------------------------------------*/
+
+static int s_absolute_ref_hash(void* key){
+}
+
+static bool s_absolute_ref_equals(void* A, void* B){
+}
+
+
+/*--------------------------------------------------------------------------------
+
  * Public variables
  */
 //long unsigned int ktl_lastaddress;
@@ -122,6 +133,8 @@ dwg_decode(Bit_Chain * dat, Dwg_Data * dwg)
   //dwg->num_layers = 0; // see now dwg->layer_control->num_entries
   dwg->num_entities = 0;
   dwg->num_objects = 0;
+  dwg->capacity = 10;
+  dwg->object = (Dwg_Object *) malloc(10 * sizeof(Dwg_Object));
   dwg->num_classes = 0;
   dwg->picture.size = 0;
   dwg->picture.chain = NULL;
@@ -139,6 +152,9 @@ dwg_decode(Bit_Chain * dat, Dwg_Data * dwg)
 
   if (dwg->opts)
     loglevel = dwg->opts & 0xf;
+  
+  dwg->hash_map = hashmapCreate(100, s_absolute_ref_hash, s_absolute_ref_equals);
+
 #ifdef USE_TRACING
   /* Before starting, set the logging level, but only do so once.  */
   if (! env_var_checked_p)
@@ -2660,6 +2676,21 @@ dwg_decode_object(Bit_Chain* dat, Bit_Chain* hdl_dat, Bit_Chain* str_dat,
   return 0;
 }
 
+/**
+ * Find a pointer to an object given it's id (handle)
+ */
+Dwg_Object *
+dwg_resolve_handle(const Dwg_Data* dwg, const long unsigned int absref)
+{
+  Hashmap* map = (Hashmap*)dwg->hash_map;
+
+  long unsigned int x = (long unsigned int)hashmapGet(map, (void*)absref);
+  if (!x)
+    return NULL;
+
+  return dwg->object + (x - 1); //FIXME use [] syntax
+}
+
 /* Store an object reference in a seperate dwg->object_ref array
    which is the id for handles, i.e. DXF 5, 330. */
 Dwg_Object_Ref *
@@ -3639,6 +3670,11 @@ dwg_decode_add_object(Dwg_Data *restrict dwg, Bit_Chain* dat, Bit_Chain* hdl_dat
             }
         }
     }
+
+  Hashmap* map = (Hashmap*)dwg->hash_map;
+  if (!hashmapPut(map, (void*)obj->handle.value, (void*)dwg->num_objects)){
+    LOG_INFO("Hashmap allocation failed!\n");
+  }
 
   /* Now 1 padding bits until next byte, and then a RS CRC */
   if (dat->bit) {

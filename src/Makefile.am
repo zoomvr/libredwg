@@ -22,6 +22,7 @@ AM_CFLAGS = -I$(top_srcdir)/include -I. $(WARN_CFLAGS)
 
 libredwg_la_SOURCES = \
 	dwg.c \
+	hashmap.c \
 	common.c \
 	bits.c \
 	decode.c \
@@ -64,6 +65,7 @@ EXTRA_HEADERS = \
 	free.h \
         print.h \
 	logging.h \
+	hashmap.h \
 	out_dxf.h \
 	out_json.h
 if USE_WRITE
