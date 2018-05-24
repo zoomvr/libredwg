@@ -73,8 +73,8 @@ Hashmap* hashmapCreate(size_t initialCapacity,
 /**
  * Hashes the given key.
  */
-static inline int hashKey(Hashmap* map, void* key) {
-    int h = map->hash(key);
+static inline unsigned int hashKey(Hashmap* map, void* key) {
+    unsigned int h = map->hash(key);
 
     // We apply this secondary hashing discovered by Doug Lea to defend
     // against bad hashes.
@@ -90,7 +90,7 @@ size_t hashmapSize(Hashmap* map) {
     return map->size;
 }
 
-static inline size_t calculateIndex(size_t bucketCount, int hash) {
+static inline size_t calculateIndex(size_t bucketCount, unsigned int hash) {
     return ((size_t) hash) & (bucketCount - 1);
 }
 
@@ -174,7 +174,7 @@ static inline bool equalKeys(void* keyA, int hashA, void* keyB, int hashB,
 }
 
 void* hashmapPut(Hashmap* map, void* key, void* value) {
-    int hash = hashKey(map, key);
+    unsigned int hash = hashKey(map, key);
     size_t index = calculateIndex(map->bucketCount, hash);
 
     Entry** p = &(map->buckets[index]);
@@ -206,7 +206,7 @@ void* hashmapPut(Hashmap* map, void* key, void* value) {
 }
 
 void* hashmapGet(Hashmap* map, void* key) {
-    int hash = hashKey(map, key);
+    unsigned int hash = hashKey(map, key);
     size_t index = calculateIndex(map->bucketCount, hash);
 
     Entry* entry = map->buckets[index];

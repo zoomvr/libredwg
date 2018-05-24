@@ -136,7 +136,6 @@ dwg_decode(Bit_Chain * dat, Dwg_Data * dwg)
   dwg->num_entities = 0;
   dwg->num_objects = 0;
   dwg->capacity = 10;
-  dwg->object = (Dwg_Object *) malloc(10 * sizeof(Dwg_Object));
   dwg->num_classes = 0;
   dwg->picture.size = 0;
   dwg->picture.chain = NULL;
@@ -145,7 +144,7 @@ dwg_decode(Bit_Chain * dat, Dwg_Data * dwg)
   dwg->measurement = 0;
   dwg->dwg_class = NULL;
   dwg->object_ref = NULL;
-  dwg->object = NULL;
+  dwg->object = (Dwg_Object *) calloc(10, sizeof(Dwg_Object));
 
   memset(&dwg->header_vars, 0, sizeof(Dwg_Header_Variables));
   memset(&dwg->r2004_header.file_ID_string[0], 0, sizeof(dwg->r2004_header));
@@ -290,6 +289,7 @@ decode_preR13_section(Dwg_Section_Type_r11 id, Bit_Chain* dat, Dwg_Data * dwg)
   dat->byte = tbl->address;
   if (dwg->num_objects % REFS_PER_REALLOC == 0)
     dwg->object = realloc(dwg->object, old_size + size + REFS_PER_REALLOC);
+  //TODO clear new slack
 
   // TODO: move to a spec dwg_r11.spec, and dwg_decode_r11_NAME
 #define PREP_TABLE(name)\
@@ -2678,23 +2678,6 @@ dwg_decode_object(Bit_Chain* dat, Bit_Chain* hdl_dat, Bit_Chain* str_dat,
   return 0;
 }
 
-/**
- * Find a pointer to an object given it's id (handle)
- */
-Dwg_Object *
-dwg_resolve_handle(const Dwg_Data* dwg, const long unsigned int absref)
-{
-  Hashmap* map = (Hashmap*)dwg->hash_map;
-
-  long unsigned int x = (long unsigned int)hashmapGet(map, (void*)absref);
-  if (!x)
-    return NULL;
-
-  return dwg->object + (x - 1); //FIXME use [] syntax
-}
-
-/* Store an object reference in a seperate dwg->object_ref array
-   which is the id for handles, i.e. DXF 5, 330. */
 Dwg_Object_Ref *
 dwg_decode_handleref(Bit_Chain *restrict dat, Dwg_Object *restrict obj,
                      Dwg_Data *restrict dwg)
@@ -3487,6 +3470,7 @@ dwg_decode_add_object(Dwg_Data *restrict dwg, Bit_Chain* dat, Bit_Chain* hdl_dat
       error = dwg_decode_BLOCK_HEADER(dat, obj);
       /* XXX
        * We cannot cache dwg->*space_block here as dwg->objects might get realloc'ed
+       * we could only store the index (objid)
        */
       break;
     case DWG_TYPE_LAYER_CONTROL:

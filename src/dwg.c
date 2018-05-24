@@ -34,6 +34,7 @@
 #include "encode.h"
 #include "in_dxf.h"
 #include "free.h"
+#include "hashmap.h"
 
 /* The logging level per .o */
 static unsigned int loglevel;
@@ -633,6 +634,24 @@ dwg_ref_get_object_relative(const Dwg_Data *restrict dwg,
     }
   else
     return NULL;
+}
+
+/**
+ * Find a pointer to an object given it's absolute id (handle)
+ */
+Dwg_Object *
+dwg_resolve_handle(const Dwg_Data* dwg, const long unsigned int absref)
+{
+  Hashmap* map = (Hashmap*)dwg->hash_map;
+
+  long unsigned int x = (long unsigned int)hashmapGet(map, (void*)absref);
+  if (!x)
+    {
+      if (absref)
+        LOG_WARN("Object not found: %lu in %ld objects", absref, dwg->num_objects)
+      return NULL;
+    }
+  return dwg->object + (x - 1); //FIXME use [] syntax
 }
 
 /* set ref->absolute_ref from obj, for a subsequent dwg_resolve_handle() */
