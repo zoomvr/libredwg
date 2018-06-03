@@ -1098,15 +1098,24 @@ void
 section_string_stream(Bit_Chain *restrict dat, BITCODE_RL bitsize,
                       Bit_Chain *restrict str)
 {
-  // 24 bytes (sentinel+size+hsize) - 1 bit (endbit)
-  BITCODE_RL start = bitsize + 159; // in bits
+  BITCODE_RL start;     // in bits
   BITCODE_RS data_size; // in byte
   BITCODE_B endbit;
+
+  PRE(R_2010) {
+    // r2007: 24 bytes (sentinel+size+hsize) - 1 bit (endbit)
+    start = bitsize + 159;
+  } else {
+    // r2010: ??
+    start = bitsize + 159; // -388 => Class 515
+  }
   *str = *dat;
   bit_set_position(str, start);
   LOG_TRACE("section string stream\n  pos: %u, %lu/%u\n", start, str->byte, str->bit);
-  endbit = bit_read_B(str);
+  endbit = bit_read_B(str); // i.e. has_strings. without data_size should be 0
   LOG_HANDLE("  endbit: %d\n", (int)endbit);
+  if (!endbit)
+    return;
   start -= 16;
   bit_set_position(str, start);
   LOG_HANDLE("  pos: %u, %lu\n", start, str->byte);
@@ -1122,8 +1131,16 @@ section_string_stream(Bit_Chain *restrict dat, BITCODE_RL bitsize,
     hi_size = bit_read_RS(str);
     data_size |= (hi_size << 15);
   }
-  start -= data_size;
-  bit_set_position(str, start);
+  if (data_size < bitsize)
+    {
+      start -= data_size;
+      bit_set_position(str, start);
+    }
+  else
+    {
+      LOG_ERROR("section string stream: data_size overflow: %u, %lu/%u\n",
+                start, str->byte, str->bit);
+    }
   LOG_HANDLE("  pos: %u, %lu/%u\n", start, str->byte, str->bit);
 }
 

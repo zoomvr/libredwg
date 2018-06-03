@@ -1163,6 +1163,10 @@ bit_read_TU(Bit_Chain *restrict dat)
   BITCODE_TU chain;
 
   length = bit_read_BS(dat);
+#if 1
+  if (length > 200)
+    return calloc(1,2);
+#endif
   chain = (BITCODE_TU) malloc((length + 1) * 2);
   for (i = 0; i < length; i++)
     {
@@ -1211,6 +1215,10 @@ bit_convert_TU(BITCODE_TU restrict wstr)
   while (*tmp++) {
     len++;
   }
+#if 1
+  if (len > 200)
+    return calloc(1,1);
+#endif
   str = malloc(len+1);
   i = 0;
   while ((c = *wstr++)) {
@@ -1218,7 +1226,8 @@ bit_convert_TU(BITCODE_TU restrict wstr)
       str[i++] = c & 0xff;
     }
     else if (c < 0x800) {
-      if (i+3 > len) {
+      if (i+2 > len) {
+        //return calloc(1,1);
         str = realloc(str, i+3);
         len = i+2;
       }
@@ -1228,6 +1237,7 @@ bit_convert_TU(BITCODE_TU restrict wstr)
     }
     else { /* windows ucs-2 has no D800-DC00 surrogate pairs. go straight up */
       if (i+3 > len) {
+        //return calloc(1,1);
         str = realloc(str, i+4);
         len = i+3;
       }

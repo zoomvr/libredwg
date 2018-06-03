@@ -1814,8 +1814,44 @@ read_2004_section_classes(Bit_Chain* dat, Dwg_Data *dwg)
       assert(max_num >= 500);
       assert(max_num < 5000);
 
-      if (dat->version >= R_2007)
+      if (dat->version == R_2007)
         section_string_stream(&sec_dat, bitsize, &str_dat);
+      else if (dat->version >= R_2010)
+        {
+          str_dat = sec_dat;
+          str_dat.byte = bitsize + 160;
+          str_dat.size -= (bitsize + 160) * 8;
+        }
+#if 1
+      printf("original bitsize: %lu\n", bitsize);
+      //14459: almost with 14071. segv with 14491
+      //bitsize += 80;
+      //section_string_stream(&sec_dat, bitsize, &str_dat);
+      //printf("bitsize: %lu\n", bitsize);
+      //str_dat.byte -= 300;
+      do {
+        unsigned long pos = bit_position(&str_dat);
+        BITCODE_TU appname;
+        char* appname_8;
+        printf("pos: %lu\n", pos);
+        appname   = bit_read_TU(&str_dat);
+        appname_8 = bit_convert_TU(appname);
+        //printf("pos: %lu\n", pos);
+        bit_set_position(&str_dat, pos);
+        error = 0;
+        if (!*appname_8 || strcmp(appname_8, "ObjectDBX Classes")) {
+          error = 1;
+          //bitsize -= 4;
+          printf("appname: %s\n", appname_8);
+          //printf("bitsize: %lu\n\n", bitsize);
+          pos -= 1;
+          bit_set_position(&str_dat, pos);
+          //section_string_stream(&sec_dat, bitsize, &str_dat);
+        }
+        free(appname_8);
+      } while (error);
+      printf("ok with bitsize: %lu\n", bitsize);
+#endif
 
       dwg->dwg_class = (Dwg_Class *) calloc(dwg->num_classes, sizeof(Dwg_Class));
       if (!dwg->dwg_class)
