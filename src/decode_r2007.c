@@ -1107,7 +1107,7 @@ section_string_stream(Bit_Chain *restrict dat, BITCODE_RL bitsize,
     start = bitsize + 159;
   } else {
     // r2010: ??
-    start = bitsize + 159; // -388 => Class 515
+    start = bitsize + 191; // size in bits + 24 bytes (sentinel+size+hSize) - 1 bit (endbit)
   }
   *str = *dat;
   bit_set_position(str, start);

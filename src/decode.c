@@ -1814,15 +1814,15 @@ read_2004_section_classes(Bit_Chain* dat, Dwg_Data *dwg)
       assert(max_num >= 500);
       assert(max_num < 5000);
 
-      if (dat->version == R_2007)
+      if (dat->version >= R_2007)
         section_string_stream(&sec_dat, bitsize, &str_dat);
+#if 0
       else if (dat->version >= R_2010)
         {
           str_dat = sec_dat;
           str_dat.byte = bitsize + 160;
           str_dat.size -= (bitsize + 160) * 8;
         }
-#if 1
       printf("original bitsize: %lu\n", bitsize);
       //14459: almost with 14071. segv with 14491
       //bitsize += 80;
@@ -1917,6 +1917,11 @@ read_2004_section_classes(Bit_Chain* dat, Dwg_Data *dwg)
       free(sec_dat.chain);
       return 1;
     }
+
+  // then RS: CRC
+  // dwg_sentinel(DWG_SENTINEL_CLASS_END)
+  // SINCE(R_2004) 8 unknown bytes
+  
   free(sec_dat.chain);
   return 0;
 }
