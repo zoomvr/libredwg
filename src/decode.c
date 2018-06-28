@@ -2289,15 +2289,11 @@ dwg_decode_eed(Bit_Chain * dat, Dwg_Object_Object * obj)
       Dwg_Object *_obj = &dwg->object[obj->objid];
 
       LOG_TRACE("EED[%u] size: " FORMAT_BS "\n", idx, size);
-      if (size > 1024)
+      if (size > _obj->size)
         {
-          LOG_ERROR("dwg_decode_eed: Absurd extended object data size: %lu ignored."
-                    " Object: %lu (handle)",
-                    (long unsigned int) size, _obj->handle.value)
-          _obj->bitsize = 0;
+          LOG_ERROR("Invalid EED size " FORMAT_BS " > %u", size, _obj->size)
           obj->num_eed = 0;
-          obj->num_reactors = 0;
-          return DWG_ERR_VALUEOUTOFBOUNDS; //XXX
+          return DWG_ERR_INVALIDEED;
         }
 
       if (idx) {
@@ -2410,7 +2406,7 @@ dwg_decode_eed(Bit_Chain * dat, Dwg_Object_Object * obj)
                 obj->eed[idx].data->u.eed_4.data[j] = bit_read_RC(dat);
               LOG_TRACE("EED[%u] raw: %s\n", idx, obj->eed[idx].data->u.eed_4.data);
               break;
-            case 10: case 11: case 12: case 13:
+            case 10: case 11: case 12: case 13: case 14: case 15:
               obj->eed[idx].data->u.eed_10.point.x = bit_read_RD(dat);
               obj->eed[idx].data->u.eed_10.point.y = bit_read_RD(dat);
               obj->eed[idx].data->u.eed_10.point.z = bit_read_RD(dat);
@@ -2419,21 +2415,25 @@ dwg_decode_eed(Bit_Chain * dat, Dwg_Object_Object * obj)
                         obj->eed[idx].data->u.eed_10.point.y,
                         obj->eed[idx].data->u.eed_10.point.z);
               break;
-            case 40: case 41: case 42:
+            case 40: case 41: case 42: case 43: case 44: case 45: case 46:
+            case 51: case 54:
               obj->eed[idx].data->u.eed_40.real = bit_read_RD(dat);
-              LOG_TRACE("EED[%u] real: %f\n", idx, obj->eed[idx].data->u.eed_40.real);
+              LOG_TRACE("EED[%u] real: %f\n", idx,
+                        obj->eed[idx].data->u.eed_40.real);
               break;
             case 70:
               obj->eed[idx].data->u.eed_70.rs = bit_read_RS(dat);
-              LOG_TRACE("EED[%u] short: " FORMAT_RS "\n", idx, obj->eed[idx].data->u.eed_70.rs);
+              LOG_TRACE("EED[%u] short: " FORMAT_RS "\n", idx,
+                        obj->eed[idx].data->u.eed_70.rs);
               break;
             case 71:
               obj->eed[idx].data->u.eed_71.rl = bit_read_RL(dat);
-              LOG_TRACE("EED[%u] long: " FORMAT_RL "\n", idx, obj->eed[idx].data->u.eed_71.rl);
+              LOG_TRACE("EED[%u] long: " FORMAT_RL "\n", idx,
+                        obj->eed[idx].data->u.eed_71.rl);
               break;
             default:
               LOG_ERROR("Unknown EED code %d", code);
-              return DWG_ERR_INVALIDTYPE;
+              //return DWG_ERR_INVALIDTYPE;
             }
 #ifdef DEBUG
           // sanity checks
@@ -2548,7 +2548,7 @@ dwg_decode_entity(Bit_Chain* dat, Bit_Chain* hdl_dat, Bit_Chain* str_dat,
 
 /* The first common part of every object.
 
-   There is no COMMON_ENTITY_HANDLE_DATA for objects.
+   There is no COMMON_ENTITY_DATA for objects.
    Check page 269, par 28 (Extended Object Data)
  */
 static int
