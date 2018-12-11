@@ -1433,10 +1433,10 @@ read_2007_section_handles(Bit_Chain* dat, Bit_Chain* hdl,
       long unsigned int startpos = hdl_dat.byte;
 
       section_size = bit_read_RS_LE(&hdl_dat);
-      LOG_TRACE("\nSection size: %u\n", section_size);
+      LOG_TRACE("\nHandles section size: %u\n", section_size);
       if (section_size > 2050)
         {
-          LOG_ERROR("Object-map section size greater than 2050!");
+          LOG_ERROR("nHandles section size greater than 2050!");
           return DWG_ERR_VALUEOUTOFBOUNDS;
         }
 
@@ -1467,21 +1467,18 @@ read_2007_section_handles(Bit_Chain* dat, Bit_Chain* hdl,
 
       if (hdl_dat.byte == oldpos)
         break;
-      hdl_dat.byte += 2; // CRC
+      hdl_dat.byte += 2; // skip the CRC
 
       if (hdl_dat.byte >= endpos)
         break;
     }
   while (section_size > 2);
 
-  LOG_INFO("\nNum objects: %lu\n", (unsigned long)dwg->num_objects);
-
+  //LOG_INFO("\nNum objects: %lu\n", (unsigned long)dwg->num_objects);
   if (hdl_dat.chain)
     free(hdl_dat.chain);
-
   if (obj_dat.chain)
     free(obj_dat.chain);
-
   return error;
 }
 

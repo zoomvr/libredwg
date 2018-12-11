@@ -227,7 +227,7 @@ bit_write_CRC(Bit_Chain *dat, long unsigned int start_address,
               uint16_t seed);
 
 uint16_t
-bit_calc_CRC(uint16_t seed, unsigned char *adr, long len);
+bit_calc_CRC(const uint16_t seed, unsigned char *addr, long len);
 
 BITCODE_TF
 bit_read_TF(Bit_Chain *dat, int length);

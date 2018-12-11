@@ -31,7 +31,7 @@
 #endif
 // else we roll our own, Latin-1 only.
 
-#define DWG_LOGLEVEL DWG_LOGLEVEL_NONE
+//#define DWG_LOGLEVEL DWG_LOGLEVEL_ERROR
 #include "logging.h"
 #include "bits.h"
 
@@ -1122,8 +1122,8 @@ bit_write_H(Bit_Chain *restrict dat, Dwg_Handle *restrict handle)
     bit_write_RC(dat, val[i]);
 }
 
-/** Only read CRC-numbers, without checking, only in order to go to
- *  the next byte, while skipping non-aligned bits.
+/** Only read CRC-numbers. Without checking, only in order to go to
+ *  the next byte, while skipping alignment bits.
  */
 uint16_t
 bit_read_CRC(Bit_Chain * dat)
@@ -1139,12 +1139,12 @@ bit_read_CRC(Bit_Chain * dat)
     }
   start_address = dat->byte;
   result = bit_read_RS(dat);
-  LOG_TRACE("read CRC at %lx: 0x%x\n", start_address, result)
+  LOG_TRACE("read CRC at %lx: %04X\n", start_address, result)
 
   return result;
 }
 
-/** Read and check CRC-number.
+/** Read and check CRC-number, from start_address until dat->byte.
  */
 int
 bit_check_CRC(Bit_Chain * dat, long unsigned int start_address,
@@ -1152,6 +1152,8 @@ bit_check_CRC(Bit_Chain * dat, long unsigned int start_address,
 {
   uint16_t calculated;
   uint16_t read;
+  unsigned char res[2];
+  long unsigned int old_byte;
 
   if (dat->bit > 0)
     {
@@ -1162,7 +1164,8 @@ bit_check_CRC(Bit_Chain * dat, long unsigned int start_address,
   calculated = bit_calc_CRC(seed, &(dat->chain[start_address]),
                             dat->byte - start_address);
   read = bit_read_RS(dat);
-  LOG_TRACE("check CRC at %lx: 0x%x <=> 0x%x\n", start_address, calculated, read)
+  LOG_TRACE("check CRC at 0x%lx-0x%lx: %04X <=> %04X\n", start_address, dat->byte,
+            calculated, read)
 
   return (calculated == read);
 }
@@ -1181,7 +1184,7 @@ bit_write_CRC(Bit_Chain * dat, long unsigned int start_address,
   crc = bit_calc_CRC(seed, &(dat->chain[start_address]), dat->byte - start_address);
 
   bit_write_RS(dat, crc);
-  LOG_TRACE("write CRC at %lx: %04X\n", start_address, crc)
+  LOG_TRACE("write CRC at 0x%lx: %04X\n", start_address, crc)
   return (crc);
 }
 
@@ -1682,9 +1685,10 @@ bit_explore_chain(Bit_Chain * dat, long unsigned int size)
 }
 
 uint16_t
-bit_calc_CRC(uint16_t dx, unsigned char *addr, long len)
+bit_calc_CRC(const uint16_t seed, unsigned char *addr, long len)
 {
   register unsigned char al;
+  register uint16_t dx = seed;
 
   static uint16_t ckrtable[256] =
       { 0x0000, 0xC0C1, 0xC181, 0x0140, 0xC301, 0x03C0, 0x0280, 0xC241, 0xC601,
@@ -1724,5 +1728,5 @@ bit_calc_CRC(uint16_t dx, unsigned char *addr, long len)
       dx = dx ^ ckrtable[al];
       addr++;
     }
-  return (dx);
+  return dx;
 }
