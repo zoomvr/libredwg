@@ -61,12 +61,22 @@ char* alloca(size_t size) {
 #define PREFIX   for (int _i=0; _i<dat->bit; _i++) { fprintf (dat->fh, "  "); }
 #define ARRAY    fprintf (dat->fh, "[\n"); dat->bit++
 #define ENDARRAY fprintf (dat->fh, "\n"); dat->bit--; PREFIX fprintf (dat->fh, "],\n")
+#define LASTENDARRAY fprintf (dat->fh, "\n"); dat->bit--; PREFIX fprintf (dat->fh, "]\n")
 #define KEYs(name) PREFIX fprintf (dat->fh, "\"%s\": ", name);
-#define KEY(name) PREFIX fprintf (dat->fh, "\"%s\": ", #name);
-#define HASH     fprintf (dat->fh, "\n"); PREFIX fprintf (dat->fh, "{\n"); dat->bit++
-#define ENDHASH  fprintf (dat->fh, "\n"); dat->bit--; PREFIX fprintf (dat->fh, "},\n")
+#define KEY(name)  PREFIX fprintf (dat->fh, "\"%s\": ", #name);
+#define HASH       PREFIX fprintf (dat->fh, "{\n"); dat->bit++
+#define ENDHASH    fprintf (dat->fh, "\n"); dat->bit--; PREFIX fprintf (dat->fh, "},\n")
+#define TABLE(name) KEY(name); HASH
+#define ENDTAB()    NOCOMMA; ENDHASH
+
+// a named hash
+#define RECORD(name) KEY(name); HASH
+#define ENDRECORD() NOCOMMA; ENDHASH
+
+// a named list
 #define SECTION(name) PREFIX fprintf (dat->fh, "\"%s\": [\n", #name); dat->bit++;
-#define ENDSEC()  ENDARRAY
+#define ENDSEC()  NOCOMMA; ENDARRAY
+#define LASTENDSEC()  LASTENDARRAY
 #define NOCOMMA   fseek(dat->fh, -2, SEEK_CUR)
 
 #undef  FORMAT_RC
@@ -82,6 +92,7 @@ char* alloca(size_t size) {
 #define VALUE_3RD(name,dxf) \
   fprintf(dat->fh, "[ %f, %f, %f ],\n", _obj->name.x, _obj->name.y, _obj->name.z)
 #define VALUE_2DD(name,d1,d2,dxf) VALUE_2RD(name,dxf)
+#define VALUE_TV(name,dxf)
 
 #define FIELD(name,type,dxf) \
   { PREFIX fprintf(dat->fh, "\"" #name "\": " FORMAT_##type ",\n", _obj->name); }
@@ -134,17 +145,34 @@ char* alloca(size_t size) {
     fprintf(dat->fh, "\",\n"); \
   }
 #endif
+#define FIELD_BINARY(name,size,dxf)       \
+{ \
+  long len = size; \
+  KEY(name); \
+  fprintf(dat->fh, "\""); \
+  if (_obj->name) { \
+    for (long j=0; j < len; j++) { \
+      fprintf(dat->fh, "%02X", _obj->name[j]); \
+    } \
+  } \
+  fprintf(dat->fh, "\""); \
+}
 
 #define FIELD_VALUE(name) _obj->name
 #define ANYCODE -1
 // todo: only the name, not the ref
-#define VALUE_HANDLE(hdlptr, name, handle_code, dxf)     \
+#define VALUE_HANDLE(hdlptr, name, handle_code, dxf) \
   if (hdlptr) { \
     fprintf(dat->fh, "\"%d.%d.%lu\",\n", \
-            hdlptr->handleref.code, \
-            hdlptr->handleref.size, \
-            hdlptr->handleref.value); \
+            (hdlptr)->handleref.code,    \
+            (hdlptr)->handleref.size,    \
+            (hdlptr)->handleref.value);  \
   } else { fprintf(dat->fh, "\"\",\n"); }
+#define VALUE_H(hdl, dxf) \
+  fprintf(dat->fh, "\"%d.%d.%lu\",\n", \
+            (hdl).code,    \
+            (hdl).size,    \
+            (hdl).value)
 #define FIELD_HANDLE(name, handle_code, dxf) \
   PREFIX if (_obj->name) { \
     fprintf(dat->fh, "\"" #name "\": \"%d.%d.%lu\",\n", \
@@ -322,6 +350,40 @@ char* alloca(size_t size) {
 #define START_STRING_STREAM
 #define END_STRING_STREAM
 #define START_HANDLE_STREAM
+
+#define COMMON_TABLE_CONTROL_FLAGS \
+  if (_obj) { \
+    SINCE(R_13) { \
+      KEY(handle); VALUE_H(obj->handle, 5); \
+    } \
+    SINCE(R_14) { \
+      FIELD_HANDLE (null_handle, 0, 330); \
+    } \
+  } \
+  SINCE(R_2000) { \
+    VALUE_TV ("AcDbSymbolTable", 100);   \
+  }
+
+//TODO add 340
+#define COMMON_TABLE_FLAGS(owner, acdbname) \
+    SINCE(R_14) { \
+      FIELD_HANDLE (owner, 4, 330); \
+    } \
+    SINCE(R_2000) { \
+      VALUE_TV ("AcDbSymbolTableRecord", 100); \
+      VALUE_TV ("AcDb" #acdbname "TableRecord", 100); \
+    }\
+    FIELD_RC (flag, 70)
+
+#define LAYER_TABLE_FLAGS(owner, acdbname) \
+    SINCE(R_14) { \
+      FIELD_HANDLE (owner, 4, 330); \
+    } \
+    SINCE(R_2000) { \
+      VALUE_TV ("AcDbSymbolTableRecord", 100); \
+      VALUE_TV ("AcDb" #acdbname "TableRecord", 100); \
+    } \
+    FIELD_RS (flag, 70)
 
 #define DWG_ENTITY(token) \
 static int \
@@ -638,20 +700,18 @@ json_header_write(Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
       ? "UTF-8"
       : "ANSI_1252";
 
-  KEY(HEADER); HASH;
+  RECORD(HEADER);
   #include "header_variables.spec"
-  NOCOMMA;
-  ENDHASH;
+  ENDRECORD();
   return 0;
 }
 
 static int
 json_classes_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 {
-  BITCODE_BS i;
+  BITCODE_BL i;
 
   SECTION(CLASSES);
-  LOG_TRACE("num_classes: " FORMAT_BS "\n", dwg->num_classes);
   for (i=0; i < dwg->num_classes; i++)
     {
       Dwg_Class *_obj = &dwg->dwg_class[i];
@@ -664,12 +724,9 @@ json_classes_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
       FIELD_BL (num_instances, 91);
       FIELD_B  (wasazombie, 280);
       FIELD_BS (item_class_id, 281);
-      // Is-an-entity. 1f2 for entities, 1f3 for objects
-      //VALUE (281, dwg->dwg_class[i].item_class_id == 0x1F2 ? 1 : 0);
       NOCOMMA;
       ENDHASH;
     }
-  NOCOMMA;
   ENDSEC();
   return 0;
 }
@@ -677,10 +734,240 @@ json_classes_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 static int
 json_tables_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 {
-  (void)dwg;
+  int error = 0;
+  unsigned int i;
 
   SECTION(TABLES);
-  //...
+  {
+    Dwg_Object_VPORT_CONTROL *_obj = &dwg->vport_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(VPORT);
+        // add handle 5 here at first
+        COMMON_TABLE_CONTROL_FLAGS;
+        //error |= dwg_json_VPORT_CONTROL(dat, obj);
+        //TODO how far back can DXF read 1000?
+        if (dat->version != dat->from_version && dat->from_version >= R_2000)
+          {
+            /* if saved from newer version, eg. AC1032: */
+            VALUE_TV ("ACAD", 1001);
+            VALUE_TV ("DbSaveVer", 1000);
+            VALUE_RS ((dat->from_version * 3) + 15, 1071); // so that 69 is R_2018
+          }
+        for (i=0; i<dwg->vport_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->vports[i]);
+            if (obj && obj->type == DWG_TYPE_VPORT) {
+              //reordered in the DXF: 2,70,10,11,12,13,14,15,16,...
+              //special-cased in the spec
+              error |= dwg_json_VPORT(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_LTYPE_CONTROL *_obj = &dwg->ltype_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(LTYPE);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_LTYPE_CONTROL(dat, obj);
+        // first the 2 builtin ltypes: ByBlock, ByLayer
+        if ((obj  = dwg_ref_object(dwg, dwg->header_vars.LTYPE_BYBLOCK))) {
+          dwg_json_LTYPE(dat, obj);
+        }
+        if ((obj  = dwg_ref_object(dwg, dwg->header_vars.LTYPE_BYLAYER))) {
+          error |= dwg_json_LTYPE(dat, obj);
+        }
+        // here LTYPE_CONTINUOUS is already included
+        for (i=0; i<dwg->ltype_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->linetypes[i]);
+            if (obj && obj->type == DWG_TYPE_LTYPE) {
+              error |= dwg_json_LTYPE(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_LAYER_CONTROL *_obj = &dwg->layer_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(LAYER);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_LAYER_CONTROL(dat, obj);
+        for (i=0; i<dwg->layer_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->layers[i]);
+            if (obj && obj->type == DWG_TYPE_LAYER)
+              error |= dwg_json_LAYER(dat, obj);
+            //else if (obj && obj->type == DWG_TYPE_DICTIONARY)
+            //  error |= dwg_json_DICTIONARY(dat, obj);
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_STYLE_CONTROL *_obj = &dwg->style_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(STYLE);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_STYLE_CONTROL(dat, obj);
+        for (i=0; i<dwg->style_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->styles[i]);
+            if (obj && obj->type == DWG_TYPE_STYLE) {
+              error |= dwg_json_STYLE(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_VIEW_CONTROL *_obj = &dwg->view_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(VIEW);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_VIEW_CONTROL(dat, obj);
+        for (i=0; i<dwg->view_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->views[i]);
+            //FIXME implement the other two
+            if (obj && obj->type == DWG_TYPE_VIEW)
+              error |= dwg_json_VIEW(dat, obj);
+            /*
+              else if (obj && obj->fixedtype == DWG_TYPE_SECTIONVIEWSTYLE)
+              error |= dwg_json_SECTIONVIEWSTYLE(dat, obj);
+              if (obj && obj->fixedtype == DWG_TYPE_DETAILVIEWSTYLE) {
+              error |= dwg_json_DETAILVIEWSTYLE(dat, obj);
+            */
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_UCS_CONTROL *_obj = &dwg->ucs_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(UCS);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_UCS_CONTROL(dat, obj);
+        for (i=0; i<dwg->ucs_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->ucs[i]);
+            if (obj && obj->type == DWG_TYPE_UCS) {
+              error |= dwg_json_UCS(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  SINCE (R_13)
+  {
+    Dwg_Object_APPID_CONTROL *_obj = &dwg->appid_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(APPID);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_APPID_CONTROL(dat, obj);
+        for (i=0; i<dwg->appid_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->apps[i]);
+            if (obj && obj->type == DWG_TYPE_APPID) {
+              error |= dwg_json_APPID(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  {
+    Dwg_Object_DIMSTYLE_CONTROL *_obj = &dwg->dimstyle_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    if (obj)
+      {
+        TABLE(DIMSTYLE);
+        COMMON_TABLE_CONTROL_FLAGS;
+        error |= dwg_json_DIMSTYLE_CONTROL(dat, obj);
+        //ignoring morehandles
+        for (i=0; i<dwg->dimstyle_control.num_entries; i++)
+          {
+            obj = dwg_ref_object(dwg, _obj->dimstyles[i]);
+            if (obj && obj->type == DWG_TYPE_DIMSTYLE) {
+              error |= dwg_json_DIMSTYLE(dat, obj);
+            }
+          }
+        ENDTAB();
+      }
+  }
+  // fool the warnings. this table is nowhere to be found in the wild. maybe pre-R_11
+  if (0 && dwg->vport_entity_control.num_entries)
+    {
+      Dwg_Object_VPORT_ENTITY_CONTROL *_obj = &dwg->vport_entity_control;
+      Dwg_Object *obj = &dwg->object[_obj->objid];
+      if (obj)
+        {
+          TABLE(VPORT_ENTITY);
+          COMMON_TABLE_CONTROL_FLAGS;
+          error |= dwg_json_VPORT_ENTITY_CONTROL(dat, obj);
+          for (i=0; i<dwg->vport_entity_control.num_entries; i++)
+            {
+              obj = dwg_ref_object(dwg, _obj->vport_entity_headers[i]);
+              if (obj && obj->type == DWG_TYPE_VPORT_ENTITY_HEADER) {
+                error |= dwg_json_VPORT_ENTITY_HEADER(dat, obj);
+              }
+            }
+          // avoid unused warnings
+          dwg_json_PROXY_ENTITY(dat, &dwg->object[0]);
+          ENDTAB();
+        }
+    }
+  SINCE (R_13)
+  {
+    Dwg_Object_BLOCK_CONTROL *_obj = &dwg->block_control;
+    Dwg_Object *obj = &dwg->object[_obj->objid];
+    Dwg_Object *mspace = NULL, *pspace = NULL;
+
+    TABLE(BLOCK_RECORD);
+    COMMON_TABLE_CONTROL_FLAGS;
+    error |= dwg_json_BLOCK_CONTROL(dat, obj);
+
+    obj = dwg_ref_object(dwg, _obj->model_space);
+    if (obj && obj->type == DWG_TYPE_BLOCK_HEADER) {
+      mspace = obj;
+      RECORD(BLOCK_RECORD);
+      error |= dwg_json_BLOCK_HEADER(dat, obj);
+    }
+    if (_obj->paper_space) {
+      obj = dwg_ref_object(dwg, _obj->paper_space);
+      if (obj && obj->type == DWG_TYPE_BLOCK_HEADER) {
+        pspace = obj;
+        RECORD(BLOCK_RECORD);
+        error |= dwg_json_BLOCK_HEADER(dat, obj);
+      }
+    }
+    for (i=0; i<dwg->block_control.num_entries; i++)
+      {
+        obj = dwg_ref_object(dwg, dwg->block_control.block_headers[i]);
+        if (obj && obj->type == DWG_TYPE_BLOCK_HEADER &&
+            obj != mspace && obj != pspace)
+          {
+            RECORD(BLOCK_RECORD);
+            error |= dwg_json_BLOCK_HEADER(dat, obj);
+          }
+      }
+    ENDTAB();
+  }
   ENDSEC();
   return 0;
 }
@@ -688,12 +975,66 @@ json_tables_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 static int
 json_blocks_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 {
-  (void)dwg;
+  int error = 0;
+  //unsigned int i;
+  Dwg_Object_BLOCK_CONTROL *_ctrl = &dwg->block_control;
+  Dwg_Object *ctrl = &dwg->object[_ctrl->objid];
+  /* let's see if this control block is correct... */
+  Dwg_Object_Ref *msref = dwg->header_vars.BLOCK_RECORD_MSPACE;
+  Dwg_Object_Ref *psref = dwg->header_vars.BLOCK_RECORD_PSPACE;
+  Dwg_Object *hdr, *obj;
+
+  // The modelspace header needs to have an block_entity.
+  // There are cases (r2010 AEC dwgs) where they don't have one.
+  if (msref && msref->obj &&
+      msref->obj->type == DWG_TYPE_BLOCK_HEADER &&
+      msref->obj->tio.object->tio.BLOCK_HEADER->block_entity)
+    hdr = msref->obj;
+  else
+    hdr = _ctrl->model_space->obj; // these two really should be the same
+
+  // If there's no *Model_Space block skip this BLOCKS section.
+  // Or try handle 1F with r2000+, 17 with r14
+  obj = get_first_owned_block(hdr);
+  if (!obj)
+    obj = dwg_resolve_handle(dwg, dwg->header.version >= R_2000 ? 0x1f : 0x17);
+  if (!obj)
+    return 1;
 
   SECTION(BLOCKS);
-  //...
+  while (obj)
+    {
+      error |= dwg_json_object(dat, obj);
+      obj = get_next_owned_block(hdr, obj);
+      if (obj && obj->type == DWG_TYPE_ENDBLK)
+        {
+          error |= dwg_json_ENDBLK(dat, obj);
+          obj = NULL;
+        }
+    }
+
+  if (psref && psref->obj && psref->obj->tio.object->tio.BLOCK_HEADER->block_entity)
+    hdr = psref->obj;
+  else if (_ctrl->paper_space)
+    hdr = _ctrl->paper_space->obj;
+  else
+    hdr = NULL;
+
+  if (hdr) {
+      obj = get_first_owned_block(hdr);
+      while (obj)
+        {
+          error |= dwg_json_object(dat, obj);
+          obj = get_next_owned_block(hdr, obj);
+          if (obj && obj->type == DWG_TYPE_ENDBLK)
+            {
+              error |= dwg_json_ENDBLK(dat, obj);
+              obj = NULL;
+            }
+        }
+    }
   ENDSEC();
-  return 0;
+  return error;
 }
 
 static int
@@ -705,37 +1046,53 @@ json_entities_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
   for (i=0; i < dwg->num_objects; i++)
     {
       Dwg_Object *obj = &dwg->object[i];
-      HASH;
-      dwg_json_object(dat, obj);
-      NOCOMMA;
-      ENDHASH;
+      if (dwg->object[i].supertype == DWG_SUPERTYPE_ENTITY &&
+          dwg->object[i].type != DWG_TYPE_BLOCK &&
+          dwg->object[i].type != DWG_TYPE_ENDBLK)
+        {
+          HASH;
+          dwg_json_object(dat, obj);
+          NOCOMMA;
+          ENDHASH;
+        }
     }
-  NOCOMMA;
-  /* ENDSEC without comma */
-  fprintf (dat->fh, "\n"); dat->bit--; PREFIX fprintf (dat->fh, "]\n");
+  ENDSEC();
   return 0;
 }
 
-/* The object map: we skip this
 static int
 json_objects_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 {
   BITCODE_BL i;
 
   SECTION(OBJECTS);
-  for (j = 0; j < dwg->num_objects; j++)
+  for (i = 0; i < dwg->num_objects; i++)
     {
+      Dwg_Object *obj = &dwg->object[i];
+      if (dwg->object[i].supertype == DWG_SUPERTYPE_OBJECT)
+        {
+          HASH;
+          dwg_json_object(dat, obj);
+          NOCOMMA;
+          ENDHASH;
+        }
     }
   ENDSEC();
   return 0;
 }
-*/
 
 static int
 json_preview_write (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
 {
-  (void)dat; (void)dwg;
-  //...
+  Bit_Chain *_obj = (Bit_Chain*) &dwg->picture;
+  if (_obj->chain && _obj->size && _obj->size > 10)
+    {
+      KEY(THUMBNAILIMAGE); HASH;
+      KEY(size); PREFIX fprintf(dat->fh, "\"size\": %lu,\n", _obj->size);
+      FIELD_BINARY(chain, _obj->size, 310);
+      NOCOMMA;
+      ENDHASH;
+    }
   return 0;
 }
 
@@ -752,31 +1109,33 @@ dwg_write_json(Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
   // see https://pythonhosted.org/ezdxf/dxfinternals/filestructure.html
   json_header_write (dat, dwg);
 
-  if (!minimal && dat->version >= R_13)
+  if (!minimal)
     {
-      SINCE(R_2000) {
-        if (json_classes_write (dat, dwg))
-          goto fail;
-      }
+      // if downgraded from r2000 to r14, but we still have classes, keep the classes
+      if ((dat->from_version >= R_2000 && dwg->num_classes) ||
+          dat->version >= R_2000)
+        {
+          if (json_classes_write (dat, dwg) >= DWG_ERR_CRITICAL)
+            goto fail;
+        }
 
-      if (json_tables_write (dat, dwg))
+      if (json_tables_write (dat, dwg) >= DWG_ERR_CRITICAL)
         goto fail;
 
-      if (json_blocks_write (dat, dwg))
+      if (json_blocks_write (dat, dwg) >= DWG_ERR_CRITICAL)
         goto fail;
     }
 
-  if (json_entities_write (dat, dwg))
+  if (json_entities_write (dat, dwg) >= DWG_ERR_CRITICAL)
     goto fail;
 
-  /* only the object map
   SINCE(R_13) {
-    if (json_objects_write (dat, dwg))
+    if (json_objects_write (dat, dwg) >= DWG_ERR_CRITICAL)
       goto fail;
-  }*/
+  }
 
   if (!minimal && dat->version >= R_2000) {
-    if (json_preview_write (dat, dwg))
+    if (json_preview_write (dat, dwg) >= DWG_ERR_CRITICAL)
       goto fail;
   }
 
