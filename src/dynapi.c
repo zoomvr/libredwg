@@ -4134,6 +4134,8 @@ dwg_dynapi_entity_value (void *restrict _obj, const char *restrict name,
         }
       if (fp)
         memcpy (fp, f, sizeof (Dwg_DYNAPI_field));
+      //TODO:
+      // which size? if text strcpy. if TU wcscpy. if struct num_fieldname * f->size
       memcpy (out, &((char *)_obj)[f->offset], f->size);
       return true;
     }
@@ -4141,9 +4143,45 @@ dwg_dynapi_entity_value (void *restrict _obj, const char *restrict name,
 }
 
 EXPORT bool
-dwg_dynapi_header_value (const Dwg_Data *restrict dwg,
-                         const char *restrict fieldname, void *restrict out,
-                         Dwg_DYNAPI_field *restrict fp)
+dwg_dynapi_entity_values (void *restrict _obj, const char *restrict name,
+                         const char *restrict fieldname,
+                         void *restrict out, const int count)
+{
+  if (!_obj)
+    return false;
+  {
+    int error;
+    // check the object type
+    const Dwg_Object* obj = dwg_obj_generic_to_object (_obj, &error);
+    if (obj && strcmp (obj->name, name)) // objid may be 0
+      {
+        int loglevel = obj->parent->opts & 0xf;
+        LOG_ERROR ("%s: Invalid entity type %s, wanted %s", __FUNCTION__, obj->name, name);
+        return false;
+      }
+    {
+      const Dwg_DYNAPI_field* f = dwg_dynapi_entity_field (name, fieldname);
+      if (!f)
+        {
+          int loglevel;
+          if (obj)
+            loglevel = obj->parent->opts & 0xf;
+          else
+            loglevel = DWG_LOGLEVEL_ERROR;
+          LOG_ERROR ("%s: Invalid %s field %s", __FUNCTION__, name, fieldname);
+          return false;
+        }
+      //TODO: if (f->malloc)
+      //  which size? if text strcpy. if TU wcscpy. if struct num_fieldname * f->size
+      memcpy (out, &((char*)_obj)[f->offset], count * f->size);
+      return true;
+    }
+  }
+}
+ 
+EXPORT bool
+dwg_dynapi_header_value (const Dwg_Data *restrict dwg, const char *restrict fieldname,
+                         void *restrict out, Dwg_DYNAPI_field *restrict fp)
 {
   if (!dwg || !fieldname || !out)
     return false;
@@ -4170,8 +4208,8 @@ dwg_dynapi_header_value (const Dwg_Data *restrict dwg,
 }
 
 EXPORT bool
-dwg_dynapi_common_value(void *restrict _obj, const char *restrict fieldname,
-                        void *restrict out, Dwg_DYNAPI_field *restrict fp)
+dwg_dynapi_common_value (void *restrict _obj, const char *restrict fieldname,
+                         void *restrict out, Dwg_DYNAPI_field *restrict fp)
 {
   if (!_obj || !fieldname || !out)
     return false;
@@ -4292,6 +4330,51 @@ dwg_dynapi_entity_set_value (void *restrict _obj, const char *restrict name,
         memcpy (old, value, f->size);
       if (f->is_malloc)
         free (old);
+      return true;
+    }
+  }
+}
+
+EXPORT bool
+dwg_dynapi_entity_set_values (void *restrict _obj, const char *restrict name,
+                              const char *restrict fieldname,
+                              const void *restrict value, const int count)
+{
+  if (!_obj)
+    return false;
+  {
+    int error;
+    const Dwg_Object* obj = dwg_obj_generic_to_object (_obj, &error);
+    if (obj && strcmp (obj->name, name))
+      {
+        const int loglevel = obj->parent->opts & 0xf;
+        LOG_ERROR ("%s: Invalid entity type %s, wanted %s", __FUNCTION__,
+                   obj->name, name);
+        return false;
+      }
+    {
+      const Dwg_DYNAPI_field* f;
+      f = dwg_dynapi_entity_field(name, fieldname);
+      if (!f)
+        {
+          const Dwg_Data *dwg
+            = obj ? obj->parent
+                  : ((Dwg_Object_UNKNOWN_OBJ *)_obj)->parent->dwg;
+          const int loglevel = dwg->opts & 0xf;
+          LOG_ERROR ("%s: Invalid %s field %s", __FUNCTION__, name, fieldname);
+          return false;
+        }
+      if (count > 1 && !f->is_malloc)
+        {
+          const Dwg_Data *dwg
+            = obj ? obj->parent
+                  : ((Dwg_Object_UNKNOWN_OBJ *)_obj)->parent->dwg;
+          const int loglevel = dwg->opts & 0xf;
+          LOG_ERROR ("%s: Wrong count %d, no is_malloc field %s", __FUNCTION__,
+                     count, fieldname);
+          return false;
+        }
+      memcpy (&((char*)_obj)[f->offset], value, count * f->size);
       return true;
     }
   }
