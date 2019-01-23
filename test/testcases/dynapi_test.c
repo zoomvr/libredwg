@@ -8591,7 +8591,7 @@ static int test__3DSOLID (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (_3dsolid, "3DSOLID", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("3DSOLID.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -8814,8 +8814,11 @@ static int test__3DSOLID (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "silhouettes", &silhouettes, NULL)
-        && silhouettes == _3dsolid->silhouettes)
+        && dwg_dynapi_entity_values (_3dsolid, "3DSOLID", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &_3dsolid->silhouettes,
+                        count * sizeof(_3dsolid->silhouettes)))
+)
       {
         pass ("3DSOLID.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -8933,8 +8936,11 @@ static int test__3DSOLID (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "wires", &wires, NULL)
-        && wires == _3dsolid->wires)
+        && dwg_dynapi_entity_values (_3dsolid, "3DSOLID", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &_3dsolid->wires,
+                        count * sizeof(_3dsolid->wires)))
+)
       {
         pass ("3DSOLID.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -15461,7 +15467,7 @@ static int test_EXTRUDEDSURFACE (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (extrudedsurface, "EXTRUDEDSURFACE", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("EXTRUDEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -15827,8 +15833,11 @@ static int test_EXTRUDEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "silhouettes", &silhouettes, NULL)
-        && silhouettes == extrudedsurface->silhouettes)
+        && dwg_dynapi_entity_values (extrudedsurface, "EXTRUDEDSURFACE", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &extrudedsurface->silhouettes,
+                        count * sizeof(extrudedsurface->silhouettes)))
+)
       {
         pass ("EXTRUDEDSURFACE.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -16180,8 +16189,11 @@ static int test_EXTRUDEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "wires", &wires, NULL)
-        && wires == extrudedsurface->wires)
+        && dwg_dynapi_entity_values (extrudedsurface, "EXTRUDEDSURFACE", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &extrudedsurface->wires,
+                        count * sizeof(extrudedsurface->wires)))
+)
       {
         pass ("EXTRUDEDSURFACE.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -16508,8 +16520,11 @@ static int test_HATCH (const Dwg_Object *obj)
     BITCODE_H* boundary_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (hatch, "HATCH", "num_boundary_handles", &count, NULL)
-        && dwg_dynapi_entity_value (hatch, "HATCH", "boundary_handles", &boundary_handles, NULL)
-        && boundary_handles == hatch->boundary_handles)
+        && dwg_dynapi_entity_values (hatch, "HATCH", "boundary_handles", &boundary_handles, count)
+        && (!count
+            || !memcmp (&boundary_handles, &hatch->boundary_handles,
+                        count * sizeof(hatch->boundary_handles)))
+)
       {
         pass ("HATCH.boundary_handles [H*] * %u num_boundary_handles", count);
       }
@@ -16523,8 +16538,11 @@ static int test_HATCH (const Dwg_Object *obj)
     Dwg_HATCH_Color* colors;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (hatch, "HATCH", "num_colors", &count, NULL)
-        && dwg_dynapi_entity_value (hatch, "HATCH", "colors", &colors, NULL)
-        && colors == hatch->colors)
+        && dwg_dynapi_entity_values (hatch, "HATCH", "colors", &colors, count)
+        && (!count
+            || !memcmp (&colors, &hatch->colors,
+                        count * sizeof(hatch->colors)))
+)
       {
         pass ("HATCH.colors [Dwg_HATCH_Color*] * %u num_colors", count);
       }
@@ -16538,8 +16556,11 @@ static int test_HATCH (const Dwg_Object *obj)
     Dwg_HATCH_DefLine* deflines;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (hatch, "HATCH", "num_deflines", &count, NULL)
-        && dwg_dynapi_entity_value (hatch, "HATCH", "deflines", &deflines, NULL)
-        && deflines == hatch->deflines)
+        && dwg_dynapi_entity_values (hatch, "HATCH", "deflines", &deflines, count)
+        && (!count
+            || !memcmp (&deflines, &hatch->deflines,
+                        count * sizeof(hatch->deflines)))
+)
       {
         pass ("HATCH.deflines [Dwg_HATCH_DefLine*] * %u num_deflines", count);
       }
@@ -16917,8 +16938,11 @@ static int test_HATCH (const Dwg_Object *obj)
     Dwg_HATCH_Path* paths;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (hatch, "HATCH", "num_paths", &count, NULL)
-        && dwg_dynapi_entity_value (hatch, "HATCH", "paths", &paths, NULL)
-        && paths == hatch->paths)
+        && dwg_dynapi_entity_values (hatch, "HATCH", "paths", &paths, count)
+        && (!count
+            || !memcmp (&paths, &hatch->paths,
+                        count * sizeof(hatch->paths)))
+)
       {
         pass ("HATCH.paths [Dwg_HATCH_Path*] * %u num_paths", count);
       }
@@ -17036,8 +17060,11 @@ static int test_HATCH (const Dwg_Object *obj)
     BITCODE_2RD* seeds;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (hatch, "HATCH", "num_seeds", &count, NULL)
-        && dwg_dynapi_entity_value (hatch, "HATCH", "seeds", &seeds, NULL)
-        && seeds == hatch->seeds)
+        && dwg_dynapi_entity_values (hatch, "HATCH", "seeds", &seeds, count)
+        && (!count
+            || !memcmp (&seeds, &hatch->seeds,
+                        count * sizeof(hatch->seeds)))
+)
       {
         pass ("HATCH.seeds [2RD*] * %u num_seeds", count);
       }
@@ -17227,8 +17254,11 @@ static int test_HELIX (const Dwg_Object *obj)
     Dwg_SPLINE_control_point* ctrl_pts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (helix, "HELIX", "num_ctrl_pts", &count, NULL)
-        && dwg_dynapi_entity_value (helix, "HELIX", "ctrl_pts", &ctrl_pts, NULL)
-        && ctrl_pts == helix->ctrl_pts)
+        && dwg_dynapi_entity_values (helix, "HELIX", "ctrl_pts", &ctrl_pts, count)
+        && (!count
+            || !memcmp (&ctrl_pts, &helix->ctrl_pts,
+                        count * sizeof(helix->ctrl_pts)))
+)
       {
         pass ("HELIX.ctrl_pts [Dwg_SPLINE_control_point*] * %u num_ctrl_pts", count);
       }
@@ -17307,8 +17337,11 @@ static int test_HELIX (const Dwg_Object *obj)
     Dwg_SPLINE_point* fit_pts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (helix, "HELIX", "num_fit_pts", &count, NULL)
-        && dwg_dynapi_entity_value (helix, "HELIX", "fit_pts", &fit_pts, NULL)
-        && fit_pts == helix->fit_pts)
+        && dwg_dynapi_entity_values (helix, "HELIX", "fit_pts", &fit_pts, count)
+        && (!count
+            || !memcmp (&fit_pts, &helix->fit_pts,
+                        count * sizeof(helix->fit_pts)))
+)
       {
         pass ("HELIX.fit_pts [Dwg_SPLINE_point*] * %u num_fit_pts", count);
       }
@@ -17452,8 +17485,11 @@ static int test_HELIX (const Dwg_Object *obj)
     BITCODE_BD* knots;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (helix, "HELIX", "num_knots", &count, NULL)
-        && dwg_dynapi_entity_value (helix, "HELIX", "knots", &knots, NULL)
-        && knots == helix->knots)
+        && dwg_dynapi_entity_values (helix, "HELIX", "knots", &knots, count)
+        && (!count
+            || !memcmp (&knots, &helix->knots,
+                        count * sizeof(helix->knots)))
+)
       {
         pass ("HELIX.knots [BD*] * %u num_knots", count);
       }
@@ -17968,8 +18004,11 @@ static int test_IMAGE (const Dwg_Object *obj)
     BITCODE_2RD* clip_verts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (image, "IMAGE", "num_clip_verts", &count, NULL)
-        && dwg_dynapi_entity_value (image, "IMAGE", "clip_verts", &clip_verts, NULL)
-        && clip_verts == image->clip_verts)
+        && dwg_dynapi_entity_values (image, "IMAGE", "clip_verts", &clip_verts, count)
+        && (!count
+            || !memcmp (&clip_verts, &image->clip_verts,
+                        count * sizeof(image->clip_verts)))
+)
       {
         pass ("IMAGE.clip_verts [2RD*] * %u num_clip_verts", count);
       }
@@ -18211,8 +18250,11 @@ static int test_INSERT (const Dwg_Object *obj)
     BITCODE_H* attrib_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (insert, "INSERT", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (insert, "INSERT", "attrib_handles", &attrib_handles, NULL)
-        && attrib_handles == insert->attrib_handles)
+        && dwg_dynapi_entity_values (insert, "INSERT", "attrib_handles", &attrib_handles, count)
+        && (!count
+            || !memcmp (&attrib_handles, &insert->attrib_handles,
+                        count * sizeof(insert->attrib_handles)))
+)
       {
         pass ("INSERT.attrib_handles [H*] * %u num_owned", count);
       }
@@ -18844,8 +18886,11 @@ static int test_LEADER (const Dwg_Object *obj)
     BITCODE_3DPOINT* points;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (leader, "LEADER", "num_points", &count, NULL)
-        && dwg_dynapi_entity_value (leader, "LEADER", "points", &points, NULL)
-        && points == leader->points)
+        && dwg_dynapi_entity_values (leader, "LEADER", "points", &points, count)
+        && (!count
+            || !memcmp (&points, &leader->points,
+                        count * sizeof(leader->points)))
+)
       {
         pass ("LEADER.points [3DPOINT*] * %u num_points", count);
       }
@@ -19776,8 +19821,11 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
     BITCODE_H* cross_sections;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_cross_sections", &count, NULL)
-        && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "cross_sections", &cross_sections, NULL)
-        && cross_sections == loftedsurface->cross_sections)
+        && dwg_dynapi_entity_values (loftedsurface, "LOFTEDSURFACE", "cross_sections", &cross_sections, count)
+        && (!count
+            || !memcmp (&cross_sections, &loftedsurface->cross_sections,
+                        count * sizeof(loftedsurface->cross_sections)))
+)
       {
         pass ("LOFTEDSURFACE.cross_sections [H*] * %u num_cross_sections", count);
       }
@@ -19791,7 +19839,7 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (loftedsurface, "LOFTEDSURFACE", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("LOFTEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -19871,8 +19919,11 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
     BITCODE_H* guide_curves;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_guide_curves", &count, NULL)
-        && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "guide_curves", &guide_curves, NULL)
-        && guide_curves == loftedsurface->guide_curves)
+        && dwg_dynapi_entity_values (loftedsurface, "LOFTEDSURFACE", "guide_curves", &guide_curves, count)
+        && (!count
+            || !memcmp (&guide_curves, &loftedsurface->guide_curves,
+                        count * sizeof(loftedsurface->guide_curves)))
+)
       {
         pass ("LOFTEDSURFACE.guide_curves [H*] * %u num_guide_curves", count);
       }
@@ -20263,8 +20314,11 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "silhouettes", &silhouettes, NULL)
-        && silhouettes == loftedsurface->silhouettes)
+        && dwg_dynapi_entity_values (loftedsurface, "LOFTEDSURFACE", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &loftedsurface->silhouettes,
+                        count * sizeof(loftedsurface->silhouettes)))
+)
       {
         pass ("LOFTEDSURFACE.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -20564,8 +20618,11 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "wires", &wires, NULL)
-        && wires == loftedsurface->wires)
+        && dwg_dynapi_entity_values (loftedsurface, "LOFTEDSURFACE", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &loftedsurface->wires,
+                        count * sizeof(loftedsurface->wires)))
+)
       {
         pass ("LOFTEDSURFACE.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -20586,8 +20643,11 @@ static int test_LWPOLYLINE (const Dwg_Object *obj)
     BITCODE_BD* bulges;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "num_bulges", &count, NULL)
-        && dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "bulges", &bulges, NULL)
-        && bulges == lwpolyline->bulges)
+        && dwg_dynapi_entity_values (lwpolyline, "LWPOLYLINE", "bulges", &bulges, count)
+        && (!count
+            || !memcmp (&bulges, &lwpolyline->bulges,
+                        count * sizeof(lwpolyline->bulges)))
+)
       {
         pass ("LWPOLYLINE.bulges [BD*] * %u num_bulges", count);
       }
@@ -20809,8 +20869,11 @@ static int test_LWPOLYLINE (const Dwg_Object *obj)
     BITCODE_2RD* points;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "num_points", &count, NULL)
-        && dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "points", &points, NULL)
-        && points == lwpolyline->points)
+        && dwg_dynapi_entity_values (lwpolyline, "LWPOLYLINE", "points", &points, count)
+        && (!count
+            || !memcmp (&points, &lwpolyline->points,
+                        count * sizeof(lwpolyline->points)))
+)
       {
         pass ("LWPOLYLINE.points [2RD*] * %u num_points", count);
       }
@@ -20850,8 +20913,11 @@ static int test_LWPOLYLINE (const Dwg_Object *obj)
     BITCODE_BL* vertexids;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "num_vertexids", &count, NULL)
-        && dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "vertexids", &vertexids, NULL)
-        && vertexids == lwpolyline->vertexids)
+        && dwg_dynapi_entity_values (lwpolyline, "LWPOLYLINE", "vertexids", &vertexids, count)
+        && (!count
+            || !memcmp (&vertexids, &lwpolyline->vertexids,
+                        count * sizeof(lwpolyline->vertexids)))
+)
       {
         pass ("LWPOLYLINE.vertexids [BL*] * %u num_vertexids", count);
       }
@@ -20865,8 +20931,11 @@ static int test_LWPOLYLINE (const Dwg_Object *obj)
     Dwg_LWPOLYLINE_width* widths;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "num_widths", &count, NULL)
-        && dwg_dynapi_entity_value (lwpolyline, "LWPOLYLINE", "widths", &widths, NULL)
-        && widths == lwpolyline->widths)
+        && dwg_dynapi_entity_values (lwpolyline, "LWPOLYLINE", "widths", &widths, count)
+        && (!count
+            || !memcmp (&widths, &lwpolyline->widths,
+                        count * sizeof(lwpolyline->widths)))
+)
       {
         pass ("LWPOLYLINE.widths [Dwg_LWPOLYLINE_width*] * %u num_widths", count);
       }
@@ -20887,8 +20956,11 @@ static int test_MINSERT (const Dwg_Object *obj)
     BITCODE_H* attrib_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (minsert, "MINSERT", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (minsert, "MINSERT", "attrib_handles", &attrib_handles, NULL)
-        && attrib_handles == minsert->attrib_handles)
+        && dwg_dynapi_entity_values (minsert, "MINSERT", "attrib_handles", &attrib_handles, count)
+        && (!count
+            || !memcmp (&attrib_handles, &minsert->attrib_handles,
+                        count * sizeof(minsert->attrib_handles)))
+)
       {
         pass ("MINSERT.attrib_handles [H*] * %u num_owned", count);
       }
@@ -21403,8 +21475,11 @@ static int test_MLINE (const Dwg_Object *obj)
     Dwg_MLINE_vertex* verts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (mline, "MLINE", "num_verts", &count, NULL)
-        && dwg_dynapi_entity_value (mline, "MLINE", "verts", &verts, NULL)
-        && verts == mline->verts)
+        && dwg_dynapi_entity_values (mline, "MLINE", "verts", &verts, count)
+        && (!count
+            || !memcmp (&verts, &mline->verts,
+                        count * sizeof(mline->verts)))
+)
       {
         pass ("MLINE.verts [Dwg_MLINE_vertex*] * %u num_verts", count);
       }
@@ -21633,8 +21708,11 @@ static int test_MTEXT (const Dwg_Object *obj)
     BITCODE_BD* column_heights;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (mtext, "MTEXT", "num_column_heights", &count, NULL)
-        && dwg_dynapi_entity_value (mtext, "MTEXT", "column_heights", &column_heights, NULL)
-        && column_heights == mtext->column_heights)
+        && dwg_dynapi_entity_values (mtext, "MTEXT", "column_heights", &column_heights, count)
+        && (!count
+            || !memcmp (&column_heights, &mtext->column_heights,
+                        count * sizeof(mtext->column_heights)))
+)
       {
         pass ("MTEXT.column_heights [BD*] * %u num_column_heights", count);
       }
@@ -22162,8 +22240,11 @@ static int test_MULTILEADER (const Dwg_Object *obj)
     Dwg_LEADER_ArrowHead* arrowheads;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (multileader, "MULTILEADER", "num_arrowheads", &count, NULL)
-        && dwg_dynapi_entity_value (multileader, "MULTILEADER", "arrowheads", &arrowheads, NULL)
-        && arrowheads == multileader->arrowheads)
+        && dwg_dynapi_entity_values (multileader, "MULTILEADER", "arrowheads", &arrowheads, count)
+        && (!count
+            || !memcmp (&arrowheads, &multileader->arrowheads,
+                        count * sizeof(multileader->arrowheads)))
+)
       {
         pass ("MULTILEADER.arrowheads [Dwg_LEADER_ArrowHead*] * %u num_arrowheads", count);
       }
@@ -22346,8 +22427,11 @@ static int test_MULTILEADER (const Dwg_Object *obj)
     Dwg_LEADER_BlockLabel* blocklabels;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (multileader, "MULTILEADER", "num_blocklabels", &count, NULL)
-        && dwg_dynapi_entity_value (multileader, "MULTILEADER", "blocklabels", &blocklabels, NULL)
-        && blocklabels == multileader->blocklabels)
+        && dwg_dynapi_entity_values (multileader, "MULTILEADER", "blocklabels", &blocklabels, count)
+        && (!count
+            || !memcmp (&blocklabels, &multileader->blocklabels,
+                        count * sizeof(multileader->blocklabels)))
+)
       {
         pass ("MULTILEADER.blocklabels [Dwg_LEADER_BlockLabel*] * %u num_blocklabels", count);
       }
@@ -23383,7 +23467,7 @@ static int test_PLANESURFACE (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (planesurface, "PLANESURFACE", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("PLANESURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -23632,8 +23716,11 @@ static int test_PLANESURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "silhouettes", &silhouettes, NULL)
-        && silhouettes == planesurface->silhouettes)
+        && dwg_dynapi_entity_values (planesurface, "PLANESURFACE", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &planesurface->silhouettes,
+                        count * sizeof(planesurface->silhouettes)))
+)
       {
         pass ("PLANESURFACE.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -23803,8 +23890,11 @@ static int test_PLANESURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "wires", &wires, NULL)
-        && wires == planesurface->wires)
+        && dwg_dynapi_entity_values (planesurface, "PLANESURFACE", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &planesurface->wires,
+                        count * sizeof(planesurface->wires)))
+)
       {
         pass ("PLANESURFACE.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -24233,8 +24323,11 @@ static int test_POLYLINE_2D (const Dwg_Object *obj)
     BITCODE_H* vertex;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (polyline_2d, "POLYLINE_2D", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_2d, "POLYLINE_2D", "vertex", &vertex, NULL)
-        && vertex == polyline_2d->vertex)
+        && dwg_dynapi_entity_values (polyline_2d, "POLYLINE_2D", "vertex", &vertex, count)
+        && (!count
+            || !memcmp (&vertex, &polyline_2d->vertex,
+                        count * sizeof(polyline_2d->vertex)))
+)
       {
         pass ("POLYLINE_2D.vertex [H*] * %u num_owned", count);
       }
@@ -24385,8 +24478,11 @@ static int test_POLYLINE_3D (const Dwg_Object *obj)
     BITCODE_H* vertex;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (polyline_3d, "POLYLINE_3D", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_3d, "POLYLINE_3D", "vertex", &vertex, NULL)
-        && vertex == polyline_3d->vertex)
+        && dwg_dynapi_entity_values (polyline_3d, "POLYLINE_3D", "vertex", &vertex, count)
+        && (!count
+            || !memcmp (&vertex, &polyline_3d->vertex,
+                        count * sizeof(polyline_3d->vertex)))
+)
       {
         pass ("POLYLINE_3D.vertex [H*] * %u num_owned", count);
       }
@@ -24641,8 +24737,11 @@ static int test_POLYLINE_MESH (const Dwg_Object *obj)
     BITCODE_H* vertex;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (polyline_mesh, "POLYLINE_MESH", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_mesh, "POLYLINE_MESH", "vertex", &vertex, NULL)
-        && vertex == polyline_mesh->vertex)
+        && dwg_dynapi_entity_values (polyline_mesh, "POLYLINE_MESH", "vertex", &vertex, count)
+        && (!count
+            || !memcmp (&vertex, &polyline_mesh->vertex,
+                        count * sizeof(polyline_mesh->vertex)))
+)
       {
         pass ("POLYLINE_MESH.vertex [H*] * %u num_owned", count);
       }
@@ -24793,8 +24892,11 @@ static int test_POLYLINE_PFACE (const Dwg_Object *obj)
     BITCODE_H* vertex;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (polyline_pface, "POLYLINE_PFACE", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_pface, "POLYLINE_PFACE", "vertex", &vertex, NULL)
-        && vertex == polyline_pface->vertex)
+        && dwg_dynapi_entity_values (polyline_pface, "POLYLINE_PFACE", "vertex", &vertex, count)
+        && (!count
+            || !memcmp (&vertex, &polyline_pface->vertex,
+                        count * sizeof(polyline_pface->vertex)))
+)
       {
         pass ("POLYLINE_PFACE.vertex [H*] * %u num_owned", count);
       }
@@ -25296,7 +25398,7 @@ static int test_REVOLVEDSURFACE (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (revolvedsurface, "REVOLVEDSURFACE", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("REVOLVEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -25610,8 +25712,11 @@ static int test_REVOLVEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "silhouettes", &silhouettes, NULL)
-        && silhouettes == revolvedsurface->silhouettes)
+        && dwg_dynapi_entity_values (revolvedsurface, "REVOLVEDSURFACE", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &revolvedsurface->silhouettes,
+                        count * sizeof(revolvedsurface->silhouettes)))
+)
       {
         pass ("REVOLVEDSURFACE.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -25859,8 +25964,11 @@ static int test_REVOLVEDSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "wires", &wires, NULL)
-        && wires == revolvedsurface->wires)
+        && dwg_dynapi_entity_values (revolvedsurface, "REVOLVEDSURFACE", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &revolvedsurface->wires,
+                        count * sizeof(revolvedsurface->wires)))
+)
       {
         pass ("REVOLVEDSURFACE.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -26291,8 +26399,11 @@ static int test_SPLINE (const Dwg_Object *obj)
     Dwg_SPLINE_control_point* ctrl_pts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (spline, "SPLINE", "num_ctrl_pts", &count, NULL)
-        && dwg_dynapi_entity_value (spline, "SPLINE", "ctrl_pts", &ctrl_pts, NULL)
-        && ctrl_pts == spline->ctrl_pts)
+        && dwg_dynapi_entity_values (spline, "SPLINE", "ctrl_pts", &ctrl_pts, count)
+        && (!count
+            || !memcmp (&ctrl_pts, &spline->ctrl_pts,
+                        count * sizeof(spline->ctrl_pts)))
+)
       {
         pass ("SPLINE.ctrl_pts [Dwg_SPLINE_control_point*] * %u num_ctrl_pts", count);
       }
@@ -26371,8 +26482,11 @@ static int test_SPLINE (const Dwg_Object *obj)
     Dwg_SPLINE_point* fit_pts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (spline, "SPLINE", "num_fit_pts", &count, NULL)
-        && dwg_dynapi_entity_value (spline, "SPLINE", "fit_pts", &fit_pts, NULL)
-        && fit_pts == spline->fit_pts)
+        && dwg_dynapi_entity_values (spline, "SPLINE", "fit_pts", &fit_pts, count)
+        && (!count
+            || !memcmp (&fit_pts, &spline->fit_pts,
+                        count * sizeof(spline->fit_pts)))
+)
       {
         pass ("SPLINE.fit_pts [Dwg_SPLINE_point*] * %u num_fit_pts", count);
       }
@@ -26490,8 +26604,11 @@ static int test_SPLINE (const Dwg_Object *obj)
     BITCODE_BD* knots;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (spline, "SPLINE", "num_knots", &count, NULL)
-        && dwg_dynapi_entity_value (spline, "SPLINE", "knots", &knots, NULL)
-        && knots == spline->knots)
+        && dwg_dynapi_entity_values (spline, "SPLINE", "knots", &knots, count)
+        && (!count
+            || !memcmp (&knots, &spline->knots,
+                        count * sizeof(spline->knots)))
+)
       {
         pass ("SPLINE.knots [BD*] * %u num_knots", count);
       }
@@ -27045,7 +27162,7 @@ static int test_SWEPTSURFACE (const Dwg_Object *obj)
     char ** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "num_encr_sat_data", &count, NULL)
-        && dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "encr_sat_data", &encr_sat_data, NULL)
+        && dwg_dynapi_entity_values (sweptsurface, "SWEPTSURFACE", "encr_sat_data", &encr_sat_data, count)
 )
       {
         pass ("SWEPTSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
@@ -27424,8 +27541,11 @@ static int test_SWEPTSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_silhouette* silhouettes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "num_silhouettes", &count, NULL)
-        && dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "silhouettes", &silhouettes, NULL)
-        && silhouettes == sweptsurface->silhouettes)
+        && dwg_dynapi_entity_values (sweptsurface, "SWEPTSURFACE", "silhouettes", &silhouettes, count)
+        && (!count
+            || !memcmp (&silhouettes, &sweptsurface->silhouettes,
+                        count * sizeof(sweptsurface->silhouettes)))
+)
       {
         pass ("SWEPTSURFACE.silhouettes [Dwg_3DSOLID_silhouette*] * %u num_silhouettes", count);
       }
@@ -27816,8 +27936,11 @@ static int test_SWEPTSURFACE (const Dwg_Object *obj)
     Dwg_3DSOLID_wire* wires;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "num_wires", &count, NULL)
-        && dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "wires", &wires, NULL)
-        && wires == sweptsurface->wires)
+        && dwg_dynapi_entity_values (sweptsurface, "SWEPTSURFACE", "wires", &wires, count)
+        && (!count
+            || !memcmp (&wires, &sweptsurface->wires,
+                        count * sizeof(sweptsurface->wires)))
+)
       {
         pass ("SWEPTSURFACE.wires [Dwg_3DSOLID_wire*] * %u num_wires", count);
       }
@@ -27838,8 +27961,11 @@ static int test_TABLE (const Dwg_Object *obj)
     BITCODE_H* attrib_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "attrib_handles", &attrib_handles, NULL)
-        && attrib_handles == table->attrib_handles)
+        && dwg_dynapi_entity_values (table, "TABLE", "attrib_handles", &attrib_handles, count)
+        && (!count
+            || !memcmp (&attrib_handles, &table->attrib_handles,
+                        count * sizeof(table->attrib_handles)))
+)
       {
         pass ("TABLE.attrib_handles [H*] * %u num_owned", count);
       }
@@ -27996,8 +28122,11 @@ static int test_TABLE (const Dwg_Object *obj)
     Dwg_TABLE_BreakHeight* break_heights;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_break_heights", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "break_heights", &break_heights, NULL)
-        && break_heights == table->break_heights)
+        && dwg_dynapi_entity_values (table, "TABLE", "break_heights", &break_heights, count)
+        && (!count
+            || !memcmp (&break_heights, &table->break_heights,
+                        count * sizeof(table->break_heights)))
+)
       {
         pass ("TABLE.break_heights [Dwg_TABLE_BreakHeight*] * %u num_break_heights", count);
       }
@@ -28011,8 +28140,11 @@ static int test_TABLE (const Dwg_Object *obj)
     Dwg_TABLE_BreakRow* break_rows;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_break_rows", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "break_rows", &break_rows, NULL)
-        && break_rows == table->break_rows)
+        && dwg_dynapi_entity_values (table, "TABLE", "break_rows", &break_rows, count)
+        && (!count
+            || !memcmp (&break_rows, &table->break_rows,
+                        count * sizeof(table->break_rows)))
+)
       {
         pass ("TABLE.break_rows [Dwg_TABLE_BreakRow*] * %u num_break_rows", count);
       }
@@ -28104,8 +28236,11 @@ static int test_TABLE (const Dwg_Object *obj)
     Dwg_TABLE_Cell* cells;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_cells", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "cells", &cells, NULL)
-        && cells == table->cells)
+        && dwg_dynapi_entity_values (table, "TABLE", "cells", &cells, count)
+        && (!count
+            || !memcmp (&cells, &table->cells,
+                        count * sizeof(table->cells)))
+)
       {
         pass ("TABLE.cells [Dwg_TABLE_Cell*] * %u num_cells", count);
       }
@@ -28119,8 +28254,11 @@ static int test_TABLE (const Dwg_Object *obj)
     BITCODE_BD* col_widths;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_col_widths", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "col_widths", &col_widths, NULL)
-        && col_widths == table->col_widths)
+        && dwg_dynapi_entity_values (table, "TABLE", "col_widths", &col_widths, count)
+        && (!count
+            || !memcmp (&col_widths, &table->col_widths,
+                        count * sizeof(table->col_widths)))
+)
       {
         pass ("TABLE.col_widths [BD*] * %u num_col_widths", count);
       }
@@ -29733,8 +29871,11 @@ static int test_TABLE (const Dwg_Object *obj)
     BITCODE_BD* row_heights;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (table, "TABLE", "num_row_heights", &count, NULL)
-        && dwg_dynapi_entity_value (table, "TABLE", "row_heights", &row_heights, NULL)
-        && row_heights == table->row_heights)
+        && dwg_dynapi_entity_values (table, "TABLE", "row_heights", &row_heights, count)
+        && (!count
+            || !memcmp (&row_heights, &table->row_heights,
+                        count * sizeof(table->row_heights)))
+)
       {
         pass ("TABLE.row_heights [BD*] * %u num_row_heights", count);
       }
@@ -31205,8 +31346,11 @@ static int test_UNDERLAY (const Dwg_Object *obj)
     BITCODE_2RD* clip_verts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (underlay, "UNDERLAY", "num_clip_verts", &count, NULL)
-        && dwg_dynapi_entity_value (underlay, "UNDERLAY", "clip_verts", &clip_verts, NULL)
-        && clip_verts == underlay->clip_verts)
+        && dwg_dynapi_entity_values (underlay, "UNDERLAY", "clip_verts", &clip_verts, count)
+        && (!count
+            || !memcmp (&clip_verts, &underlay->clip_verts,
+                        count * sizeof(underlay->clip_verts)))
+)
       {
         pass ("UNDERLAY.clip_verts [2RD*] * %u num_clip_verts", count);
       }
@@ -32640,8 +32784,11 @@ static int test_WIPEOUT (const Dwg_Object *obj)
     BITCODE_2RD* clip_verts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (wipeout, "WIPEOUT", "num_clip_verts", &count, NULL)
-        && dwg_dynapi_entity_value (wipeout, "WIPEOUT", "clip_verts", &clip_verts, NULL)
-        && clip_verts == wipeout->clip_verts)
+        && dwg_dynapi_entity_values (wipeout, "WIPEOUT", "clip_verts", &clip_verts, count)
+        && (!count
+            || !memcmp (&clip_verts, &wipeout->clip_verts,
+                        count * sizeof(wipeout->clip_verts)))
+)
       {
         pass ("WIPEOUT.clip_verts [2RD*] * %u num_clip_verts", count);
       }
@@ -34022,8 +34169,11 @@ static int test_APPID_CONTROL (const Dwg_Object *obj)
     BITCODE_H* apps;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (appid_control, "APPID_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (appid_control, "APPID_CONTROL", "apps", &apps, NULL)
-        && apps == appid_control->apps)
+        && dwg_dynapi_entity_values (appid_control, "APPID_CONTROL", "apps", &apps, count)
+        && (!count
+            || !memcmp (&apps, &appid_control->apps,
+                        count * sizeof(appid_control->apps)))
+)
       {
         pass ("APPID_CONTROL.apps [H*] * %u num_entries", count);
       }
@@ -34766,8 +34916,11 @@ static int test_ASSOCACTION (const Dwg_Object *obj)
     BITCODE_H* readdeps;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (assocaction, "ASSOCACTION", "num_deps", &count, NULL)
-        && dwg_dynapi_entity_value (assocaction, "ASSOCACTION", "readdeps", &readdeps, NULL)
-        && readdeps == assocaction->readdeps)
+        && dwg_dynapi_entity_values (assocaction, "ASSOCACTION", "readdeps", &readdeps, count)
+        && (!count
+            || !memcmp (&readdeps, &assocaction->readdeps,
+                        count * sizeof(assocaction->readdeps)))
+)
       {
         pass ("ASSOCACTION.readdeps [H*] * %u num_deps", count);
       }
@@ -34833,8 +34986,11 @@ static int test_ASSOCACTION (const Dwg_Object *obj)
     BITCODE_H* writedeps;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (assocaction, "ASSOCACTION", "num_deps", &count, NULL)
-        && dwg_dynapi_entity_value (assocaction, "ASSOCACTION", "writedeps", &writedeps, NULL)
-        && writedeps == assocaction->writedeps)
+        && dwg_dynapi_entity_values (assocaction, "ASSOCACTION", "writedeps", &writedeps, count)
+        && (!count
+            || !memcmp (&writedeps, &assocaction->writedeps,
+                        count * sizeof(assocaction->writedeps)))
+)
       {
         pass ("ASSOCACTION.writedeps [H*] * %u num_deps", count);
       }
@@ -35441,8 +35597,11 @@ static int test_ASSOCNETWORK (const Dwg_Object *obj)
     BITCODE_H* actions;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (assocnetwork, "ASSOCNETWORK", "num_actions", &count, NULL)
-        && dwg_dynapi_entity_value (assocnetwork, "ASSOCNETWORK", "actions", &actions, NULL)
-        && actions == assocnetwork->actions)
+        && dwg_dynapi_entity_values (assocnetwork, "ASSOCNETWORK", "actions", &actions, count)
+        && (!count
+            || !memcmp (&actions, &assocnetwork->actions,
+                        count * sizeof(assocnetwork->actions)))
+)
       {
         pass ("ASSOCNETWORK.actions [H*] * %u num_actions", count);
       }
@@ -37317,8 +37476,11 @@ static int test_BLOCK_CONTROL (const Dwg_Object *obj)
     BITCODE_H* block_headers;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (block_control, "BLOCK_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (block_control, "BLOCK_CONTROL", "block_headers", &block_headers, NULL)
-        && block_headers == block_control->block_headers)
+        && dwg_dynapi_entity_values (block_control, "BLOCK_CONTROL", "block_headers", &block_headers, count)
+        && (!count
+            || !memcmp (&block_headers, &block_control->block_headers,
+                        count * sizeof(block_control->block_headers)))
+)
       {
         pass ("BLOCK_CONTROL.block_headers [H*] * %u num_entries", count);
       }
@@ -37586,8 +37748,11 @@ static int test_BLOCK_HEADER (const Dwg_Object *obj)
     BITCODE_H* entities;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (block_header, "BLOCK_HEADER", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (block_header, "BLOCK_HEADER", "entities", &entities, NULL)
-        && entities == block_header->entities)
+        && dwg_dynapi_entity_values (block_header, "BLOCK_HEADER", "entities", &entities, count)
+        && (!count
+            || !memcmp (&entities, &block_header->entities,
+                        count * sizeof(block_header->entities)))
+)
       {
         pass ("BLOCK_HEADER.entities [H*] * %u num_owned", count);
       }
@@ -37744,8 +37909,11 @@ static int test_BLOCK_HEADER (const Dwg_Object *obj)
     BITCODE_H* insert_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (block_header, "BLOCK_HEADER", "num_inserts", &count, NULL)
-        && dwg_dynapi_entity_value (block_header, "BLOCK_HEADER", "insert_handles", &insert_handles, NULL)
-        && insert_handles == block_header->insert_handles)
+        && dwg_dynapi_entity_values (block_header, "BLOCK_HEADER", "insert_handles", &insert_handles, count)
+        && (!count
+            || !memcmp (&insert_handles, &block_header->insert_handles,
+                        count * sizeof(block_header->insert_handles)))
+)
       {
         pass ("BLOCK_HEADER.insert_handles [H*] * %u num_inserts", count);
       }
@@ -38117,8 +38285,11 @@ static int test_CELLSTYLEMAP (const Dwg_Object *obj)
     Dwg_CELLSTYLEMAP_Cell* cells;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (cellstylemap, "CELLSTYLEMAP", "num_cells", &count, NULL)
-        && dwg_dynapi_entity_value (cellstylemap, "CELLSTYLEMAP", "cells", &cells, NULL)
-        && cells == cellstylemap->cells)
+        && dwg_dynapi_entity_values (cellstylemap, "CELLSTYLEMAP", "cells", &cells, count)
+        && (!count
+            || !memcmp (&cells, &cellstylemap->cells,
+                        count * sizeof(cellstylemap->cells)))
+)
       {
         pass ("CELLSTYLEMAP.cells [Dwg_CELLSTYLEMAP_Cell*] * %u num_cells", count);
       }
@@ -38400,8 +38571,11 @@ static int test_DICTIONARY (const Dwg_Object *obj)
     BITCODE_H* itemhandles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dictionary, "DICTIONARY", "numitems", &count, NULL)
-        && dwg_dynapi_entity_value (dictionary, "DICTIONARY", "itemhandles", &itemhandles, NULL)
-        && itemhandles == dictionary->itemhandles)
+        && dwg_dynapi_entity_values (dictionary, "DICTIONARY", "itemhandles", &itemhandles, count)
+        && (!count
+            || !memcmp (&itemhandles, &dictionary->itemhandles,
+                        count * sizeof(dictionary->itemhandles)))
+)
       {
         pass ("DICTIONARY.itemhandles [H*] * %u numitems", count);
       }
@@ -38454,8 +38628,11 @@ static int test_DICTIONARY (const Dwg_Object *obj)
     BITCODE_TV* text;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dictionary, "DICTIONARY", "numitems", &count, NULL)
-        && dwg_dynapi_entity_value (dictionary, "DICTIONARY", "text", &text, NULL)
-        && text == dictionary->text)
+        && dwg_dynapi_entity_values (dictionary, "DICTIONARY", "text", &text, count)
+        && (!count
+            || !memcmp (&text, &dictionary->text,
+                        count * sizeof(dictionary->text)))
+)
       {
         pass ("DICTIONARY.text [TV*] * %u numitems", count);
       }
@@ -38652,8 +38829,11 @@ static int test_DICTIONARYWDFLT (const Dwg_Object *obj)
     BITCODE_H* itemhandles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dictionarywdflt, "DICTIONARYWDFLT", "numitems", &count, NULL)
-        && dwg_dynapi_entity_value (dictionarywdflt, "DICTIONARYWDFLT", "itemhandles", &itemhandles, NULL)
-        && itemhandles == dictionarywdflt->itemhandles)
+        && dwg_dynapi_entity_values (dictionarywdflt, "DICTIONARYWDFLT", "itemhandles", &itemhandles, count)
+        && (!count
+            || !memcmp (&itemhandles, &dictionarywdflt->itemhandles,
+                        count * sizeof(dictionarywdflt->itemhandles)))
+)
       {
         pass ("DICTIONARYWDFLT.itemhandles [H*] * %u numitems", count);
       }
@@ -38706,8 +38886,11 @@ static int test_DICTIONARYWDFLT (const Dwg_Object *obj)
     BITCODE_TV* text;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dictionarywdflt, "DICTIONARYWDFLT", "numitems", &count, NULL)
-        && dwg_dynapi_entity_value (dictionarywdflt, "DICTIONARYWDFLT", "text", &text, NULL)
-        && text == dictionarywdflt->text)
+        && dwg_dynapi_entity_values (dictionarywdflt, "DICTIONARYWDFLT", "text", &text, count)
+        && (!count
+            || !memcmp (&text, &dictionarywdflt->text,
+                        count * sizeof(dictionarywdflt->text)))
+)
       {
         pass ("DICTIONARYWDFLT.text [TV*] * %u numitems", count);
       }
@@ -41121,8 +41304,11 @@ static int test_DIMSTYLE_CONTROL (const Dwg_Object *obj)
     BITCODE_H* dimstyles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dimstyle_control, "DIMSTYLE_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (dimstyle_control, "DIMSTYLE_CONTROL", "dimstyles", &dimstyles, NULL)
-        && dimstyles == dimstyle_control->dimstyles)
+        && dwg_dynapi_entity_values (dimstyle_control, "DIMSTYLE_CONTROL", "dimstyles", &dimstyles, count)
+        && (!count
+            || !memcmp (&dimstyles, &dimstyle_control->dimstyles,
+                        count * sizeof(dimstyle_control->dimstyles)))
+)
       {
         pass ("DIMSTYLE_CONTROL.dimstyles [H*] * %u num_entries", count);
       }
@@ -41136,8 +41322,11 @@ static int test_DIMSTYLE_CONTROL (const Dwg_Object *obj)
     BITCODE_H* morehandles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (dimstyle_control, "DIMSTYLE_CONTROL", "num_morehandles", &count, NULL)
-        && dwg_dynapi_entity_value (dimstyle_control, "DIMSTYLE_CONTROL", "morehandles", &morehandles, NULL)
-        && morehandles == dimstyle_control->morehandles)
+        && dwg_dynapi_entity_values (dimstyle_control, "DIMSTYLE_CONTROL", "morehandles", &morehandles, count)
+        && (!count
+            || !memcmp (&morehandles, &dimstyle_control->morehandles,
+                        count * sizeof(dimstyle_control->morehandles)))
+)
       {
         pass ("DIMSTYLE_CONTROL.morehandles [H*] * %u num_morehandles", count);
       }
@@ -41367,8 +41556,11 @@ static int test_EVALUATION_GRAPH (const Dwg_Object *obj)
     BITCODE_H* evalexpr;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (evaluation_graph, "EVALUATION_GRAPH", "num_evalexpr", &count, NULL)
-        && dwg_dynapi_entity_value (evaluation_graph, "EVALUATION_GRAPH", "evalexpr", &evalexpr, NULL)
-        && evalexpr == evaluation_graph->evalexpr)
+        && dwg_dynapi_entity_values (evaluation_graph, "EVALUATION_GRAPH", "evalexpr", &evalexpr, count)
+        && (!count
+            || !memcmp (&evalexpr, &evaluation_graph->evalexpr,
+                        count * sizeof(evaluation_graph->evalexpr)))
+)
       {
         pass ("EVALUATION_GRAPH.evalexpr [H*] * %u num_evalexpr", count);
       }
@@ -41636,8 +41828,11 @@ static int test_FIELD (const Dwg_Object *obj)
     BITCODE_H* childs;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (field, "FIELD", "num_childs", &count, NULL)
-        && dwg_dynapi_entity_value (field, "FIELD", "childs", &childs, NULL)
-        && childs == field->childs)
+        && dwg_dynapi_entity_values (field, "FIELD", "childs", &childs, count)
+        && (!count
+            || !memcmp (&childs, &field->childs,
+                        count * sizeof(field->childs)))
+)
       {
         pass ("FIELD.childs [H*] * %u num_childs", count);
       }
@@ -41651,8 +41846,11 @@ static int test_FIELD (const Dwg_Object *obj)
     Dwg_FIELD_ChildValue* childval;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (field, "FIELD", "num_childval", &count, NULL)
-        && dwg_dynapi_entity_value (field, "FIELD", "childval", &childval, NULL)
-        && childval == field->childval)
+        && dwg_dynapi_entity_values (field, "FIELD", "childval", &childval, count)
+        && (!count
+            || !memcmp (&childval, &field->childval,
+                        count * sizeof(field->childval)))
+)
       {
         pass ("FIELD.childval [Dwg_FIELD_ChildValue*] * %u num_childval", count);
       }
@@ -41926,8 +42124,11 @@ static int test_FIELD (const Dwg_Object *obj)
     BITCODE_H* objects;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (field, "FIELD", "num_objects", &count, NULL)
-        && dwg_dynapi_entity_value (field, "FIELD", "objects", &objects, NULL)
-        && objects == field->objects)
+        && dwg_dynapi_entity_values (field, "FIELD", "objects", &objects, count)
+        && (!count
+            || !memcmp (&objects, &field->objects,
+                        count * sizeof(field->objects)))
+)
       {
         pass ("FIELD.objects [H*] * %u num_objects", count);
       }
@@ -42013,8 +42214,11 @@ static int test_FIELDLIST (const Dwg_Object *obj)
     BITCODE_H* field_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (fieldlist, "FIELDLIST", "num_fields", &count, NULL)
-        && dwg_dynapi_entity_value (fieldlist, "FIELDLIST", "field_handles", &field_handles, NULL)
-        && field_handles == fieldlist->field_handles)
+        && dwg_dynapi_entity_values (fieldlist, "FIELDLIST", "field_handles", &field_handles, count)
+        && (!count
+            || !memcmp (&field_handles, &fieldlist->field_handles,
+                        count * sizeof(fieldlist->field_handles)))
+)
       {
         pass ("FIELDLIST.field_handles [H*] * %u num_fields", count);
       }
@@ -42243,8 +42447,11 @@ static int test_GEODATA (const Dwg_Object *obj)
     Dwg_GEODATA_meshface* geomesh_faces;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (geodata, "GEODATA", "num_geomesh_faces", &count, NULL)
-        && dwg_dynapi_entity_value (geodata, "GEODATA", "geomesh_faces", &geomesh_faces, NULL)
-        && geomesh_faces == geodata->geomesh_faces)
+        && dwg_dynapi_entity_values (geodata, "GEODATA", "geomesh_faces", &geomesh_faces, count)
+        && (!count
+            || !memcmp (&geomesh_faces, &geodata->geomesh_faces,
+                        count * sizeof(geodata->geomesh_faces)))
+)
       {
         pass ("GEODATA.geomesh_faces [Dwg_GEODATA_meshface*] * %u num_geomesh_faces", count);
       }
@@ -42258,8 +42465,11 @@ static int test_GEODATA (const Dwg_Object *obj)
     Dwg_GEODATA_meshpt* geomesh_pts;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (geodata, "GEODATA", "num_geomesh_pts", &count, NULL)
-        && dwg_dynapi_entity_value (geodata, "GEODATA", "geomesh_pts", &geomesh_pts, NULL)
-        && geomesh_pts == geodata->geomesh_pts)
+        && dwg_dynapi_entity_values (geodata, "GEODATA", "geomesh_pts", &geomesh_pts, count)
+        && (!count
+            || !memcmp (&geomesh_pts, &geodata->geomesh_pts,
+                        count * sizeof(geodata->geomesh_pts)))
+)
       {
         pass ("GEODATA.geomesh_pts [Dwg_GEODATA_meshpt*] * %u num_geomesh_pts", count);
       }
@@ -42761,8 +42971,11 @@ static int test_GROUP (const Dwg_Object *obj)
     BITCODE_H* group_entries;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (group, "GROUP", "num_handles", &count, NULL)
-        && dwg_dynapi_entity_value (group, "GROUP", "group_entries", &group_entries, NULL)
-        && group_entries == group->group_entries)
+        && dwg_dynapi_entity_values (group, "GROUP", "group_entries", &group_entries, count)
+        && (!count
+            || !memcmp (&group_entries, &group->group_entries,
+                        count * sizeof(group->group_entries)))
+)
       {
         pass ("GROUP.group_entries [H*] * %u num_handles", count);
       }
@@ -42913,8 +43126,11 @@ static int test_IDBUFFER (const Dwg_Object *obj)
     BITCODE_H* obj_ids;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (idbuffer, "IDBUFFER", "num_obj_ids", &count, NULL)
-        && dwg_dynapi_entity_value (idbuffer, "IDBUFFER", "obj_ids", &obj_ids, NULL)
-        && obj_ids == idbuffer->obj_ids)
+        && dwg_dynapi_entity_values (idbuffer, "IDBUFFER", "obj_ids", &obj_ids, count)
+        && (!count
+            || !memcmp (&obj_ids, &idbuffer->obj_ids,
+                        count * sizeof(idbuffer->obj_ids)))
+)
       {
         pass ("IDBUFFER.obj_ids [H*] * %u num_obj_ids", count);
       }
@@ -43593,8 +43809,11 @@ static int test_LAYER_CONTROL (const Dwg_Object *obj)
     BITCODE_H* layers;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (layer_control, "LAYER_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (layer_control, "LAYER_CONTROL", "layers", &layers, NULL)
-        && layers == layer_control->layers)
+        && dwg_dynapi_entity_values (layer_control, "LAYER_CONTROL", "layers", &layers, count)
+        && (!count
+            || !memcmp (&layers, &layer_control->layers,
+                        count * sizeof(layer_control->layers)))
+)
       {
         pass ("LAYER_CONTROL.layers [H*] * %u num_entries", count);
       }
@@ -43680,8 +43899,11 @@ static int test_LAYER_INDEX (const Dwg_Object *obj)
     Dwg_LAYER_entry* entries;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (layer_index, "LAYER_INDEX", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (layer_index, "LAYER_INDEX", "entries", &entries, NULL)
-        && entries == layer_index->entries)
+        && dwg_dynapi_entity_values (layer_index, "LAYER_INDEX", "entries", &entries, count)
+        && (!count
+            || !memcmp (&entries, &layer_index->entries,
+                        count * sizeof(layer_index->entries)))
+)
       {
         pass ("LAYER_INDEX.entries [Dwg_LAYER_entry*] * %u num_entries", count);
       }
@@ -43695,8 +43917,11 @@ static int test_LAYER_INDEX (const Dwg_Object *obj)
     BITCODE_H* entry_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (layer_index, "LAYER_INDEX", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (layer_index, "LAYER_INDEX", "entry_handles", &entry_handles, NULL)
-        && entry_handles == layer_index->entry_handles)
+        && dwg_dynapi_entity_values (layer_index, "LAYER_INDEX", "entry_handles", &entry_handles, count)
+        && (!count
+            || !memcmp (&entry_handles, &layer_index->entry_handles,
+                        count * sizeof(layer_index->entry_handles)))
+)
       {
         pass ("LAYER_INDEX.entry_handles [H*] * %u num_entries", count);
       }
@@ -44666,8 +44891,11 @@ static int test_LAYOUT (const Dwg_Object *obj)
     BITCODE_H* viewports;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (layout, "LAYOUT", "num_viewports", &count, NULL)
-        && dwg_dynapi_entity_value (layout, "LAYOUT", "viewports", &viewports, NULL)
-        && viewports == layout->viewports)
+        && dwg_dynapi_entity_values (layout, "LAYOUT", "viewports", &viewports, count)
+        && (!count
+            || !memcmp (&viewports, &layout->viewports,
+                        count * sizeof(layout->viewports)))
+)
       {
         pass ("LAYOUT.viewports [H*] * %u num_viewports", count);
       }
@@ -44753,8 +44981,11 @@ static int test_LIGHTLIST (const Dwg_Object *obj)
     BITCODE_H* dictionary;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (lightlist, "LIGHTLIST", "num_dictionary", &count, NULL)
-        && dwg_dynapi_entity_value (lightlist, "LIGHTLIST", "dictionary", &dictionary, NULL)
-        && dictionary == lightlist->dictionary)
+        && dwg_dynapi_entity_values (lightlist, "LIGHTLIST", "dictionary", &dictionary, count)
+        && (!count
+            || !memcmp (&dictionary, &lightlist->dictionary,
+                        count * sizeof(lightlist->dictionary)))
+)
       {
         pass ("LIGHTLIST.dictionary [H*] * %u num_dictionary", count);
       }
@@ -44886,8 +45117,11 @@ static int test_LTYPE (const Dwg_Object *obj)
     Dwg_LTYPE_dash* dashes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (ltype, "LTYPE", "num_dashes", &count, NULL)
-        && dwg_dynapi_entity_value (ltype, "LTYPE", "dashes", &dashes, NULL)
-        && dashes == ltype->dashes)
+        && dwg_dynapi_entity_values (ltype, "LTYPE", "dashes", &dashes, count)
+        && (!count
+            || !memcmp (&dashes, &ltype->dashes,
+                        count * sizeof(ltype->dashes)))
+)
       {
         pass ("LTYPE.dashes [Dwg_LTYPE_dash*] * %u num_dashes", count);
       }
@@ -44901,8 +45135,11 @@ static int test_LTYPE (const Dwg_Object *obj)
     BITCODE_RD* dashes_r11;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (ltype, "LTYPE", "num_dashes", &count, NULL)
-        && dwg_dynapi_entity_value (ltype, "LTYPE", "dashes_r11", &dashes_r11, NULL)
-        && dashes_r11 == ltype->dashes_r11)
+        && dwg_dynapi_entity_values (ltype, "LTYPE", "dashes_r11", &dashes_r11, count)
+        && (!count
+            || !memcmp (&dashes_r11, &ltype->dashes_r11,
+                        count * sizeof(ltype->dashes_r11)))
+)
       {
         pass ("LTYPE.dashes_r11 [RD*] * %u num_dashes", count);
       }
@@ -45059,8 +45296,11 @@ static int test_LTYPE (const Dwg_Object *obj)
     BITCODE_H* styles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (ltype, "LTYPE", "num_dashes", &count, NULL)
-        && dwg_dynapi_entity_value (ltype, "LTYPE", "styles", &styles, NULL)
-        && styles == ltype->styles)
+        && dwg_dynapi_entity_values (ltype, "LTYPE", "styles", &styles, count)
+        && (!count
+            || !memcmp (&styles, &ltype->styles,
+                        count * sizeof(ltype->styles)))
+)
       {
         pass ("LTYPE.styles [H*] * %u num_dashes", count);
       }
@@ -45237,8 +45477,11 @@ static int test_LTYPE_CONTROL (const Dwg_Object *obj)
     BITCODE_H* linetypes;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (ltype_control, "LTYPE_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (ltype_control, "LTYPE_CONTROL", "linetypes", &linetypes, NULL)
-        && linetypes == ltype_control->linetypes)
+        && dwg_dynapi_entity_values (ltype_control, "LTYPE_CONTROL", "linetypes", &linetypes, count)
+        && (!count
+            || !memcmp (&linetypes, &ltype_control->linetypes,
+                        count * sizeof(ltype_control->linetypes)))
+)
       {
         pass ("LTYPE_CONTROL.linetypes [H*] * %u num_entries", count);
       }
@@ -48523,8 +48766,11 @@ static int test_MLINESTYLE (const Dwg_Object *obj)
     Dwg_MLINESTYLE_line* lines;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (mlinestyle, "MLINESTYLE", "num_lines", &count, NULL)
-        && dwg_dynapi_entity_value (mlinestyle, "MLINESTYLE", "lines", &lines, NULL)
-        && lines == mlinestyle->lines)
+        && dwg_dynapi_entity_values (mlinestyle, "MLINESTYLE", "lines", &lines, count)
+        && (!count
+            || !memcmp (&lines, &mlinestyle->lines,
+                        count * sizeof(mlinestyle->lines)))
+)
       {
         pass ("MLINESTYLE.lines [Dwg_MLINESTYLE_line*] * %u num_lines", count);
       }
@@ -50500,8 +50746,11 @@ static int test_SORTENTSTABLE (const Dwg_Object *obj)
     BITCODE_H* ents;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sortentstable, "SORTENTSTABLE", "num_ents", &count, NULL)
-        && dwg_dynapi_entity_value (sortentstable, "SORTENTSTABLE", "ents", &ents, NULL)
-        && ents == sortentstable->ents)
+        && dwg_dynapi_entity_values (sortentstable, "SORTENTSTABLE", "ents", &ents, count)
+        && (!count
+            || !memcmp (&ents, &sortentstable->ents,
+                        count * sizeof(sortentstable->ents)))
+)
       {
         pass ("SORTENTSTABLE.ents [H*] * %u num_ents", count);
       }
@@ -50554,8 +50803,11 @@ static int test_SORTENTSTABLE (const Dwg_Object *obj)
     BITCODE_H* sort_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sortentstable, "SORTENTSTABLE", "num_ents", &count, NULL)
-        && dwg_dynapi_entity_value (sortentstable, "SORTENTSTABLE", "sort_handles", &sort_handles, NULL)
-        && sort_handles == sortentstable->sort_handles)
+        && dwg_dynapi_entity_values (sortentstable, "SORTENTSTABLE", "sort_handles", &sort_handles, count)
+        && (!count
+            || !memcmp (&sort_handles, &sortentstable->sort_handles,
+                        count * sizeof(sortentstable->sort_handles)))
+)
       {
         pass ("SORTENTSTABLE.sort_handles [H*] * %u num_ents", count);
       }
@@ -50797,8 +51049,11 @@ static int test_SPATIAL_FILTER (const Dwg_Object *obj)
     BITCODE_2RD* points;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (spatial_filter, "SPATIAL_FILTER", "num_points", &count, NULL)
-        && dwg_dynapi_entity_value (spatial_filter, "SPATIAL_FILTER", "points", &points, NULL)
-        && points == spatial_filter->points)
+        && dwg_dynapi_entity_values (spatial_filter, "SPATIAL_FILTER", "points", &points, count)
+        && (!count
+            || !memcmp (&points, &spatial_filter->points,
+                        count * sizeof(spatial_filter->points)))
+)
       {
         pass ("SPATIAL_FILTER.points [2RD*] * %u num_points", count);
       }
@@ -51353,8 +51608,11 @@ static int test_STYLE_CONTROL (const Dwg_Object *obj)
     BITCODE_H* styles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (style_control, "STYLE_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (style_control, "STYLE_CONTROL", "styles", &styles, NULL)
-        && styles == style_control->styles)
+        && dwg_dynapi_entity_values (style_control, "STYLE_CONTROL", "styles", &styles, count)
+        && (!count
+            || !memcmp (&styles, &style_control->styles,
+                        count * sizeof(style_control->styles)))
+)
       {
         pass ("STYLE_CONTROL.styles [H*] * %u num_entries", count);
       }
@@ -51733,8 +51991,11 @@ static int test_SUNSTUDY (const Dwg_Object *obj)
     Dwg_SUNSTUDY_Dates* dates;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sunstudy, "SUNSTUDY", "num_dates", &count, NULL)
-        && dwg_dynapi_entity_value (sunstudy, "SUNSTUDY", "dates", &dates, NULL)
-        && dates == sunstudy->dates)
+        && dwg_dynapi_entity_values (sunstudy, "SUNSTUDY", "dates", &dates, count)
+        && (!count
+            || !memcmp (&dates, &sunstudy->dates,
+                        count * sizeof(sunstudy->dates)))
+)
       {
         pass ("SUNSTUDY.dates [Dwg_SUNSTUDY_Dates*] * %u num_dates", count);
       }
@@ -51787,8 +52048,11 @@ static int test_SUNSTUDY (const Dwg_Object *obj)
     BITCODE_B* hours;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sunstudy, "SUNSTUDY", "num_hours", &count, NULL)
-        && dwg_dynapi_entity_value (sunstudy, "SUNSTUDY", "hours", &hours, NULL)
-        && hours == sunstudy->hours)
+        && dwg_dynapi_entity_values (sunstudy, "SUNSTUDY", "hours", &hours, count)
+        && (!count
+            || !memcmp (&hours, &sunstudy->hours,
+                        count * sizeof(sunstudy->hours)))
+)
       {
         pass ("SUNSTUDY.hours [B*] * %u num_hours", count);
       }
@@ -52375,8 +52639,11 @@ static int test_TABLEGEOMETRY (const Dwg_Object *obj)
     Dwg_TABLEGEOMETRY_Cell* cells;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (tablegeometry, "TABLEGEOMETRY", "num_cells", &count, NULL)
-        && dwg_dynapi_entity_value (tablegeometry, "TABLEGEOMETRY", "cells", &cells, NULL)
-        && cells == tablegeometry->cells)
+        && dwg_dynapi_entity_values (tablegeometry, "TABLEGEOMETRY", "cells", &cells, count)
+        && (!count
+            || !memcmp (&cells, &tablegeometry->cells,
+                        count * sizeof(tablegeometry->cells)))
+)
       {
         pass ("TABLEGEOMETRY.cells [Dwg_TABLEGEOMETRY_Cell*] * %u num_cells", count);
       }
@@ -52488,8 +52755,11 @@ static int test_TABLESTYLE (const Dwg_Object *obj)
     Dwg_TABLESTYLE_Cell* cells;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "num_cells", &count, NULL)
-        && dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "cells", &cells, NULL)
-        && cells == tablestyle->cells)
+        && dwg_dynapi_entity_values (tablestyle, "TABLESTYLE", "cells", &cells, count)
+        && (!count
+            || !memcmp (&cells, &tablestyle->cells,
+                        count * sizeof(tablestyle->cells)))
+)
       {
         pass ("TABLESTYLE.cells [Dwg_TABLESTYLE_Cell*] * %u num_cells", count);
       }
@@ -53128,8 +53398,11 @@ static int test_UCS_CONTROL (const Dwg_Object *obj)
     BITCODE_H* ucs;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (ucs_control, "UCS_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (ucs_control, "UCS_CONTROL", "ucs", &ucs, NULL)
-        && ucs == ucs_control->ucs)
+        && dwg_dynapi_entity_values (ucs_control, "UCS_CONTROL", "ucs", &ucs, count)
+        && (!count
+            || !memcmp (&ucs, &ucs_control->ucs,
+                        count * sizeof(ucs_control->ucs)))
+)
       {
         pass ("UCS_CONTROL.ucs [H*] * %u num_entries", count);
       }
@@ -54126,8 +54399,11 @@ static int test_VIEW_CONTROL (const Dwg_Object *obj)
     BITCODE_H* views;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (view_control, "VIEW_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (view_control, "VIEW_CONTROL", "views", &views, NULL)
-        && views == view_control->views)
+        && dwg_dynapi_entity_values (view_control, "VIEW_CONTROL", "views", &views, count)
+        && (!count
+            || !memcmp (&views, &view_control->views,
+                        count * sizeof(view_control->views)))
+)
       {
         pass ("VIEW_CONTROL.views [H*] * %u num_entries", count);
       }
@@ -56124,8 +56400,11 @@ static int test_VPORT_CONTROL (const Dwg_Object *obj)
     BITCODE_H* vports;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (vport_control, "VPORT_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (vport_control, "VPORT_CONTROL", "vports", &vports, NULL)
-        && vports == vport_control->vports)
+        && dwg_dynapi_entity_values (vport_control, "VPORT_CONTROL", "vports", &vports, count)
+        && (!count
+            || !memcmp (&vports, &vport_control->vports,
+                        count * sizeof(vport_control->vports)))
+)
       {
         pass ("VPORT_CONTROL.vports [H*] * %u num_entries", count);
       }
@@ -56211,8 +56490,11 @@ static int test_VPORT_ENTITY_CONTROL (const Dwg_Object *obj)
     BITCODE_H* vport_entity_headers;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (vport_entity_control, "VPORT_ENTITY_CONTROL", "num_entries", &count, NULL)
-        && dwg_dynapi_entity_value (vport_entity_control, "VPORT_ENTITY_CONTROL", "vport_entity_headers", &vport_entity_headers, NULL)
-        && vport_entity_headers == vport_entity_control->vport_entity_headers)
+        && dwg_dynapi_entity_values (vport_entity_control, "VPORT_ENTITY_CONTROL", "vport_entity_headers", &vport_entity_headers, count)
+        && (!count
+            || !memcmp (&vport_entity_headers, &vport_entity_control->vport_entity_headers,
+                        count * sizeof(vport_entity_control->vport_entity_headers)))
+)
       {
         pass ("VPORT_ENTITY_CONTROL.vport_entity_headers [H*] * %u num_entries", count);
       }
@@ -56598,8 +56880,11 @@ static int test_XRECORD (const Dwg_Object *obj)
     BITCODE_H* objid_handles;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (xrecord, "XRECORD", "num_objid_handles", &count, NULL)
-        && dwg_dynapi_entity_value (xrecord, "XRECORD", "objid_handles", &objid_handles, NULL)
-        && objid_handles == xrecord->objid_handles)
+        && dwg_dynapi_entity_values (xrecord, "XRECORD", "objid_handles", &objid_handles, count)
+        && (!count
+            || !memcmp (&objid_handles, &xrecord->objid_handles,
+                        count * sizeof(xrecord->objid_handles)))
+)
       {
         pass ("XRECORD.objid_handles [H*] * %u num_objid_handles", count);
       }
@@ -56626,8 +56911,11 @@ static int test_XRECORD (const Dwg_Object *obj)
     Dwg_Resbuf* xdata;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (xrecord, "XRECORD", "num_xdata", &count, NULL)
-        && dwg_dynapi_entity_value (xrecord, "XRECORD", "xdata", &xdata, NULL)
-        && xdata == xrecord->xdata)
+        && dwg_dynapi_entity_values (xrecord, "XRECORD", "xdata", &xdata, count)
+        && (!count
+            || !memcmp (&xdata, &xrecord->xdata,
+                        count * sizeof(xrecord->xdata)))
+)
       {
         pass ("XRECORD.xdata [Dwg_Resbuf*] * %u num_xdata", count);
       }
