@@ -28,7 +28,7 @@ TODO:
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-//#include <math.h>
+#include <math.h>
 
 #include "common.h"
 #include "bits.h"
@@ -247,21 +247,29 @@ dxf_print_rd (Bit_Chain *dat, BITCODE_RD value, int dxf)
 {
   if (dxf)
     {
-      char _buf[128];
-      int k;
-      fprintf (dat->fh, "%3i\r\n", dxf);
+      GROUP (dxf);
 #ifdef IS_RELEASE
       if (bit_isnan (value))
         value = 0.0;
 #endif
-        snprintf (_buf, 127, "%-16.14f", value);
-      k = strlen (_buf);
-      if (strrchr (_buf, '.') && _buf[k - 1] == '0')
+      if (fabs (value) <= 1e-35)
+        fprintf (dat->fh, "0.0\n");
+      else if (fabs (value) <= 1e-15 || fabs (value) >= 1e+15)
+        fprintf (dat->fh, "%.15E\n", value);
+      else
         {
-          for (k--; k > 1 && _buf[k - 1] != '.' && _buf[k] == '0'; k--)
-            _buf[k] = '\0';
+          char str[30];
+          sprintf (str, "%.16g", value);
+          char *p = strchr (str, '.');
+          if (!p)
+            { /*Add decimal sign if it's not found and add one zero*/
+              int len = strlen (str);
+              str[len++] = '.';
+              str[len++] = '0';
+              str[len] = '\0';
+            }
+          fprintf (dat->fh, "%s\n", str);
         }
-      fprintf (dat->fh, "%s\r\n", _buf);
     }
 }
 #define VALUE_BSd(value, dxf)                                                 \
