@@ -167,7 +167,7 @@ extern "C"
 
 /* TODO: implement version dependent string parsing */
 /* encode codepages/utf8 */
-#define BITCODE_T BITCODE_TV
+  typedef BITCODE_TV BITCODE_T;
 #ifdef HAVE_NATIVE_WCHAR2
   typedef dwg_wchar_t *BITCODE_TU; /* native UCS-2 wchar_t */
 #  define FORMAT_TU "\"%ls\""

@@ -20,7 +20,7 @@ use strict;
 use warnings;
 use vars qw(@entity_names @object_names @subtypes $max_entity_names $max_object_names);
 use Convert::Binary::C;
-#use Data::Dumper;
+use Data::Dumper;
 BEGIN { chdir 'src' if $0 =~ /src/; }
 
 # add gcc/clang -print-search-dirs paths
@@ -64,7 +64,7 @@ my $c = Convert::Binary::C->new
 my $hdr = "../include/dwg.h";
 $c->parse_file($hdr);
 
-#print Data::Dumper->Dump([$c->struct('_dwg_entity_TEXT')], ['_dwg_entity_TEXT']);
+print Data::Dumper->Dump([$c->struct('_dwg_entity_TEXT')], ['_dwg_entity_TEXT']);
 #print Data::Dumper->Dump([$c->struct('struct _dwg_header_variables')], ['Dwg_Header_Variables']);
 
 my (%h, $n, %structs, %ENT, %DXF);
@@ -91,7 +91,7 @@ open my $in, "<", $hdr or die "hdr: $!";
 my $f;
 while (<$in>) {
   if (!$n) {
-    if (/^typedef struct (_dwg_.+) \{/) {
+    if (/^typedef struct (_dwg_.+)/) {
       $n = $1;
     } elsif (/^typedef struct (_dwg_\S+)$/) {
       $n = $1;
@@ -120,6 +120,7 @@ while (<$in>) {
     $h{$n}{$v} = $type;
   }
 }
+$h{COMMON_ENTITY_POLYLINE}{parent} = 'struct _dwg_object_entity*';
 #$h{Dwg_Bitcode_3BD} = '3BD';
 #$h{Dwg_Bitcode_2BD} = '2BD';
 #$h{Dwg_Bitcode_3RD} = '3RD';
@@ -259,7 +260,7 @@ sub out_struct {
     }
     $type = $bc if $bc;
     if ($name eq 'encr_sat_data') {
-      $type = 'char **'; $bc = '';
+      $type = 'char**'; $bc = '';
     }
     $type =~ s/\s+$//;
     my $size = $bc ? "sizeof (BITCODE_$type)" : "sizeof ($type)";

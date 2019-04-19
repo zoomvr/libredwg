@@ -8588,17 +8588,17 @@ static int test__3DSOLID (const Dwg_Object *obj)
       }
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (_3dsolid, "3DSOLID", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("3DSOLID.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("3DSOLID.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("3DSOLID.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("3DSOLID.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
@@ -15458,17 +15458,17 @@ static int test_EXTRUDEDSURFACE (const Dwg_Object *obj)
 
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (extrudedsurface, "EXTRUDEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("EXTRUDEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("EXTRUDEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("EXTRUDEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("EXTRUDEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
@@ -19788,17 +19788,17 @@ static int test_LOFTEDSURFACE (const Dwg_Object *obj)
       }
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (loftedsurface, "LOFTEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("LOFTEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("LOFTEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("LOFTEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("LOFTEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
@@ -23380,17 +23380,17 @@ static int test_PLANESURFACE (const Dwg_Object *obj)
 
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (planesurface, "PLANESURFACE", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("PLANESURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("PLANESURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("PLANESURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("PLANESURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
@@ -24062,15 +24062,15 @@ static int test_POLYLINE_2D (const Dwg_Object *obj)
 
   }
   {
-    BITCODE_BE extrusion;
+    BITCODE_3BD extrusion;
     if (dwg_dynapi_entity_value(polyline_2d, "POLYLINE_2D", "extrusion", &extrusion, NULL)
         && !memcmp (&extrusion, &polyline_2d->extrusion, sizeof (polyline_2d->extrusion)))
       {
-        pass ("POLYLINE_2D.extrusion [BE]");
+        pass ("POLYLINE_2D.extrusion [3BD]");
       }
     else
       {
-        fail ("POLYLINE_2D.extrusion [BE]");
+        fail ("POLYLINE_2D.extrusion [3BD]");
         error++;
       }
   }
@@ -24205,42 +24205,41 @@ static int test_POLYLINE_2D (const Dwg_Object *obj)
 
   }
   {
-    BITCODE_BT thickness;
+    BITCODE_BD thickness;
     if (dwg_dynapi_entity_value(polyline_2d, "POLYLINE_2D", "thickness", &thickness, NULL)
         && thickness == polyline_2d->thickness)
       {
-        pass ("POLYLINE_2D.thickness [BT] " FORMAT_BT "", thickness);
+        pass ("POLYLINE_2D.thickness [BD] %g", thickness);
       }
     else
       {
-        fail ("POLYLINE_2D.thickness [BT] " FORMAT_BT " != " FORMAT_BT "", polyline_2d->thickness, thickness);
+        fail ("POLYLINE_2D.thickness [BD] %g != %g", polyline_2d->thickness, thickness);
         error++;
       }
+    thickness++;
     if (dwg_dynapi_entity_set_value (polyline_2d, "POLYLINE_2D", "thickness", &thickness)
         && thickness == polyline_2d->thickness)
       {
-        pass ("POLYLINE_2D.thickness [BT] set+1 " FORMAT_BT "", thickness);
+        pass ("POLYLINE_2D.thickness [BD] set+1 %g", thickness);
       }
     else
       {
-        fail ("POLYLINE_2D.thickness [BT] set+1 " FORMAT_BT " != " FORMAT_BT "", polyline_2d->thickness, thickness);
+        fail ("POLYLINE_2D.thickness [BD] set+1 %g != %g", polyline_2d->thickness, thickness);
         error++;
       }
     polyline_2d->thickness--;
 
   }
   {
-    BITCODE_H* vertex;
-    BITCODE_BL count = 0;
-    if (dwg_dynapi_entity_value (polyline_2d, "POLYLINE_2D", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_2d, "POLYLINE_2D", "vertex", &vertex, NULL)
-        && vertex == polyline_2d->vertex)
+    BITCODE_3BD vertex;
+    if (dwg_dynapi_entity_value(polyline_2d, "POLYLINE_2D", "vertex", &vertex, NULL)
+        && !memcmp (&vertex, &polyline_2d->vertex, sizeof (polyline_2d->vertex)))
       {
-        pass ("POLYLINE_2D.vertex [H*] * %u num_owned", count);
+        pass ("POLYLINE_2D.vertex [3BD]");
       }
     else
       {
-        fail ("POLYLINE_2D.vertex [H*] * %u num_owned", count);
+        fail ("POLYLINE_2D.vertex [3BD]");
         error++;
       }
   }
@@ -24252,26 +24251,26 @@ static int test_POLYLINE_3D (const Dwg_Object *obj)
   const Dwg_Object_Entity *restrict obj_obj = obj->tio.entity;
   Dwg_Entity_POLYLINE_3D *restrict polyline_3d = obj->tio.entity->tio.POLYLINE_3D;
   {
-    BITCODE_RC curve_type;
+    BITCODE_BS curve_type;
     if (dwg_dynapi_entity_value(polyline_3d, "POLYLINE_3D", "curve_type", &curve_type, NULL)
         && curve_type == polyline_3d->curve_type)
       {
-        pass ("POLYLINE_3D.curve_type [RC] %u", curve_type);
+        pass ("POLYLINE_3D.curve_type [BS] %hu", curve_type);
       }
     else
       {
-        fail ("POLYLINE_3D.curve_type [RC] %u != %u", polyline_3d->curve_type, curve_type);
+        fail ("POLYLINE_3D.curve_type [BS] %hu != %hu", polyline_3d->curve_type, curve_type);
         error++;
       }
     curve_type++;
     if (dwg_dynapi_entity_set_value (polyline_3d, "POLYLINE_3D", "curve_type", &curve_type)
         && curve_type == polyline_3d->curve_type)
       {
-        pass ("POLYLINE_3D.curve_type [RC] set+1 %u", curve_type);
+        pass ("POLYLINE_3D.curve_type [BS] set+1 %hu", curve_type);
       }
     else
       {
-        fail ("POLYLINE_3D.curve_type [RC] set+1 %u != %u", polyline_3d->curve_type, curve_type);
+        fail ("POLYLINE_3D.curve_type [BS] set+1 %hu != %hu", polyline_3d->curve_type, curve_type);
         error++;
       }
     polyline_3d->curve_type--;
@@ -24291,26 +24290,26 @@ static int test_POLYLINE_3D (const Dwg_Object *obj)
       }
   }
   {
-    BITCODE_RC flag;
+    BITCODE_BS flag;
     if (dwg_dynapi_entity_value(polyline_3d, "POLYLINE_3D", "flag", &flag, NULL)
         && flag == polyline_3d->flag)
       {
-        pass ("POLYLINE_3D.flag [RC] %u", flag);
+        pass ("POLYLINE_3D.flag [BS] %hu", flag);
       }
     else
       {
-        fail ("POLYLINE_3D.flag [RC] %u != %u", polyline_3d->flag, flag);
+        fail ("POLYLINE_3D.flag [BS] %hu != %hu", polyline_3d->flag, flag);
         error++;
       }
     flag++;
     if (dwg_dynapi_entity_set_value (polyline_3d, "POLYLINE_3D", "flag", &flag)
         && flag == polyline_3d->flag)
       {
-        pass ("POLYLINE_3D.flag [RC] set+1 %u", flag);
+        pass ("POLYLINE_3D.flag [BS] set+1 %hu", flag);
       }
     else
       {
-        fail ("POLYLINE_3D.flag [RC] set+1 %u != %u", polyline_3d->flag, flag);
+        fail ("POLYLINE_3D.flag [BS] set+1 %hu != %hu", polyline_3d->flag, flag);
         error++;
       }
     polyline_3d->flag--;
@@ -24382,17 +24381,15 @@ static int test_POLYLINE_3D (const Dwg_Object *obj)
       }
   }
   {
-    BITCODE_H* vertex;
-    BITCODE_BL count = 0;
-    if (dwg_dynapi_entity_value (polyline_3d, "POLYLINE_3D", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_3d, "POLYLINE_3D", "vertex", &vertex, NULL)
-        && vertex == polyline_3d->vertex)
+    BITCODE_3BD vertex;
+    if (dwg_dynapi_entity_value(polyline_3d, "POLYLINE_3D", "vertex", &vertex, NULL)
+        && !memcmp (&vertex, &polyline_3d->vertex, sizeof (polyline_3d->vertex)))
       {
-        pass ("POLYLINE_3D.vertex [H*] * %u num_owned", count);
+        pass ("POLYLINE_3D.vertex [3BD]");
       }
     else
       {
-        fail ("POLYLINE_3D.vertex [H*] * %u num_owned", count);
+        fail ("POLYLINE_3D.vertex [3BD]");
         error++;
       }
   }
@@ -24638,17 +24635,15 @@ static int test_POLYLINE_MESH (const Dwg_Object *obj)
       }
   }
   {
-    BITCODE_H* vertex;
-    BITCODE_BL count = 0;
-    if (dwg_dynapi_entity_value (polyline_mesh, "POLYLINE_MESH", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_mesh, "POLYLINE_MESH", "vertex", &vertex, NULL)
-        && vertex == polyline_mesh->vertex)
+    BITCODE_3BD vertex;
+    if (dwg_dynapi_entity_value(polyline_mesh, "POLYLINE_MESH", "vertex", &vertex, NULL)
+        && !memcmp (&vertex, &polyline_mesh->vertex, sizeof (polyline_mesh->vertex)))
       {
-        pass ("POLYLINE_MESH.vertex [H*] * %u num_owned", count);
+        pass ("POLYLINE_MESH.vertex [3BD]");
       }
     else
       {
-        fail ("POLYLINE_MESH.vertex [H*] * %u num_owned", count);
+        fail ("POLYLINE_MESH.vertex [3BD]");
         error++;
       }
   }
@@ -24790,17 +24785,15 @@ static int test_POLYLINE_PFACE (const Dwg_Object *obj)
       }
   }
   {
-    BITCODE_H* vertex;
-    BITCODE_BL count = 0;
-    if (dwg_dynapi_entity_value (polyline_pface, "POLYLINE_PFACE", "num_owned", &count, NULL)
-        && dwg_dynapi_entity_value (polyline_pface, "POLYLINE_PFACE", "vertex", &vertex, NULL)
-        && vertex == polyline_pface->vertex)
+    BITCODE_3BD vertex;
+    if (dwg_dynapi_entity_value(polyline_pface, "POLYLINE_PFACE", "vertex", &vertex, NULL)
+        && !memcmp (&vertex, &polyline_pface->vertex, sizeof (polyline_pface->vertex)))
       {
-        pass ("POLYLINE_PFACE.vertex [H*] * %u num_owned", count);
+        pass ("POLYLINE_PFACE.vertex [3BD]");
       }
     else
       {
-        fail ("POLYLINE_PFACE.vertex [H*] * %u num_owned", count);
+        fail ("POLYLINE_PFACE.vertex [3BD]");
         error++;
       }
   }
@@ -25306,17 +25299,17 @@ static int test_REVOLVEDSURFACE (const Dwg_Object *obj)
 
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (revolvedsurface, "REVOLVEDSURFACE", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("REVOLVEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("REVOLVEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("REVOLVEDSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("REVOLVEDSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
@@ -27055,17 +27048,17 @@ static int test_SWEPTSURFACE (const Dwg_Object *obj)
 
   }
   {
-    char ** encr_sat_data;
+    char** encr_sat_data;
     BITCODE_BL count = 0;
     if (dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "num_encr_sat_data", &count, NULL)
         && dwg_dynapi_entity_value (sweptsurface, "SWEPTSURFACE", "encr_sat_data", &encr_sat_data, NULL)
 )
       {
-        pass ("SWEPTSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        pass ("SWEPTSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
       }
     else
       {
-        fail ("SWEPTSURFACE.encr_sat_data [char **] * %u num_encr_sat_data", count);
+        fail ("SWEPTSURFACE.encr_sat_data [char**] * %u num_encr_sat_data", count);
         error++;
       }
   }
