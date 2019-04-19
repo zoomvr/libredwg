@@ -4,5 +4,11 @@ BasedOnStyle:  GNU
 IndentPPDirectives: AfterHash
 SortIncludes:    false
 SortUsingDeclarations: false
+StatementMacros:
+  - dwg_get_OBJECT_DECL
+  - CAST_DWG_OBJECT_TO_OBJECT_DECL
+  - CAST_DWG_OBJECT_TO_ENTITY_DECL
+  - DWG_GETALL_ENTITY_DECL
+  - DWG_GETALL_OBJECT_DECL
 ...
 

@@ -24,12 +24,12 @@ someone should probably think about and resolve them!
   - from Emacs: (info "(standards)")
   - from shell: $ info standards
 
-  We format the code now with clang-format. For include/*.h we would
-  require >= 8.0 for the new StatementMacros option, but we don't process
-  include yet, because src/gen-dynapi.pl is too fragile.
+  We format the code now with clang-format. For include/*.h we require
+  >= 8.0 for the new StatementMacros option, but beware,
+  src/gen-dynapi.pl is very fragile.
   You can use
 
-    $ bash build-aux/clang-format-all.sh src programs examples test
+    $ bash build-aux/clang-format-all.sh src programs examples test include
 
   or use some clang-format editor integration.
   See https://clang.llvm.org/docs/ClangFormat.html
