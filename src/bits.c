@@ -31,11 +31,8 @@
 #endif
 // else we roll our own, Latin-1 only.
 
-#ifdef IS_RELEASE
-#  define DWG_LOGLEVEL DWG_LOGLEVEL_NONE
-#else
-#  define DWG_LOGLEVEL DWG_LOGLEVEL_ERROR
-#endif
+static unsigned int loglevel;
+#define DWG_LOGLEVEL loglevel
 #include "logging.h"
 #include "bits.h"
 
@@ -54,6 +51,7 @@ bit_advance_position (Bit_Chain *dat, long advance)
       // but allow pointing to the very end.
       if (dat->byte != dat->size - 1 || dat->bit != 0)
         {
+          loglevel = dat->opts & 0xf;
           LOG_ERROR ("buffer overflow at pos %lu, size %lu, advance by %ld",
                      dat->byte, dat->size, advance)
         }
@@ -63,6 +61,7 @@ bit_advance_position (Bit_Chain *dat, long advance)
     }
   if ((long)dat->byte + (endpos / 8) < 0)
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("buffer underflow at pos %lu, size %lu, advance by %ld",
                  dat->byte, dat->size, advance)
       dat->byte = 0;
@@ -90,6 +89,7 @@ bit_set_position (Bit_Chain *dat, unsigned long bitpos)
   dat->bit = bitpos & 7;
   if (dat->byte > dat->size || (dat->byte == dat->size && dat->bit))
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("buffer overflow at %lu, have %lu", dat->byte, dat->size)
     }
 }
@@ -104,6 +104,7 @@ bit_read_B (Bit_Chain *dat)
 
   if (dat->byte >= dat->size)
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("buffer overflow at %lu", dat->byte)
       return 0;
     }
@@ -140,6 +141,7 @@ bit_read_BB (Bit_Chain *dat)
 
   if (dat->byte >= dat->size)
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("buffer overflow at %lu", dat->byte)
       return 0;
     }
@@ -224,6 +226,7 @@ bit_write_3B (Bit_Chain *dat, unsigned char value)
 {
   if (value > 7)
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("Invalid bit_write_3B value %d > 7", value)
       return;
     }
@@ -274,6 +277,7 @@ bit_read_RC (Bit_Chain *dat)
 
   if (dat->byte >= dat->size)
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("buffer overflow at %lu", dat->byte)
       return 0;
     }
@@ -523,6 +527,7 @@ bit_read_BL (Bit_Chain *dat)
     return 0;
   else /* if (two_bit_code == 3) */
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("bit_read_BL: unexpected 2-bit code: '11'")
       return 256;
     }
@@ -724,6 +729,7 @@ bit_read_BD (Bit_Chain *dat)
     return 0.0;
   else /* if (two_bit_code == 3) */
     {
+      loglevel = dat->opts & 0xf;
       LOG_ERROR ("bit_read_BD: unexpected 2-bit code: '11'")
       return bit_nan ();
     }
@@ -801,6 +807,7 @@ bit_read_MC (Bit_Chain *dat)
       result |= ((BITCODE_UMC)byte[i]) << j;
     }
 
+  loglevel = dat->opts & 0xf;
   LOG_ERROR ("bit_read_MC: error parsing modular char, i=%d,j=%d,result=0x%lx",
              i, j, result)
   return 0; /* error... */
@@ -865,6 +872,7 @@ bit_read_UMC (Bit_Chain *dat)
       result |= ((BITCODE_UMC)byte[i]) << j;
     }
 
+  loglevel = dat->opts & 0xf;
   LOG_ERROR (
       "bit_read_UMC: error parsing modular char, i=%d,j=%d,result=0x%lx", i, j,
       result)
@@ -923,6 +931,7 @@ bit_read_MS (Bit_Chain *dat)
         word[i] &= 0x7fff;
       result |= ((BITCODE_MS)word[i]) << j;
     }
+  loglevel = dat->opts & 0xf;
   LOG_ERROR ("bit_read_MS: error parsing modular short, i=%d,j=%d", i, j)
   return 0; /* error... */
 }
@@ -1422,9 +1431,11 @@ bit_utf8_to_TU (char *restrict str)
           /*
           if (str[1] < 0x80 || str[1] > 0xBF ||
               str[2] < 0x80 || str[2] > 0xBF) {
+            loglevel = dat->opts & 0xf;
             LOG_ERROR("utf-8: BAD_CONTINUATION_BYTE %s", str);
           }
           if (c == 0xe0 && str[1] < 0xa0) {
+            loglevel = dat->opts & 0xf;
             LOG_ERROR("utf-8: NON_SHORTEST %s", str);
           } */
           wstr[i++]

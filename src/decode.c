@@ -2109,6 +2109,7 @@ read_2004_section_header (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
   int error;
   Bit_Chain sec_dat = { 0 };
 
+  sec_dat.opts = dwg->opts & 0xf;
   error = read_2004_compressed_section (dat, dwg, &sec_dat, SECTION_HEADER);
   if (error >= DWG_ERR_CRITICAL)
     {
@@ -2131,7 +2132,7 @@ read_2004_section_header (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
       }
       else
       {
-        Bit_Chain hdl_dat = { 0 }, str_dat = { 0 };
+        Bit_Chain hdl_dat, str_dat;
         BITCODE_RL endbits = 160; // start bit: 16 sentinel + 4 size
         hdl_dat = sec_dat;
         str_dat = sec_dat;
@@ -2165,6 +2166,7 @@ read_2004_section_handles (Bit_Chain *restrict dat, Dwg_Data *restrict dwg)
   long unsigned int endpos;
   int error;
 
+  obj_dat.opts = hdl_dat.opts = dwg->opts & 0xf;
   error = read_2004_compressed_section (dat, dwg, &obj_dat, SECTION_OBJECTS);
   if (error >= DWG_ERR_CRITICAL)
     {
