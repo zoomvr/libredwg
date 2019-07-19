@@ -59,7 +59,15 @@
         GCC31_DIAG_PRAGMA (GCC diagnostic ignored #x)
 #else
 #  define GCC31_DIAG_IGNORE(w)
-#  define GCC31_DIAG_RESTORE
+#endif
+/* for GCC30_DIAG_IGNORE(-Wformat-nonliteral) */
+#if defined(__GNUC__) && ((__GNUC__ * 100) + __GNUC_MINOR__) >= 300
+#  define GCC30_DIAG_PRAGMA(x) _Pragma (#  x)
+#  define GCC30_DIAG_IGNORE(x)                                                \
+    _Pragma ("GCC diagnostic push")                                           \
+        GCC30_DIAG_PRAGMA (GCC diagnostic ignored #x)
+#else
+#  define GCC30_DIAG_IGNORE(w)
 #endif
 
 #ifndef __has_feature
