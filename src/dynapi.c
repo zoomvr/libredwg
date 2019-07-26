@@ -214,184 +214,192 @@ static const char dwg_object_names[][MAXLEN_OBJECTS] = {
   "AEC_DISP_REP_ANCHOR_EXT_TAG_TO_ENT" "\0\0\0\0\0\0\0\0\0",	/* 103 */
   "AEC_DISP_REP_ANCHOR_TAG_TO_ENT" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 104 */
   "AEC_DISP_REP_BDG_ELEVLINE_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 105 */
-  "AEC_DISP_REP_BDG_ELEVLINE_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 106 */
-  "AEC_DISP_REP_BDG_SECTIONLINE_MODEL" "\0\0\0\0\0\0\0\0\0",	/* 107 */
-  "AEC_DISP_REP_BDG_SECTIONLINE_PLAN" "\0\0\0\0\0\0\0\0\0\0",	/* 108 */
-  "AEC_DISP_REP_BDG_SECTIONLINE_RCP" "\0\0\0\0\0\0\0\0\0\0\0",	/* 109 */
-  "AEC_DISP_REP_BDG_SECTION_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 110 */
-  "AEC_DISP_REP_BDG_SECTION_SUBDIV" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 111 */
-  "AEC_DISP_REP_CEILING_GRID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 112 */
-  "AEC_DISP_REP_CEILING_GRID_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 113 */
-  "AEC_DISP_REP_CEILING_GRID_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 114 */
-  "AEC_DISP_REP_CLIP_VOLUME_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 115 */
-  "AEC_DISP_REP_CLIP_VOLUME_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 116 */
-  "AEC_DISP_REP_CLIP_VOLUME_RESULT" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 117 */
-  "AEC_DISP_REP_CLIP_VOLUME_RESULT_SUBDIV" "\0\0\0\0\0",	/* 118 */
-  "AEC_DISP_REP_COLUMN_GRID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 119 */
-  "AEC_DISP_REP_COLUMN_GRID_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 120 */
-  "AEC_DISP_REP_COLUMN_GRID_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 121 */
-  "AEC_DISP_REP_CONFIG" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 122 */
-  "AEC_DISP_REP_CURTAIN_WALL_LAYOUT_MODEL" "\0\0\0\0\0",	/* 123 */
-  "AEC_DISP_REP_CURTAIN_WALL_LAYOUT_PLAN" "\0\0\0\0\0\0",	/* 124 */
-  "AEC_DISP_REP_CURTAIN_WALL_UNIT_MODEL" "\0\0\0\0\0\0\0",	/* 125 */
-  "AEC_DISP_REP_CURTAIN_WALL_UNIT_PLAN" "\0\0\0\0\0\0\0\0",	/* 126 */
-  "AEC_DISP_REP_DISPLAYTHEME" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 127 */
-  "AEC_DISP_REP_DOOR_ELEV" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 128 */
-  "AEC_DISP_REP_DOOR_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 129 */
-  "AEC_DISP_REP_DOOR_NOMINAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 130 */
-  "AEC_DISP_REP_DOOR_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 131 */
-  "AEC_DISP_REP_DOOR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 132 */
-  "AEC_DISP_REP_DOOR_PLAN_HEKTO" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 133 */
-  "AEC_DISP_REP_DOOR_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 134 */
-  "AEC_DISP_REP_DOOR_THRESHOLD_PLAN" "\0\0\0\0\0\0\0\0\0\0\0",	/* 135 */
-  "AEC_DISP_REP_DOOR_THRESHOLD_SYMBOL_PLAN" "\0\0\0\0",	/* 136 */
-  "AEC_DISP_REP_EDITINPLACEPROFILE" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 137 */
-  "AEC_DISP_REP_ENT_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 138 */
-  "AEC_DISP_REP_LAYOUT_CURVE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 139 */
-  "AEC_DISP_REP_LAYOUT_GRID2D" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 140 */
-  "AEC_DISP_REP_LAYOUT_GRID3D" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 141 */
-  "AEC_DISP_REP_MASKBLOCK_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 142 */
-  "AEC_DISP_REP_MASKBLOCK_REF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 143 */
-  "AEC_DISP_REP_MASS_ELEM_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 144 */
-  "AEC_DISP_REP_MASS_ELEM_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 145 */
-  "AEC_DISP_REP_MASS_ELEM_SCHEM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 146 */
-  "AEC_DISP_REP_MASS_GROUP_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 147 */
-  "AEC_DISP_REP_MASS_GROUP_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 148 */
-  "AEC_DISP_REP_MASS_GROUP_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 149 */
-  "AEC_DISP_REP_MATERIAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 150 */
-  "AEC_DISP_REP_MVBLOCK_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 151 */
-  "AEC_DISP_REP_MVBLOCK_REF_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 152 */
-  "AEC_DISP_REP_MVBLOCK_REF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 153 */
-  "AEC_DISP_REP_OPENING" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 154 */
-  "AEC_DISP_REP_OPENING_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 155 */
-  "AEC_DISP_REP_POLYGON_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 156 */
-  "AEC_DISP_REP_POLYGON_TRUECOLOUR" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 157 */
-  "AEC_DISP_REP_RAILING_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 158 */
-  "AEC_DISP_REP_RAILING_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 159 */
-  "AEC_DISP_REP_RAILING_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 160 */
-  "AEC_DISP_REP_RAILING_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 161 */
-  "AEC_DISP_REP_ROOFSLAB_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 162 */
-  "AEC_DISP_REP_ROOFSLAB_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 163 */
-  "AEC_DISP_REP_ROOF_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 164 */
-  "AEC_DISP_REP_ROOF_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 165 */
-  "AEC_DISP_REP_ROOF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 166 */
-  "AEC_DISP_REP_SCHEDULE_TABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 167 */
-  "AEC_DISP_REP_SET" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 168 */
-  "AEC_DISP_REP_SLAB_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 169 */
-  "AEC_DISP_REP_SLAB_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 170 */
-  "AEC_DISP_REP_SLICE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 171 */
-  "AEC_DISP_REP_SPACE_DECOMPOSED" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 172 */
-  "AEC_DISP_REP_SPACE_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 173 */
-  "AEC_DISP_REP_SPACE_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 174 */
-  "AEC_DISP_REP_SPACE_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 175 */
-  "AEC_DISP_REP_SPACE_VOLUME" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 176 */
-  "AEC_DISP_REP_STAIR_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 177 */
-  "AEC_DISP_REP_STAIR_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 178 */
-  "AEC_DISP_REP_STAIR_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 179 */
-  "AEC_DISP_REP_STAIR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 180 */
-  "AEC_DISP_REP_STAIR_PLAN_OVERLAPPING" "\0\0\0\0\0\0\0\0",	/* 181 */
-  "AEC_DISP_REP_STAIR_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 182 */
-  "AEC_DISP_REP_WALL_GRAPH" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 183 */
-  "AEC_DISP_REP_WALL_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 184 */
-  "AEC_DISP_REP_WALL_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 185 */
-  "AEC_DISP_REP_WALL_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 186 */
-  "AEC_DISP_REP_WALL_SCHEM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 187 */
-  "AEC_DISP_REP_WINDOWASSEMBLY_SILL_PLAN" "\0\0\0\0\0\0",	/* 188 */
-  "AEC_DISP_REP_WINDOW_ASSEMBLY_MODEL" "\0\0\0\0\0\0\0\0\0",	/* 189 */
-  "AEC_DISP_REP_WINDOW_ASSEMBLY_PLAN" "\0\0\0\0\0\0\0\0\0\0",	/* 190 */
-  "AEC_DISP_REP_WINDOW_ELEV" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 191 */
-  "AEC_DISP_REP_WINDOW_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 192 */
-  "AEC_DISP_REP_WINDOW_NOMINAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 193 */
-  "AEC_DISP_REP_WINDOW_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 194 */
-  "AEC_DISP_REP_WINDOW_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 195 */
-  "AEC_DISP_REP_WINDOW_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 196 */
-  "AEC_DISP_REP_WINDOW_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 197 */
-  "AEC_DISP_REP_WINDOW_SILL_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 198 */
-  "AEC_DISP_REP_ZONE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 199 */
-  "AEC_DISP_ROPS_RAILING_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 200 */
-  "AEC_DISP_ROPS_RAILING_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 201 */
-  "AEC_DISP_ROPS_STAIR_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 202 */
-  "AEC_DISP_ROPS_STAIR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 203 */
-  "AEC_VARS_DWG_SETUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 204 */
-  "ANNOTSCALEOBJECTCONTEXTDATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 205 */
-  "APPID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 206 */
-  "APPID_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 207 */
-  "ASSOC2DCONSTRAINTGROUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 208 */
-  "ASSOCACTION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 209 */
-  "ASSOCALIGNEDDIMACTIONBODY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 210 */
-  "ASSOCDEPENDENCY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 211 */
-  "ASSOCNETWORK" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 212 */
-  "ASSOCOSNAPPOINTREFACTIONPARAM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 213 */
-  "ASSOCPERSSUBENTMANAGER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 214 */
-  "ASSOCPLANESURFACEACTIONBODY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 215 */
-  "BLOCK_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 216 */
-  "BLOCK_HEADER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 217 */
-  "CELLSTYLEMAP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 218 */
-  "DATATABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 219 */
-  "DBCOLOR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 220 */
-  "DICTIONARY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 221 */
-  "DICTIONARYVAR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 222 */
-  "DICTIONARYWDFLT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 223 */
-  "DIMASSOC" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 224 */
-  "DIMSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 225 */
-  "DIMSTYLE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 226 */
-  "DUMMY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 227 */
-  "DYNAMICBLOCKPURGEPREVENTER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 228 */
-  "EVALUATION_GRAPH" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 229 */
-  "FIELD" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 230 */
-  "FIELDLIST" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 231 */
-  "GEODATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 232 */
-  "GEOMAPIMAGE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 233 */
-  "GROUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 234 */
-  "IDBUFFER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 235 */
-  "IMAGEDEF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 236 */
-  "IMAGEDEF_REACTOR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 237 */
-  "LAYER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 238 */
-  "LAYER_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 239 */
-  "LAYER_INDEX" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 240 */
-  "LAYOUT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 241 */
-  "LIGHTLIST" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 242 */
-  "LONG_TRANSACTION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 243 */
-  "LTYPE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 244 */
-  "LTYPE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 245 */
-  "MATERIAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 246 */
-  "MLEADERSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 247 */
-  "MLINESTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 248 */
-  "NAVISWORKSMODELDEF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 249 */
-  "OBJECTCONTEXTDATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 250 */
-  "OBJECT_PTR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 251 */
-  "PERSSUBENTMANAGER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 252 */
-  "PLACEHOLDER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 253 */
-  "PLOTSETTINGS" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 254 */
-  "PROXY_OBJECT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 255 */
-  "RASTERVARIABLES" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 256 */
-  "RENDERENVIRONMENT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 257 */
-  "RENDERGLOBAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 258 */
-  "SCALE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 259 */
-  "SORTENTSTABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 260 */
-  "SPATIAL_FILTER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 261 */
-  "SPATIAL_INDEX" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 262 */
-  "STYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 263 */
-  "STYLE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 264 */
-  "SUN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 265 */
-  "SUNSTUDY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 266 */
-  "TABLECONTENT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 267 */
-  "TABLEGEOMETRY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 268 */
-  "TABLESTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 269 */
-  "UCS" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 270 */
-  "UCS_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 271 */
-  "UNDERLAYDEFINITION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 272 */
-  "UNKNOWN_OBJ" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 273 */
-  "VBA_PROJECT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 274 */
-  "VIEW" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 275 */
-  "VIEW_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 276 */
-  "VISUALSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 277 */
-  "VPORT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 278 */
-  "VPORT_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 279 */
-  "VPORT_ENTITY_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 280 */
-  "VPORT_ENTITY_HEADER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 281 */
-  "WIPEOUTVARIABLES" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 282 */
-  "XRECORD" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 283 */
+  "AEC_DISP_REP_BDG_ELEVLINE_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 106 */
+  "AEC_DISP_REP_BDG_ELEVLINE_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 107 */
+  "AEC_DISP_REP_BDG_SECTIONLINE_MODEL" "\0\0\0\0\0\0\0\0\0",	/* 108 */
+  "AEC_DISP_REP_BDG_SECTIONLINE_PLAN" "\0\0\0\0\0\0\0\0\0\0",	/* 109 */
+  "AEC_DISP_REP_BDG_SECTIONLINE_RCP" "\0\0\0\0\0\0\0\0\0\0\0",	/* 110 */
+  "AEC_DISP_REP_BDG_SECTION_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 111 */
+  "AEC_DISP_REP_BDG_SECTION_SUBDIV" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 112 */
+  "AEC_DISP_REP_CEILING_GRID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 113 */
+  "AEC_DISP_REP_CEILING_GRID_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 114 */
+  "AEC_DISP_REP_CEILING_GRID_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 115 */
+  "AEC_DISP_REP_CLIP_VOLUME_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 116 */
+  "AEC_DISP_REP_CLIP_VOLUME_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 117 */
+  "AEC_DISP_REP_CLIP_VOLUME_RESULT" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 118 */
+  "AEC_DISP_REP_CLIP_VOLUME_RESULT_SUBDIV" "\0\0\0\0\0",	/* 119 */
+  "AEC_DISP_REP_COLUMN_GRID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 120 */
+  "AEC_DISP_REP_COLUMN_GRID_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 121 */
+  "AEC_DISP_REP_COLUMN_GRID_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 122 */
+  "AEC_DISP_REP_CONFIG" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 123 */
+  "AEC_DISP_REP_CURTAIN_WALL_LAYOUT_MODEL" "\0\0\0\0\0",	/* 124 */
+  "AEC_DISP_REP_CURTAIN_WALL_LAYOUT_PLAN" "\0\0\0\0\0\0",	/* 125 */
+  "AEC_DISP_REP_CURTAIN_WALL_UNIT_MODEL" "\0\0\0\0\0\0\0",	/* 126 */
+  "AEC_DISP_REP_CURTAIN_WALL_UNIT_PLAN" "\0\0\0\0\0\0\0\0",	/* 127 */
+  "AEC_DISP_REP_DISPLAYTHEME" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 128 */
+  "AEC_DISP_REP_DOOR_ELEV" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 129 */
+  "AEC_DISP_REP_DOOR_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 130 */
+  "AEC_DISP_REP_DOOR_NOMINAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 131 */
+  "AEC_DISP_REP_DOOR_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 132 */
+  "AEC_DISP_REP_DOOR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 133 */
+  "AEC_DISP_REP_DOOR_PLAN_HEKTO" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 134 */
+  "AEC_DISP_REP_DOOR_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 135 */
+  "AEC_DISP_REP_DOOR_THRESHOLD_PLAN" "\0\0\0\0\0\0\0\0\0\0\0",	/* 136 */
+  "AEC_DISP_REP_DOOR_THRESHOLD_SYMBOL_PLAN" "\0\0\0\0",	/* 137 */
+  "AEC_DISP_REP_EDITINPLACEPROFILE" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 138 */
+  "AEC_DISP_REP_ENT_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 139 */
+  "AEC_DISP_REP_LAYOUT_CURVE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 140 */
+  "AEC_DISP_REP_LAYOUT_GRID2D" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 141 */
+  "AEC_DISP_REP_LAYOUT_GRID3D" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 142 */
+  "AEC_DISP_REP_MASKBLOCK_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 143 */
+  "AEC_DISP_REP_MASKBLOCK_REF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 144 */
+  "AEC_DISP_REP_MASS_ELEM_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 145 */
+  "AEC_DISP_REP_MASS_ELEM_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 146 */
+  "AEC_DISP_REP_MASS_ELEM_SCHEM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 147 */
+  "AEC_DISP_REP_MASS_GROUP_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 148 */
+  "AEC_DISP_REP_MASS_GROUP_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 149 */
+  "AEC_DISP_REP_MASS_GROUP_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 150 */
+  "AEC_DISP_REP_MATERIAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 151 */
+  "AEC_DISP_REP_MVBLOCK_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 152 */
+  "AEC_DISP_REP_MVBLOCK_REF_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 153 */
+  "AEC_DISP_REP_MVBLOCK_REF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 154 */
+  "AEC_DISP_REP_OPENING" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 155 */
+  "AEC_DISP_REP_OPENING_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 156 */
+  "AEC_DISP_REP_POLYGON_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 157 */
+  "AEC_DISP_REP_POLYGON_TRUECOLOUR" "\0\0\0\0\0\0\0\0\0\0\0\0",	/* 158 */
+  "AEC_DISP_REP_RAILING_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 159 */
+  "AEC_DISP_REP_RAILING_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 160 */
+  "AEC_DISP_REP_RAILING_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 161 */
+  "AEC_DISP_REP_RAILING_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 162 */
+  "AEC_DISP_REP_ROOFSLAB_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 163 */
+  "AEC_DISP_REP_ROOFSLAB_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 164 */
+  "AEC_DISP_REP_ROOF_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 165 */
+  "AEC_DISP_REP_ROOF_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 166 */
+  "AEC_DISP_REP_ROOF_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 167 */
+  "AEC_DISP_REP_SCHEDULE_TABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 168 */
+  "AEC_DISP_REP_SET" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 169 */
+  "AEC_DISP_REP_SLAB_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 170 */
+  "AEC_DISP_REP_SLAB_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 171 */
+  "AEC_DISP_REP_SLICE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 172 */
+  "AEC_DISP_REP_SPACE_DECOMPOSED" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 173 */
+  "AEC_DISP_REP_SPACE_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 174 */
+  "AEC_DISP_REP_SPACE_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 175 */
+  "AEC_DISP_REP_SPACE_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 176 */
+  "AEC_DISP_REP_SPACE_VOLUME" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 177 */
+  "AEC_DISP_REP_STAIR_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 178 */
+  "AEC_DISP_REP_STAIR_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 179 */
+  "AEC_DISP_REP_STAIR_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 180 */
+  "AEC_DISP_REP_STAIR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 181 */
+  "AEC_DISP_REP_STAIR_PLAN_OVERLAPPING" "\0\0\0\0\0\0\0\0",	/* 182 */
+  "AEC_DISP_REP_STAIR_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 183 */
+  "AEC_DISP_REP_WALL_GRAPH" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 184 */
+  "AEC_DISP_REP_WALL_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 185 */
+  "AEC_DISP_REP_WALL_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 186 */
+  "AEC_DISP_REP_WALL_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 187 */
+  "AEC_DISP_REP_WALL_SCHEM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 188 */
+  "AEC_DISP_REP_WINDOWASSEMBLY_SILL_PLAN" "\0\0\0\0\0\0",	/* 189 */
+  "AEC_DISP_REP_WINDOW_ASSEMBLY_MODEL" "\0\0\0\0\0\0\0\0\0",	/* 190 */
+  "AEC_DISP_REP_WINDOW_ASSEMBLY_PLAN" "\0\0\0\0\0\0\0\0\0\0",	/* 191 */
+  "AEC_DISP_REP_WINDOW_ELEV" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 192 */
+  "AEC_DISP_REP_WINDOW_MODEL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 193 */
+  "AEC_DISP_REP_WINDOW_NOMINAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 194 */
+  "AEC_DISP_REP_WINDOW_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 195 */
+  "AEC_DISP_REP_WINDOW_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 196 */
+  "AEC_DISP_REP_WINDOW_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 197 */
+  "AEC_DISP_REP_WINDOW_RCP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 198 */
+  "AEC_DISP_REP_WINDOW_SILL_PLAN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 199 */
+  "AEC_DISP_REP_ZONE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 200 */
+  "AEC_DISP_ROPS_RAILING_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 201 */
+  "AEC_DISP_ROPS_RAILING_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 202 */
+  "AEC_DISP_ROPS_STAIR_PLAN_100" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 203 */
+  "AEC_DISP_ROPS_STAIR_PLAN_50" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 204 */
+  "AEC_MVBLOCK_DEF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 205 */
+  "AEC_MVBLOCK_REF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 206 */
+  "AEC_NOTIFICATION_TRACKER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 207 */
+  "AEC_POLYGON" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 208 */
+  "AEC_POLYGON_STYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 209 */
+  "AEC_VARS_ARCHBASE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 210 */
+  "AEC_VARS_DWG_SETUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 211 */
+  "ANNOTSCALEOBJECTCONTEXTDATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 212 */
+  "APPID" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 213 */
+  "APPID_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 214 */
+  "ASSOC2DCONSTRAINTGROUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 215 */
+  "ASSOCACTION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 216 */
+  "ASSOCALIGNEDDIMACTIONBODY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 217 */
+  "ASSOCDEPENDENCY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 218 */
+  "ASSOCNETWORK" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 219 */
+  "ASSOCOSNAPPOINTREFACTIONPARAM" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 220 */
+  "ASSOCPERSSUBENTMANAGER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 221 */
+  "ASSOCPLANESURFACEACTIONBODY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 222 */
+  "BLOCK_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 223 */
+  "BLOCK_HEADER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 224 */
+  "CELLSTYLEMAP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 225 */
+  "DATATABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 226 */
+  "DBCOLOR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 227 */
+  "DICTIONARY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 228 */
+  "DICTIONARYVAR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 229 */
+  "DICTIONARYWDFLT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 230 */
+  "DIMASSOC" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 231 */
+  "DIMSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 232 */
+  "DIMSTYLE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 233 */
+  "DUMMY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 234 */
+  "DYNAMICBLOCKPURGEPREVENTER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 235 */
+  "EVALUATION_GRAPH" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 236 */
+  "FIELD" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 237 */
+  "FIELDLIST" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 238 */
+  "GEODATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 239 */
+  "GEOMAPIMAGE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 240 */
+  "GROUP" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 241 */
+  "IDBUFFER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 242 */
+  "IMAGEDEF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 243 */
+  "IMAGEDEF_REACTOR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 244 */
+  "LAYER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 245 */
+  "LAYER_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 246 */
+  "LAYER_INDEX" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 247 */
+  "LAYOUT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 248 */
+  "LIGHTLIST" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 249 */
+  "LONG_TRANSACTION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 250 */
+  "LTYPE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 251 */
+  "LTYPE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 252 */
+  "MATERIAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 253 */
+  "MLEADERSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 254 */
+  "MLINESTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 255 */
+  "NAVISWORKSMODELDEF" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 256 */
+  "OBJECTCONTEXTDATA" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 257 */
+  "OBJECT_PTR" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 258 */
+  "PERSSUBENTMANAGER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 259 */
+  "PLACEHOLDER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 260 */
+  "PLOTSETTINGS" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 261 */
+  "PROXY_OBJECT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 262 */
+  "RASTERVARIABLES" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 263 */
+  "REFEDIT_STATUS_TRACKER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 264 */
+  "RENDERENVIRONMENT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 265 */
+  "RENDERGLOBAL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 266 */
+  "SCALE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 267 */
+  "SORTENTSTABLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 268 */
+  "SPATIAL_FILTER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 269 */
+  "SPATIAL_INDEX" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 270 */
+  "STYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 271 */
+  "STYLE_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 272 */
+  "SUN" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 273 */
+  "SUNSTUDY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 274 */
+  "TABLECONTENT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 275 */
+  "TABLEGEOMETRY" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 276 */
+  "TABLESTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 277 */
+  "UCS" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 278 */
+  "UCS_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 279 */
+  "UNDERLAYDEFINITION" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 280 */
+  "UNKNOWN_OBJ" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 281 */
+  "VBA_PROJECT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 282 */
+  "VIEW" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 283 */
+  "VIEW_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 284 */
+  "VISUALSTYLE" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 285 */
+  "VPORT" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 286 */
+  "VPORT_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 287 */
+  "VPORT_ENTITY_CONTROL" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 288 */
+  "VPORT_ENTITY_HEADER" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 289 */
+  "WIPEOUTVARIABLES" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 290 */
+  "XRECORD" "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",	/* 291 */
 
 };
 
@@ -4461,6 +4469,12 @@ static const Dwg_DYNAPI_field _dwg_AEC_DISP_REP_BDG_ELEVLINE_MODEL_fields[] = {
     1,1,0, 0 },
   {NULL,	NULL,	0,	0,	0,0,0, 0},
 };
+/* from typedef struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_PLAN: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_DISP_REP_BDG_ELEVLINE_PLAN_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_PLAN, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
 /* from typedef struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_RCP: (sorted by offset) */
 static const Dwg_DYNAPI_field _dwg_AEC_DISP_REP_BDG_ELEVLINE_RCP_fields[] = {
   { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_RCP, parent),
@@ -5046,6 +5060,42 @@ static const Dwg_DYNAPI_field _dwg_AEC_DISP_ROPS_STAIR_PLAN_100_fields[] = {
 /* from typedef struct _dwg_object_AEC_DISP_ROPS_STAIR_PLAN_50: (sorted by offset) */
 static const Dwg_DYNAPI_field _dwg_AEC_DISP_ROPS_STAIR_PLAN_50_fields[] = {
   { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_DISP_ROPS_STAIR_PLAN_50, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_MVBLOCK_DEF: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_MVBLOCK_DEF_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_MVBLOCK_DEF, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_MVBLOCK_REF: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_MVBLOCK_REF_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_MVBLOCK_REF, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_NOTIFICATION_TRACKER: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_NOTIFICATION_TRACKER_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_NOTIFICATION_TRACKER, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_POLYGON: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_POLYGON_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_POLYGON, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_POLYGON_STYLE: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_POLYGON_STYLE_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_POLYGON_STYLE, parent),
+    1,1,0, 0 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_AEC_VARS_ARCHBASE: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_AEC_VARS_ARCHBASE_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_AEC_VARS_ARCHBASE, parent),
     1,1,0, 0 },
   {NULL,	NULL,	0,	0,	0,0,0, 0},
 };
@@ -6799,6 +6849,12 @@ static const Dwg_DYNAPI_field _dwg_RASTERVARIABLES_fields[] = {
     0,0,0, 71 },
   { "units",	"BS", sizeof (BITCODE_BS),  OFF (struct _dwg_object_RASTERVARIABLES, units),
     0,0,0, 72 },
+  {NULL,	NULL,	0,	0,	0,0,0, 0},
+};
+/* from typedef struct _dwg_object_REFEDIT_STATUS_TRACKER: (sorted by offset) */
+static const Dwg_DYNAPI_field _dwg_REFEDIT_STATUS_TRACKER_fields[] = {
+  { "parent",	"struct _dwg_object_object*", sizeof (void *),  OFF (struct _dwg_object_REFEDIT_STATUS_TRACKER, parent),
+    1,1,0, 0 },
   {NULL,	NULL,	0,	0,	0,0,0, 0},
 };
 /* from typedef struct _dwg_object_RENDERENVIRONMENT: (sorted by offset) */
@@ -9018,7 +9074,7 @@ static const struct _name_type_fields dwg_name_types[] = {
   { "AEC_DISP_REP_ANCHOR_EXT_TAG_TO_ENT", DWG_TYPE_AEC_DISP_REP_ANCHOR_EXT_TAG_TO_ENT /*(694)*/, _dwg_AEC_DISP_REP_ANCHOR_EXT_TAG_TO_ENT_fields, sizeof (struct _dwg_object_AEC_DISP_REP_ANCHOR_EXT_TAG_TO_ENT) },	/* 108 */
   { "AEC_DISP_REP_ANCHOR_TAG_TO_ENT", DWG_TYPE_AEC_DISP_REP_ANCHOR_TAG_TO_ENT /*(695)*/, _dwg_AEC_DISP_REP_ANCHOR_TAG_TO_ENT_fields, sizeof (struct _dwg_object_AEC_DISP_REP_ANCHOR_TAG_TO_ENT) },	/* 109 */
   { "AEC_DISP_REP_BDG_ELEVLINE_MODEL", DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_MODEL /*(696)*/, _dwg_AEC_DISP_REP_BDG_ELEVLINE_MODEL_fields, sizeof (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_MODEL) },	/* 110 */
-  { "AEC_DISP_REP_BDG_ELEVLINE_PLAN", DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_PLAN /*(697)*/, NULL, 0 },	/* 111 */
+  { "AEC_DISP_REP_BDG_ELEVLINE_PLAN", DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_PLAN /*(697)*/, _dwg_AEC_DISP_REP_BDG_ELEVLINE_PLAN_fields, sizeof (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_PLAN) },	/* 111 */
   { "AEC_DISP_REP_BDG_ELEVLINE_RCP", DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_RCP /*(698)*/, _dwg_AEC_DISP_REP_BDG_ELEVLINE_RCP_fields, sizeof (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_RCP) },	/* 112 */
   { "AEC_DISP_REP_BDG_SECTIONLINE_MODEL", DWG_TYPE_AEC_DISP_REP_BDG_SECTIONLINE_MODEL /*(699)*/, _dwg_AEC_DISP_REP_BDG_SECTIONLINE_MODEL_fields, sizeof (struct _dwg_object_AEC_DISP_REP_BDG_SECTIONLINE_MODEL) },	/* 113 */
   { "AEC_DISP_REP_BDG_SECTIONLINE_PLAN", DWG_TYPE_AEC_DISP_REP_BDG_SECTIONLINE_PLAN /*(700)*/, _dwg_AEC_DISP_REP_BDG_SECTIONLINE_PLAN_fields, sizeof (struct _dwg_object_AEC_DISP_REP_BDG_SECTIONLINE_PLAN) },	/* 114 */
@@ -9117,13 +9173,13 @@ static const struct _name_type_fields dwg_name_types[] = {
   { "AEC_DISP_ROPS_RAILING_PLAN_50", DWG_TYPE_AEC_DISP_ROPS_RAILING_PLAN_50 /*(798)*/, _dwg_AEC_DISP_ROPS_RAILING_PLAN_50_fields, sizeof (struct _dwg_object_AEC_DISP_ROPS_RAILING_PLAN_50) },	/* 207 */
   { "AEC_DISP_ROPS_STAIR_PLAN_100", DWG_TYPE_AEC_DISP_ROPS_STAIR_PLAN_100 /*(799)*/, _dwg_AEC_DISP_ROPS_STAIR_PLAN_100_fields, sizeof (struct _dwg_object_AEC_DISP_ROPS_STAIR_PLAN_100) },	/* 208 */
   { "AEC_DISP_ROPS_STAIR_PLAN_50", DWG_TYPE_AEC_DISP_ROPS_STAIR_PLAN_50 /*(800)*/, _dwg_AEC_DISP_ROPS_STAIR_PLAN_50_fields, sizeof (struct _dwg_object_AEC_DISP_ROPS_STAIR_PLAN_50) },	/* 209 */
-  { "AEC_MVBLOCK_DEF", DWG_TYPE_AEC_MVBLOCK_DEF /*(801)*/, NULL, 0 },	/* 210 */
-  { "AEC_MVBLOCK_REF", DWG_TYPE_AEC_MVBLOCK_REF /*(802)*/, NULL, 0 },	/* 211 */
-  { "AEC_NOTIFICATION_TRACKER", DWG_TYPE_AEC_NOTIFICATION_TRACKER /*(803)*/, NULL, 0 },	/* 212 */
-  { "AEC_POLYGON", DWG_TYPE_AEC_POLYGON /*(804)*/, NULL, 0 },	/* 213 */
-  { "AEC_POLYGON_STYLE", DWG_TYPE_AEC_POLYGON_STYLE /*(805)*/, NULL, 0 },	/* 214 */
+  { "AEC_MVBLOCK_DEF", DWG_TYPE_AEC_MVBLOCK_DEF /*(801)*/, _dwg_AEC_MVBLOCK_DEF_fields, sizeof (struct _dwg_object_AEC_MVBLOCK_DEF) },	/* 210 */
+  { "AEC_MVBLOCK_REF", DWG_TYPE_AEC_MVBLOCK_REF /*(802)*/, _dwg_AEC_MVBLOCK_REF_fields, sizeof (struct _dwg_object_AEC_MVBLOCK_REF) },	/* 211 */
+  { "AEC_NOTIFICATION_TRACKER", DWG_TYPE_AEC_NOTIFICATION_TRACKER /*(803)*/, _dwg_AEC_NOTIFICATION_TRACKER_fields, sizeof (struct _dwg_object_AEC_NOTIFICATION_TRACKER) },	/* 212 */
+  { "AEC_POLYGON", DWG_TYPE_AEC_POLYGON /*(804)*/, _dwg_AEC_POLYGON_fields, sizeof (struct _dwg_object_AEC_POLYGON) },	/* 213 */
+  { "AEC_POLYGON_STYLE", DWG_TYPE_AEC_POLYGON_STYLE /*(805)*/, _dwg_AEC_POLYGON_STYLE_fields, sizeof (struct _dwg_object_AEC_POLYGON_STYLE) },	/* 214 */
   { "AEC_REFEDIT_STATUS_TRACKER", DWG_TYPE_AEC_REFEDIT_STATUS_TRACKER /*(806)*/, NULL, 0 },	/* 215 */
-  { "AEC_VARS_ARCHBASE", DWG_TYPE_AEC_VARS_ARCHBASE /*(807)*/, NULL, 0 },	/* 216 */
+  { "AEC_VARS_ARCHBASE", DWG_TYPE_AEC_VARS_ARCHBASE /*(807)*/, _dwg_AEC_VARS_ARCHBASE_fields, sizeof (struct _dwg_object_AEC_VARS_ARCHBASE) },	/* 216 */
   { "AEC_VARS_DWG_SETUP", DWG_TYPE_AEC_VARS_DWG_SETUP /*(808)*/, _dwg_AEC_VARS_DWG_SETUP_fields, sizeof (struct _dwg_object_AEC_VARS_DWG_SETUP) },	/* 217 */
   { "AEC_VARS_MUNICH", DWG_TYPE_AEC_VARS_MUNICH /*(809)*/, NULL, 0 },	/* 218 */
   { "AEC_VARS_STRUCTUREBASE", DWG_TYPE_AEC_VARS_STRUCTUREBASE /*(810)*/, NULL, 0 },	/* 219 */

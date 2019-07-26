@@ -5277,6 +5277,19 @@ struct _dwg_object_object*
 @end vtable
 @end indentedblock
 
+@strong{AEC_DISP_REP_BDG_ELEVLINE_PLAN} @anchor{AEC_DISP_REP_BDG_ELEVLINE_PLAN}
+@cindex object, AEC_DISP_REP_BDG_ELEVLINE_PLAN
+@vindex AEC_DISP_REP_BDG_ELEVLINE_PLAN
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
 @strong{AEC_DISP_REP_BDG_ELEVLINE_RCP} @anchor{AEC_DISP_REP_BDG_ELEVLINE_RCP}
 @cindex object, AEC_DISP_REP_BDG_ELEVLINE_RCP
 @vindex AEC_DISP_REP_BDG_ELEVLINE_RCP
@@ -6541,6 +6554,84 @@ struct _dwg_object_object*
 @strong{AEC_DISP_ROPS_STAIR_PLAN_50} @anchor{AEC_DISP_ROPS_STAIR_PLAN_50}
 @cindex object, AEC_DISP_ROPS_STAIR_PLAN_50
 @vindex AEC_DISP_ROPS_STAIR_PLAN_50
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_MVBLOCK_DEF} @anchor{AEC_MVBLOCK_DEF}
+@cindex object, AEC_MVBLOCK_DEF
+@vindex AEC_MVBLOCK_DEF
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_MVBLOCK_REF} @anchor{AEC_MVBLOCK_REF}
+@cindex object, AEC_MVBLOCK_REF
+@vindex AEC_MVBLOCK_REF
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_NOTIFICATION_TRACKER} @anchor{AEC_NOTIFICATION_TRACKER}
+@cindex object, AEC_NOTIFICATION_TRACKER
+@vindex AEC_NOTIFICATION_TRACKER
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_POLYGON} @anchor{AEC_POLYGON}
+@cindex object, AEC_POLYGON
+@vindex AEC_POLYGON
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_POLYGON_STYLE} @anchor{AEC_POLYGON_STYLE}
+@cindex object, AEC_POLYGON_STYLE
+@vindex AEC_POLYGON_STYLE
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
+
+@end vtable
+@end indentedblock
+
+@strong{AEC_VARS_ARCHBASE} @anchor{AEC_VARS_ARCHBASE}
+@cindex object, AEC_VARS_ARCHBASE
+@vindex AEC_VARS_ARCHBASE
 
 @indentedblock
 @vtable @code
@@ -8710,6 +8801,19 @@ BS,	DXF 70
 BS,	DXF 71
 @item units
 BS,	DXF 72
+
+@end vtable
+@end indentedblock
+
+@strong{REFEDIT_STATUS_TRACKER} @anchor{REFEDIT_STATUS_TRACKER}
+@cindex object, REFEDIT_STATUS_TRACKER
+@vindex REFEDIT_STATUS_TRACKER
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_object*
 
 @end vtable
 @end indentedblock

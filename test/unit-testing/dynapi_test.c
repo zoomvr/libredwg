@@ -23144,6 +23144,21 @@ static int test_AEC_DISP_REP_BDG_ELEVLINE_MODEL (const Dwg_Object *obj)
   }
   return failed;
 }
+static int test_AEC_DISP_REP_BDG_ELEVLINE_PLAN (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_DISP_REP_BDG_ELEVLINE_PLAN *restrict aec_disp_rep_bdg_elevline_plan = obj->tio.object->tio.AEC_DISP_REP_BDG_ELEVLINE_PLAN;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_disp_rep_bdg_elevline_plan, "AEC_DISP_REP_BDG_ELEVLINE_PLAN", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_disp_rep_bdg_elevline_plan->parent, sizeof (aec_disp_rep_bdg_elevline_plan->parent)))
+        pass ();
+    else
+        fail ("AEC_DISP_REP_BDG_ELEVLINE_PLAN.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
 static int test_AEC_DISP_REP_BDG_ELEVLINE_RCP (const Dwg_Object *obj)
 {
   int error = 0;
@@ -24611,6 +24626,96 @@ static int test_AEC_DISP_ROPS_STAIR_PLAN_50 (const Dwg_Object *obj)
         pass ();
     else
         fail ("AEC_DISP_ROPS_STAIR_PLAN_50.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_MVBLOCK_DEF (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_MVBLOCK_DEF *restrict aec_mvblock_def = obj->tio.object->tio.AEC_MVBLOCK_DEF;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_mvblock_def, "AEC_MVBLOCK_DEF", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_mvblock_def->parent, sizeof (aec_mvblock_def->parent)))
+        pass ();
+    else
+        fail ("AEC_MVBLOCK_DEF.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_MVBLOCK_REF (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_MVBLOCK_REF *restrict aec_mvblock_ref = obj->tio.object->tio.AEC_MVBLOCK_REF;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_mvblock_ref, "AEC_MVBLOCK_REF", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_mvblock_ref->parent, sizeof (aec_mvblock_ref->parent)))
+        pass ();
+    else
+        fail ("AEC_MVBLOCK_REF.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_NOTIFICATION_TRACKER (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_NOTIFICATION_TRACKER *restrict aec_notification_tracker = obj->tio.object->tio.AEC_NOTIFICATION_TRACKER;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_notification_tracker, "AEC_NOTIFICATION_TRACKER", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_notification_tracker->parent, sizeof (aec_notification_tracker->parent)))
+        pass ();
+    else
+        fail ("AEC_NOTIFICATION_TRACKER.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_POLYGON (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_POLYGON *restrict aec_polygon = obj->tio.object->tio.AEC_POLYGON;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_polygon, "AEC_POLYGON", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_polygon->parent, sizeof (aec_polygon->parent)))
+        pass ();
+    else
+        fail ("AEC_POLYGON.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_POLYGON_STYLE (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_POLYGON_STYLE *restrict aec_polygon_style = obj->tio.object->tio.AEC_POLYGON_STYLE;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_polygon_style, "AEC_POLYGON_STYLE", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_polygon_style->parent, sizeof (aec_polygon_style->parent)))
+        pass ();
+    else
+        fail ("AEC_POLYGON_STYLE.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
+static int test_AEC_VARS_ARCHBASE (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_AEC_VARS_ARCHBASE *restrict aec_vars_archbase = obj->tio.object->tio.AEC_VARS_ARCHBASE;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (aec_vars_archbase, "AEC_VARS_ARCHBASE", "parent", &parent, NULL)
+        && !memcmp (&parent, &aec_vars_archbase->parent, sizeof (aec_vars_archbase->parent)))
+        pass ();
+    else
+        fail ("AEC_VARS_ARCHBASE.parent [struct _dwg_object_object*]");
   }
   return failed;
 }
@@ -35352,6 +35457,21 @@ static int test_RASTERVARIABLES (const Dwg_Object *obj)
   }
   return failed;
 }
+static int test_REFEDIT_STATUS_TRACKER (const Dwg_Object *obj)
+{
+  int error = 0;
+  const Dwg_Object_Object *restrict obj_obj = obj->tio.object;
+  Dwg_Object_REFEDIT_STATUS_TRACKER *restrict refedit_status_tracker = obj->tio.object->tio.REFEDIT_STATUS_TRACKER;
+  {
+    struct _dwg_object_object* parent;
+    if (dwg_dynapi_entity_value (refedit_status_tracker, "REFEDIT_STATUS_TRACKER", "parent", &parent, NULL)
+        && !memcmp (&parent, &refedit_status_tracker->parent, sizeof (refedit_status_tracker->parent)))
+        pass ();
+    else
+        fail ("REFEDIT_STATUS_TRACKER.parent [struct _dwg_object_object*]");
+  }
+  return failed;
+}
 static int test_RENDERENVIRONMENT (const Dwg_Object *obj)
 {
   int error = 0;
@@ -40026,6 +40146,8 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_AEC_DISP_REP_ANCHOR_TAG_TO_ENT(obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_MODEL)
     error += test_AEC_DISP_REP_BDG_ELEVLINE_MODEL(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_PLAN)
+    error += test_AEC_DISP_REP_BDG_ELEVLINE_PLAN(obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_RCP)
     error += test_AEC_DISP_REP_BDG_ELEVLINE_RCP(obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_SECTIONLINE_MODEL)
@@ -40222,6 +40344,18 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_AEC_DISP_ROPS_STAIR_PLAN_100(obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_ROPS_STAIR_PLAN_50)
     error += test_AEC_DISP_ROPS_STAIR_PLAN_50(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_MVBLOCK_DEF)
+    error += test_AEC_MVBLOCK_DEF(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_MVBLOCK_REF)
+    error += test_AEC_MVBLOCK_REF(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_NOTIFICATION_TRACKER)
+    error += test_AEC_NOTIFICATION_TRACKER(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_POLYGON)
+    error += test_AEC_POLYGON(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_POLYGON_STYLE)
+    error += test_AEC_POLYGON_STYLE(obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_VARS_ARCHBASE)
+    error += test_AEC_VARS_ARCHBASE(obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_VARS_DWG_SETUP)
     error += test_AEC_VARS_DWG_SETUP(obj);
   else  if (obj->fixedtype == DWG_TYPE_ANNOTSCALEOBJECTCONTEXTDATA)
@@ -40328,6 +40462,8 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_PROXY_OBJECT(obj);
   else  if (obj->fixedtype == DWG_TYPE_RASTERVARIABLES)
     error += test_RASTERVARIABLES(obj);
+  else  if (obj->fixedtype == DWG_TYPE_REFEDIT_STATUS_TRACKER)
+    error += test_REFEDIT_STATUS_TRACKER(obj);
   else  if (obj->fixedtype == DWG_TYPE_RENDERENVIRONMENT)
     error += test_RENDERENVIRONMENT(obj);
   else  if (obj->fixedtype == DWG_TYPE_RENDERGLOBAL)
@@ -40718,6 +40854,8 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_AEC_DISP_REP_ANCHOR_TAG_TO_ENT (obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_MODEL)
     error += test_AEC_DISP_REP_BDG_ELEVLINE_MODEL (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_PLAN)
+    error += test_AEC_DISP_REP_BDG_ELEVLINE_PLAN (obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_ELEVLINE_RCP)
     error += test_AEC_DISP_REP_BDG_ELEVLINE_RCP (obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_REP_BDG_SECTIONLINE_MODEL)
@@ -40914,6 +41052,18 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_AEC_DISP_ROPS_STAIR_PLAN_100 (obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_DISP_ROPS_STAIR_PLAN_50)
     error += test_AEC_DISP_ROPS_STAIR_PLAN_50 (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_MVBLOCK_DEF)
+    error += test_AEC_MVBLOCK_DEF (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_MVBLOCK_REF)
+    error += test_AEC_MVBLOCK_REF (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_NOTIFICATION_TRACKER)
+    error += test_AEC_NOTIFICATION_TRACKER (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_POLYGON)
+    error += test_AEC_POLYGON (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_POLYGON_STYLE)
+    error += test_AEC_POLYGON_STYLE (obj);
+  else  if (obj->fixedtype == DWG_TYPE_AEC_VARS_ARCHBASE)
+    error += test_AEC_VARS_ARCHBASE (obj);
   else  if (obj->fixedtype == DWG_TYPE_AEC_VARS_DWG_SETUP)
     error += test_AEC_VARS_DWG_SETUP (obj);
   else  if (obj->fixedtype == DWG_TYPE_ANNOTSCALEOBJECTCONTEXTDATA)
@@ -41020,6 +41170,8 @@ test_object (const Dwg_Data *restrict dwg, const Dwg_Object *restrict obj)
     error += test_PROXY_OBJECT (obj);
   else  if (obj->fixedtype == DWG_TYPE_RASTERVARIABLES)
     error += test_RASTERVARIABLES (obj);
+  else  if (obj->fixedtype == DWG_TYPE_REFEDIT_STATUS_TRACKER)
+    error += test_REFEDIT_STATUS_TRACKER (obj);
   else  if (obj->fixedtype == DWG_TYPE_RENDERENVIRONMENT)
     error += test_RENDERENVIRONMENT (obj);
   else  if (obj->fixedtype == DWG_TYPE_RENDERGLOBAL)
@@ -42454,6 +42606,14 @@ test_sizes (void)
                "dwg_dynapi_fields_size (\"AEC_DISP_REP_BDG_ELEVLINE_MODEL\"): %d\n", size1, size2);
       error++;
     }
+  size1 = sizeof (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_PLAN);
+  size2 = dwg_dynapi_fields_size ("AEC_DISP_REP_BDG_ELEVLINE_PLAN");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_PLAN): %d != "
+               "dwg_dynapi_fields_size (\"AEC_DISP_REP_BDG_ELEVLINE_PLAN\"): %d\n", size1, size2);
+      error++;
+    }
   size1 = sizeof (struct _dwg_object_AEC_DISP_REP_BDG_ELEVLINE_RCP);
   size2 = dwg_dynapi_fields_size ("AEC_DISP_REP_BDG_ELEVLINE_RCP");
   if (size1 != size2)
@@ -43238,6 +43398,54 @@ test_sizes (void)
                "dwg_dynapi_fields_size (\"AEC_DISP_ROPS_STAIR_PLAN_50\"): %d\n", size1, size2);
       error++;
     }
+  size1 = sizeof (struct _dwg_object_AEC_MVBLOCK_DEF);
+  size2 = dwg_dynapi_fields_size ("AEC_MVBLOCK_DEF");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_MVBLOCK_DEF): %d != "
+               "dwg_dynapi_fields_size (\"AEC_MVBLOCK_DEF\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_AEC_MVBLOCK_REF);
+  size2 = dwg_dynapi_fields_size ("AEC_MVBLOCK_REF");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_MVBLOCK_REF): %d != "
+               "dwg_dynapi_fields_size (\"AEC_MVBLOCK_REF\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_AEC_NOTIFICATION_TRACKER);
+  size2 = dwg_dynapi_fields_size ("AEC_NOTIFICATION_TRACKER");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_NOTIFICATION_TRACKER): %d != "
+               "dwg_dynapi_fields_size (\"AEC_NOTIFICATION_TRACKER\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_AEC_POLYGON);
+  size2 = dwg_dynapi_fields_size ("AEC_POLYGON");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_POLYGON): %d != "
+               "dwg_dynapi_fields_size (\"AEC_POLYGON\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_AEC_POLYGON_STYLE);
+  size2 = dwg_dynapi_fields_size ("AEC_POLYGON_STYLE");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_POLYGON_STYLE): %d != "
+               "dwg_dynapi_fields_size (\"AEC_POLYGON_STYLE\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_AEC_VARS_ARCHBASE);
+  size2 = dwg_dynapi_fields_size ("AEC_VARS_ARCHBASE");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_AEC_VARS_ARCHBASE): %d != "
+               "dwg_dynapi_fields_size (\"AEC_VARS_ARCHBASE\"): %d\n", size1, size2);
+      error++;
+    }
   size1 = sizeof (struct _dwg_object_AEC_VARS_DWG_SETUP);
   size2 = dwg_dynapi_fields_size ("AEC_VARS_DWG_SETUP");
   if (size1 != size2)
@@ -43660,6 +43868,14 @@ test_sizes (void)
     {
       fprintf (stderr, "sizeof(struct _dwg_object_RASTERVARIABLES): %d != "
                "dwg_dynapi_fields_size (\"RASTERVARIABLES\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_object_REFEDIT_STATUS_TRACKER);
+  size2 = dwg_dynapi_fields_size ("REFEDIT_STATUS_TRACKER");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_object_REFEDIT_STATUS_TRACKER): %d != "
+               "dwg_dynapi_fields_size (\"REFEDIT_STATUS_TRACKER\"): %d\n", size1, size2);
       error++;
     }
   size1 = sizeof (struct _dwg_object_RENDERENVIRONMENT);
