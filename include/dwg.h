@@ -5398,7 +5398,7 @@ typedef struct _dwg_object_object
 typedef struct _dwg_object
 {
   BITCODE_RL size;       /*!< in bytes */
-  unsigned long address; /*!< byte offset in the file */
+  unsigned long address; /*!< after size, before type */
   unsigned int type;     /*!< fixed or variable (class - 500) */
   BITCODE_RL index;      /*!< into dwg->object[] */
   enum DWG_OBJECT_TYPE fixedtype; /*!< into a global list */
@@ -5423,6 +5423,7 @@ typedef struct _dwg_object
   BITCODE_RL stringstream_size;  /*!< r2007+ in bits, unused */
   BITCODE_UMC handlestream_size; /*!< r2010+ in bits */
   unsigned long common_size; /* relative offset from type ... end common_entity_data */
+  unsigned long start_address; /*!< start offset in the file */
 
   unsigned long num_unknown_bits;
   char *unknown_bits;

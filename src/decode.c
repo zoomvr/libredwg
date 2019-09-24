@@ -3471,7 +3471,7 @@ dwg_decode_object (Bit_Chain *dat, Bit_Chain *hdl_dat, Bit_Chain *str_dat,
   SINCE (R_2007)
   {
     SINCE (R_2010)
-    LOG_HANDLE (" bitsize: " FORMAT_RL ",", obj->bitsize);
+      LOG_HANDLE (" bitsize: " FORMAT_RL ",", obj->bitsize);
     // restrict the hdl_dat stream
     error |= obj_handle_stream (dat, obj, hdl_dat);
 

@@ -492,7 +492,10 @@ static bool env_var_checked_p;
   if (dat->version >= R_2007 && obj->bitsize)                                 \
     bit_set_position (hdl_dat, obj->hdlpos);                                  \
   if (!obj->bitsize)                                                          \
-    obj->bitsize =  bit_position (dat) - (obj->address * 8);                  \
+    {                                                                         \
+      obj->hdlpos = bit_position (dat);                                       \
+      obj->bitsize = obj->hdlpos - (obj->start_address * 8);                  \
+    }                                                                         \
   RESET_VER
 
 #if 0
@@ -1644,7 +1647,7 @@ dwg_encode_add_object (Dwg_Object *obj, Bit_Chain *dat, unsigned long address)
 
   oldpos = bit_position (dat);
   assert (address);
-  dat->byte = address;
+  dat->byte = obj->start_address = address;
   dat->bit = 0;
 
   LOG_INFO ("Object number: %lu", (unsigned long)obj->index);
@@ -1970,8 +1973,13 @@ dwg_encode_add_object (Dwg_Object *obj, Bit_Chain *dat, unsigned long address)
       obj->size = dat->byte - address - 2; // excludes the CRC
       if (dat->bit)
         obj->size++;
-      if (!obj->bitsize)
-        obj->bitsize = pos - (address * 8); // minus hdlpos
+      if (!obj->bitsize) // set by START_HANDLE_STREAM
+        {
+          if (obj->hdlpos)
+            obj->bitsize = obj->hdlpos - (address * 8);
+          else
+            obj->bitsize = pos - (address * 8); // minus hdlpos
+        }
 
       bit_set_position (dat, address * 8);
       if (obj->size > 0x7fff)
