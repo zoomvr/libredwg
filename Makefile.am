@@ -80,6 +80,8 @@ else
 endif
 endif
 
+regen-dynapi: $(srcdir)/src/gen-dynapi.pl $(srcdir)/include/dwg.h
+	-$(PERL) $(srcdir)/src/gen-dynapi.pl
 regen-unknown:
 	$(MAKE) -C examples $@
 regen-man:

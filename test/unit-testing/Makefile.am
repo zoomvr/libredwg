@@ -90,7 +90,7 @@ check_PROGRAMS = \
 dynapi_test.c: dynapi_test.c.in \
 		$(top_srcdir)/include/dwg.h \
 	        $(top_srcdir)/src/gen-dynapi.pl
-	-cd $(top_srcdir)/src && $(PERL) gen-dynapi.pl
+	echo make regen-dynapi might be needed
 
 .c.i:
 	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
