@@ -1009,7 +1009,7 @@ void
 bit_read_BE (Bit_Chain *restrict dat, double *restrict x, double *restrict y,
              double *restrict z)
 {
-  if (dat->version >= R_2000 && bit_read_B (dat))
+  if (dat->from_version >= R_2000 && bit_read_B (dat))
     {
       *x = 0.0;
       *y = 0.0;
@@ -1129,7 +1129,7 @@ bit_read_BT (Bit_Chain *dat)
 {
   int mode = 0;
 
-  if (dat->version >= R_2000)
+  if (dat->from_version >= R_2000)
     mode = bit_read_B (dat);
 
   return (mode ? 0.0 : bit_read_BD (dat));
@@ -1437,18 +1437,138 @@ bit_read_TV (Bit_Chain *restrict dat)
   return (char *)chain;
 }
 
-/** Write simple text.
+// Usage: hex(c >> 4), hex(c & 0xf)
+static int heX (unsigned char c)
+{
+  c &= 0xf; // 0-15
+  return c >= 10 ? 'A' + c - 10 : '0' + c;
+}
+
+/* converts TU to ASCII with embedded \U+XXXX */
+char *
+bit_embed_TU (BITCODE_TU restrict wstr)
+{
+  BITCODE_TU tmp = wstr;
+  char *str;
+  int i, len = 0;
+  uint16_t c = 0;
+
+  if (!wstr)
+    return NULL;
+  while ((c = *tmp++))
+    {
+      len++;
+      if (c >= 256)
+        len += 7;
+    }
+  str = malloc (len + 1);
+  i = 0;
+  while ((c = *wstr++))
+    {
+      if (c < 256)
+        {
+          str[i++] = c & 0xFF;
+        }
+      else
+        {
+          str[i++] = '\\';
+          str[i++] = 'U';
+          str[i++] = '+';
+          str[i++] = heX (c >> 12);
+          str[i++] = heX (c >> 8);
+          str[i++] = heX (c >> 4);
+          str[i++] = heX (c);
+        }
+    }
+  str[i] = '\0';
+  return str;
+}
+
+/** Write ASCII text.
  */
 void
 bit_write_TV (Bit_Chain *restrict dat, BITCODE_TV restrict chain)
 {
   int i;
-  int length;
-
-  length = chain ? strlen ((const char *)chain) + 1 : 0;
+  int length = chain ? strlen ((const char *)chain) + 1 : 0;
   bit_write_BS (dat, length);
   for (i = 0; i < length; i++)
     bit_write_RC (dat, (unsigned char)chain[i]);
+}
+
+static int ishex (int c)
+{
+  return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')
+          || (c >= 'A' && c <= 'F'));
+}
+
+/** Write ASCII or Unicode text.
+ */
+void
+bit_write_T (Bit_Chain *restrict dat, BITCODE_T restrict s)
+{
+  int i, length;
+
+  if (dat->from_version >= R_2007)
+    {
+      // downconvert TU to TV
+      if (dat->version < R_2007)
+        {
+          if (!s)
+            bit_write_BS (dat, 0);
+          else
+            {
+              BITCODE_TV str = bit_embed_TU ((BITCODE_TU)s);
+              length = strlen ((const char *)str) + 1;
+              bit_write_BS (dat, length);
+              for (i = 0; i < length; i++)
+                bit_write_RC (dat, (unsigned char)str[i]);
+              if (str) free (str);
+            }
+        }
+      else
+        {
+          bit_write_TU (dat, (BITCODE_TU)s);
+        }
+    }
+  else
+    {
+      // convert TV to TU. parse \U+xxxx to wchars
+      if (dat->version >= R_2007)
+        {
+          if (!s)
+            {
+              bit_write_BS (dat, 0);
+            }
+          else
+            {
+              uint16_t c;
+              BITCODE_TU ws = (BITCODE_TU)malloc (strlen (s) + 2);
+              while ((c = *s++))
+                {
+                  if (c == '\\' && s[0] == 'U' && s[1] == '+' && ishex (s[2])
+                      && ishex (s[3]) && ishex (s[4]) && ishex (s[5]))
+                    {
+                      unsigned x;
+                      if (sscanf (&s[2], "%04X", &x) > 0)
+                        {
+                          *ws = x;
+                          s += 5;
+                        }
+                      else
+                        *ws++ = c;
+                    }
+                  else
+                    *ws++ = c;
+                }
+              *ws = 0;
+              bit_write_TU (dat, ws);
+              free (ws);
+            }
+        }
+      else
+        bit_write_TV (dat, s);
+    }
 }
 
 /** Read UCS-2 unicode text. no supplementary planes
@@ -1475,7 +1595,6 @@ bit_read_TU (Bit_Chain *restrict dat)
       chain[i] = bit_read_RS (dat); // probably without byte swapping
     }
   chain[length] = 0;
-
   return chain;
 }
 
@@ -1537,7 +1656,7 @@ bit_read_T32 (Bit_Chain *restrict dat)
   BITCODE_RL i, size;
 
   size = bit_read_RL (dat);
-  if (dat->version >= R_2007)
+  if (dat->from_version >= R_2007)
     {
       BITCODE_TU wstr;
       BITCODE_RL len = size / 2;
@@ -1608,19 +1727,10 @@ bit_write_TU (Bit_Chain *restrict dat, BITCODE_TU restrict chain)
 BITCODE_T
 bit_read_T (Bit_Chain *restrict dat)
 {
-  if (dat->version >= R_2007)
+  if (dat->from_version >= R_2007)
     return (BITCODE_T)bit_read_TU (dat);
   else
     return (BITCODE_T)bit_read_TV (dat);
-}
-
-void
-bit_write_T (Bit_Chain *restrict dat, BITCODE_T restrict chain)
-{
-  if (dat->version >= R_2007)
-    return bit_write_TU (dat, (BITCODE_TU)chain);
-  else
-    return bit_write_TV (dat, chain);
 }
 
 /* converts UCS-2 to UTF-8 */
@@ -1820,7 +1930,7 @@ bit_read_TIMEBLL (Bit_Chain *dat)
   BITCODE_TIMEBLL date;
   BITCODE_BD ms;
 
-  if (dat->version < R_13)
+  if (dat->from_version < R_13)
     {
       date.days = bit_read_RL (dat);
       date.ms = bit_read_RL (dat);
@@ -1886,13 +1996,13 @@ bit_read_CMC (Bit_Chain *restrict dat, Dwg_Color *restrict color)
 {
   memset (color, 0, sizeof (Dwg_Color));
   color->index = bit_read_BS (dat);
-  if (dat->version >= R_2004)
+  if (dat->from_version >= R_2004)
     {
       color->rgb = bit_read_BL (dat);
       color->flag = bit_read_RC (dat);
       // wide?
-      color->name = (color->flag & 1) ? (char *)bit_read_TV (dat) : NULL;
-      color->book_name = (color->flag & 2) ? (char *)bit_read_TV (dat) : NULL;
+      color->name = (color->flag & 1) ? (char *)bit_read_T (dat) : NULL;
+      color->book_name = (color->flag & 2) ? (char *)bit_read_T (dat) : NULL;
     }
 }
 
@@ -1908,9 +2018,9 @@ bit_write_CMC (Bit_Chain *restrict dat, Dwg_Color *restrict color)
       bit_write_RC (dat, color->flag);
       // wide?
       if (color->flag & 1)
-        bit_write_TV (dat, color->name);
+        bit_write_T (dat, color->name);
       if (color->flag & 2)
-        bit_write_TV (dat, color->book_name);
+        bit_write_T (dat, color->book_name);
     }
 }
 
@@ -1922,7 +2032,7 @@ bit_read_ENC (Bit_Chain *dat, Bit_Chain *hdl_dat, Bit_Chain *str_dat,
               Dwg_Color *restrict color)
 {
   color->index = bit_read_BS (dat);
-  if (dat->version >= R_2004)
+  if (dat->from_version >= R_2004)
     {
       uint16_t flag = (((uint32_t)color->index) >> 8) & 0xff;
       color->index &= 0x1ff;
