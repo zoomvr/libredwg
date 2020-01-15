@@ -3357,12 +3357,12 @@ decode_R2004_header (Bit_Chain *restrict file_dat, Dwg_Data *restrict dwg)
             dat->byte = start + i;
             checksum = dwg_section_page_checksum (seed, dat, size);
             dat->byte = old;
-            LOG_HANDLE ("  checksum: 0x%08x (calculated with seed %d, offset %3d, size %3d) ",
+            LOG_HANDLE ("  checksum: 0x%08x (calculated with seed 0x%x, offset %3d, size %3d) ",
                         checksum, seed, i, size);
             LOG_HANDLE ("  0x%x - 0x%x\n", start + i, start + i + size);
             if (checksum == _obj->checksum)
               {
-                LOG_INFO ("  checksum: 0x%08x (calculated with seed %d, offset %3d, size %3d) ",
+                LOG_INFO ("  checksum: 0x%08x (calculated with seed 0x%x, offset %3d, size %3d) ",
                             checksum, seed, i, size);
                 LOG_INFO ("  0x%x - 0x%x\n", start + i, start + i + size);
                 return error;
