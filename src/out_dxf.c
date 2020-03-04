@@ -253,22 +253,19 @@ dxf_print_rd (Bit_Chain *dat, BITCODE_RD value, int dxf)
         value = 0.0;
 #endif
       if (fabs (value) <= 1e-35)
-        fprintf (dat->fh, "0.0\n");
-      else if (fabs (value) <= 1e-15 || fabs (value) >= 1e+15)
-        fprintf (dat->fh, "%.15E\n", value);
+        fprintf (dat->fh, "0.0\r\n");
       else
         {
-          char str[30];
-          sprintf (str, "%.16g", value);
-          char *p = strchr (str, '.');
-          if (!p)
-            { /*Add decimal sign if it's not found and add one zero*/
-              int len = strlen (str);
-              str[len++] = '.';
-              str[len++] = '0';
-              str[len] = '\0';
+          int l;
+          char str[48];
+          sprintf (str, "%-16.14f", value);
+          l = strlen (str);
+          if (strrchr (str, '.') && str[l - 1] == '0')
+            {
+              for (l--; l > 1 && str[l - 1] != '.' && str[l] == '0'; l--)
+                str[l] = '\0';
             }
-          fprintf (dat->fh, "%s\n", str);
+          fprintf (dat->fh, "%s\r\n", str);
         }
     }
 }
