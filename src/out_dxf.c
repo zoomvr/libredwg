@@ -218,7 +218,7 @@ static void dxf_fixup_string (Bit_Chain *restrict dat, char *restrict str);
     {                                                                         \
       const char *_fmt = dxf_format (dxf);                                    \
       assert (_fmt);                                                          \
-      if (strEQc (_fmt, "%-16.14f"))                                          \
+      if (strEQc (_fmt, DXF_FORMAT_RD))                                          \
         {                                                                     \
           dxf_print_rd (dat, (double)(value), dxf);                           \
         }                                                                     \
@@ -229,13 +229,13 @@ static void dxf_fixup_string (Bit_Chain *restrict dat, char *restrict str);
           snprintf (buf, 255, _fmt, value);                                   \
           GCC46_DIAG_RESTORE                                                  \
           /* not a string, empty num. must be zero */                         \
-          if (strEQc (_fmt, "%s") && !*buf)                                   \
+          if (strEQc (_fmt, DXF_FORMAT_T) && !*buf)                           \
             fprintf (dat->fh, "0\r\n");                                       \
           else if (90 <= dxf && dxf < 100)                                    \
             {                                                                 \
               /* -Wpointer-to-int-cast */                                     \
               const int32_t _si = (int32_t) (intptr_t) (value);               \
-              fprintf (dat->fh, "%6i\r\n", _si);                              \
+              fprintf (dat->fh, DXF_FORMAT_RS "\r\n", _si);                   \
             }                                                                 \
           else                                                                \
             fprintf (dat->fh, "%s\r\n", buf);                                 \
@@ -258,7 +258,7 @@ dxf_print_rd (Bit_Chain *dat, BITCODE_RD value, int dxf)
         {
           int l;
           char str[48];
-          sprintf (str, "%-16.14f", value);
+          sprintf (str, DXF_FORMAT_RD, value);
           l = strlen (str);
           if (strrchr (str, '.') && str[l - 1] == '0')
             {
@@ -273,7 +273,7 @@ dxf_print_rd (Bit_Chain *dat, BITCODE_RD value, int dxf)
   if (dxf)                                                                    \
     {                                                                         \
       GROUP (dxf);                                                            \
-      fprintf (dat->fh, "%6i\r\n", value);                                    \
+      fprintf (dat->fh, DXF_FORMAT_RS "\r\n", value);                         \
     }
 #define VALUE_RD(value, dxf) dxf_print_rd (dat, value, dxf)
 #define VALUE_B(value, dxf)                                                   \
@@ -1676,75 +1676,75 @@ const char *
 dxf_format (int code)
 {
   if (0 <= code && code < 5)
-    return "%s";
+    return DXF_FORMAT_T;
   if (code == 5 || code == -5)
-    return "%lX";
+    return DXF_FORMAT_H;
   if (5 < code && code < 10)
-    return "%s";
+    return DXF_FORMAT_T;
   if (code < 60)
-    return "%-16.14f";
+    return DXF_FORMAT_RD;
   if (code < 80)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (80 <= code && code <= 99) // BL int32 lgtm [cpp/constant-comparison]
-    return "%9li";
+    return DXF_FORMAT_RL;
   if (code == 100)
-    return "%s";
+    return DXF_FORMAT_T;
   if (code == 102)
-    return "%s";
+    return DXF_FORMAT_T;
   if (code == 105)
-    return "%lX";
+    return DXF_FORMAT_H;
   if (110 <= code && code <= 149)
-    return "%-16.14f";
+    return DXF_FORMAT_RD;
   if (160 <= code && code <= 169)
-    return "%12li";
+    return DXF_FORMAT_RLL;
   if (170 <= code && code <= 179)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (210 <= code && code <= 239)
-    return "%-16.14f";
+    return DXF_FORMAT_RD;
   if (270 <= code && code <= 289)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (290 <= code && code <= 299)
-    return "%6i"; // boolean
+    return DXF_FORMAT_RS; // boolean
   if (300 <= code && code <= 319)
-    return "%s";
+    return DXF_FORMAT_T;
   if (320 <= code && code <= 369)
-    return "%lX";
+    return DXF_FORMAT_H;
   if (370 <= code && code <= 389)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (390 <= code && code <= 399)
-    return "%lX";
+    return DXF_FORMAT_H;
   if (400 <= code && code <= 409)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (410 <= code && code <= 419)
-    return "%s";
+    return DXF_FORMAT_T;
   if (420 <= code && code <= 429)
-    return "%9li"; // int32_t
+    return DXF_FORMAT_RL; // int32_t
   if (430 <= code && code <= 439)
-    return "%s";
+    return DXF_FORMAT_T;
   if (440 <= code && code <= 449)
-    return "%9li"; // int32_t
+    return DXF_FORMAT_RL; // int32_t
   if (450 <= code && code <= 459)
-    return "%12li"; // long
+    return DXF_FORMAT_RLL; // long
   if (460 <= code && code <= 469)
-    return "%-16.14f";
+    return DXF_FORMAT_RD;
   if (470 <= code && code <= 479)
-    return "%s";
+    return DXF_FORMAT_T;
   if (480 <= code && code <= 481)
-    return "%lX";
+    return DXF_FORMAT_H;
   if (code == 999)
-    return "%s";
+    return DXF_FORMAT_T;
   if (1000 <= code && code <= 1009)
-    return "%s";
+    return DXF_FORMAT_T;
   if (1010 <= code && code <= 1059)
-    return "%-16.14f";
+    return DXF_FORMAT_RD;
   if (1060 <= code && code <= 1070)
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (code == 1071)
-    return "%9li"; // int32_t
+    return DXF_FORMAT_RL; // int32_t
   if (code == 1002) // RC
-    return "%6i";
+    return DXF_FORMAT_RS;
   if (code == 1003) // RL layer
-    return "%9li";
+    return DXF_FORMAT_RL; // int32_t
   if (code > 1000)
     return dxf_format (code - 1000);
 

@@ -21,6 +21,13 @@
 #include "dwg.h"
 #include "bits.h"
 
+#define DXF_FORMAT_RD "%-16.14f"
+#define DXF_FORMAT_RS "%6i"
+#define DXF_FORMAT_RL "%9li"
+#define DXF_FORMAT_RLL "%12li"
+#define DXF_FORMAT_H "%lX"
+#define DXF_FORMAT_T "%s"
+
 const char *dxf_format (int code) RETURNS_NONNULL;
 const char *dxf_codepage (int code, Dwg_Data *dwg)  RETURNS_NONNULL;
 int dxf_is_sorted_INSERT (const Dwg_Object *restrict obj);
